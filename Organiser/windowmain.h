@@ -15,9 +15,17 @@ class WindowMain : public QMainWindow
 		WindowMain(QWidget *parent = nullptr);
 		~WindowMain();
 
-		void Testtest();
+	private slots:
+		void saveAppData();
+
+		void on_btnTest1_clicked();
+
+		void on_btnTest2_clicked();
 
 	private:
 		Ui::WindowMain *ui;
+
+		void saveAppDataToFile();
+		void loadAppDataFromFile();
 };
 #endif // WINDOWMAIN_H

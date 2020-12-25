@@ -1,6 +1,6 @@
 
 
-QT += core gui network
+QT += core gui network xml
 
 CONFIG += c++11
 
@@ -9,7 +9,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = Organiser
 TEMPLATE = app
 
-
+VERSION = 0.1.0.0
 # The following define makes your compiler emit warnings if you use
 # any Qt feature that has been marked deprecated (the exact warnings
 # depend on your compiler). Please consult the documentation of the
@@ -22,18 +22,45 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    card/card.cpp \
+    datastructures/Notes/notes.cpp \
+    datastructures/appData/appdata.cpp \
+    datastructures/appData/appdatawriterxml.cpp \
+    datastructures/board/board.cpp \
+    datastructures/board/boardcolumn.cpp \
+    datastructures/card/card.cpp \
+    datastructures/card/cardwriterxml.cpp \
+    gui/dialogs/dialogcard.cpp \
     main.cpp \
+    datastructures/notes/noteswriterxml.cpp \
+    gui/widgets/cellnotes.cpp \
+    gui/widgets/widgetnotes.cpp \
     windowmain.cpp
 
 HEADERS += \
-    card/card.h \
+    datastructures/appData/appdata.h \
+    datastructures/ appData/appdatawriterxml.h \
+    datastructures/board/board.h \
+    datastructures/board/boardcolumn.h \
+    datastructures/card/cardwriterxml.h \
+    exceptions/generalexception.h \
+    datastructures/notes/notes.h \
+    datastructures/card/card.h \
+    gui/dialogs/dialogcard.h \
+    notes/noteswriterxml.h \
+    gui/widgets/cellnotes.h \
+    gui/widgets/widgetnotes.h \
     windowmain.h
 
 FORMS += \
+    gui/dialogs/dialogcard.ui \
+    gui/widgets/cellnotes.ui \
+    gui/widgets/widgetnotes.ui \
     windowmain.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+    resources.qrc

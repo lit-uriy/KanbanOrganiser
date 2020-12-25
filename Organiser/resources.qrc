@@ -1,0 +1,12 @@
+<RCC>
+    <qresource prefix="/icons">
+        <file>resources/icons/calendar_start.png</file>
+        <file>resources/icons/add.png</file>
+        <file>resources/icons/check.png</file>
+        <file>resources/icons/close.png</file>
+        <file>resources/icons/edit.png</file>
+        <file>resources/icons/priority_high.png</file>
+        <file>resources/icons/priority_low.png</file>
+        <file>resources/icons/priority_mid.png</file>
+    </qresource>
+</RCC>
