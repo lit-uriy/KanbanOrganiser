@@ -20,6 +20,9 @@ class WidgetNotes : public QWidget
 		Notes GetNotes();
 		void SetNotes(Notes notes);
 
+		void SetTitle(QString title);
+
+		QString GetTitle();
 	private slots:
 		void on_btnAddNote_clicked();
 
@@ -35,6 +38,7 @@ class WidgetNotes : public QWidget
 		Ui::WidgetNotes *ui;
 
 		Notes notes;
+		QString title;
 
 		void updateListView();
 		void addCardToListView(class Card card,int id);

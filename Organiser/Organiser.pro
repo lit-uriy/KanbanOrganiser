@@ -27,9 +27,12 @@ SOURCES += \
     datastructures/appData/appdatawriterxml.cpp \
     datastructures/board/board.cpp \
     datastructures/board/boardcolumn.cpp \
+    datastructures/board/boardcolumnwriterxml.cpp \
+    datastructures/board/boardwriterxml.cpp \
     datastructures/card/card.cpp \
     datastructures/card/cardwriterxml.cpp \
     gui/dialogs/dialogcard.cpp \
+    gui/widgets/widgetboard.cpp \
     main.cpp \
     datastructures/notes/noteswriterxml.cpp \
     gui/widgets/cellnotes.cpp \
@@ -41,12 +44,15 @@ HEADERS += \
     datastructures/ appData/appdatawriterxml.h \
     datastructures/board/board.h \
     datastructures/board/boardcolumn.h \
+    datastructures/board/boardcolumnwriterxml.h \
+    datastructures/board/boardwriterxml.h \
     datastructures/card/cardwriterxml.h \
     exceptions/generalexception.h \
     datastructures/notes/notes.h \
     datastructures/card/card.h \
     gui/dialogs/dialogcard.h \
-    notes/noteswriterxml.h \
+    gui/widgets/widgetboard.h \
+    datastructures/notes/noteswriterxml.h \
     gui/widgets/cellnotes.h \
     gui/widgets/widgetnotes.h \
     windowmain.h
@@ -54,6 +60,7 @@ HEADERS += \
 FORMS += \
     gui/dialogs/dialogcard.ui \
     gui/widgets/cellnotes.ui \
+    gui/widgets/widgetboard.ui \
     gui/widgets/widgetnotes.ui \
     windowmain.ui
 

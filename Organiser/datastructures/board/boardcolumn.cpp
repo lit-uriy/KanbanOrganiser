@@ -22,7 +22,8 @@ bool BoardColumn::operator!=(const BoardColumn &other)
 
 bool BoardColumn::isEqual(const BoardColumn &other)
 {
-	if(this->title.compare(other.title) == 0)
+	if(this->title.compare(other.title) == 0
+			&& cards.size() == other.cards.size())
 	{
 		return true;
 	}

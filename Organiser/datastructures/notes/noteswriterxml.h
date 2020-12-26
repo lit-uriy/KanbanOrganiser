@@ -7,13 +7,13 @@
 
 class NotesWriterXml
 {
-	public:
-		NotesWriterXml();
+    public:
+        NotesWriterXml();
 
-		QDomElement Save(Notes notes, QDomDocument document);
-		QString GetRootElementName();
+        QDomElement Save(Notes notes, QDomDocument document);
+        QString GetRootElementName();
 
-		Notes Load(QDomElement root);
+        Notes Load(QDomElement root);
 };
 
 #endif // NOTESWRITERXML_H

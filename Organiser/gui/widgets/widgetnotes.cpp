@@ -12,6 +12,7 @@ WidgetNotes::WidgetNotes(QWidget *parent) :
 	ui(new Ui::WidgetNotes)
 {
 	ui->setupUi(this);
+	ui->lblTitle->setText("");
 }
 
 WidgetNotes::~WidgetNotes()
@@ -20,6 +21,16 @@ WidgetNotes::~WidgetNotes()
 }
 
 
+void WidgetNotes::SetTitle(QString title)
+{
+	ui->lblTitle->setText(title);
+	this->title = title;
+}
+
+QString WidgetNotes::GetTitle()
+{
+	return title;
+}
 Notes WidgetNotes::GetNotes()
 {
 	return notes;
