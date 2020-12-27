@@ -7,6 +7,7 @@
 
 #include <QMenu>
 
+
 WidgetNotes::WidgetNotes(QWidget *parent) :
 	QWidget(parent),
 	ui(new Ui::WidgetNotes)
@@ -15,11 +16,28 @@ WidgetNotes::WidgetNotes(QWidget *parent) :
 	ui->lblTitle->setText("");
 }
 
+WidgetNotes::WidgetNotes(BoardColumn column, int id,QWidget *parent) :
+	QWidget(parent),
+	ui(new Ui::WidgetNotes)
+{
+	ui->setupUi(this);
+	SetNotes(column);
+	this->title = column.title;
+	this->id = id;
+
+	ui->lblTitle->setText(title);
+}
+
+
 WidgetNotes::~WidgetNotes()
 {
 	delete ui;
 }
 
+QString WidgetNotes::GetTitle()
+{
+	return title;
+}
 
 void WidgetNotes::SetTitle(QString title)
 {
@@ -27,10 +45,6 @@ void WidgetNotes::SetTitle(QString title)
 	this->title = title;
 }
 
-QString WidgetNotes::GetTitle()
-{
-	return title;
-}
 Notes WidgetNotes::GetNotes()
 {
 	return notes;
@@ -42,6 +56,25 @@ void WidgetNotes::SetNotes(Notes notes)
 	updateListView();
 }
 
+int WidgetNotes::GetId()
+{
+	return id;
+}
+
+BoardColumn WidgetNotes::GetColumn()
+{
+	BoardColumn column;
+
+	column.title = title;
+
+	for(int i=0; i < notes.GetCardsCount();i++)
+	{
+		Card card = notes.GetCardAt(i);
+		column.AddCard(card);
+	}
+
+	return column;
+}
 
 void WidgetNotes::updateListView()
 {

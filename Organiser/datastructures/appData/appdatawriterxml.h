@@ -7,20 +7,20 @@
 
 class AppDataWriterXml
 {
-	public:
-		AppDataWriterXml();
+    public:
+        AppDataWriterXml();
 
 
-		QDomElement Save(AppData appData, QDomDocument document);
-		AppData Load(QDomElement root);
+        QDomElement Save(AppData appData, QDomDocument document);
+        AppData Load(QDomElement root);
 
 
-		QString GetRootElementName();
-		bool IsValid();
+        QString GetRootElementName();
+        bool IsValid();
 
 
-		bool WriteToFile(AppData appData,QString path);
-		AppData ReadFromFile(QString path);
+        bool WriteToFile(AppData appData,QString path);
+        AppData ReadFromFile(QString path);
 
 };
 

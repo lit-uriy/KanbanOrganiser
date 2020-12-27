@@ -4,6 +4,7 @@
 #include <QWidget>
 
 #include "datastructures/notes/notes.h"
+#include "datastructures/board/boardcolumn.h"
 
 namespace Ui {
 class WidgetNotes;
@@ -15,14 +16,18 @@ class WidgetNotes : public QWidget
 
 	public:
 		explicit WidgetNotes(QWidget *parent = nullptr);
+		explicit WidgetNotes(BoardColumn column, int id,QWidget *parent = nullptr);
 		~WidgetNotes();
 
 		Notes GetNotes();
 		void SetNotes(Notes notes);
 
+		QString GetTitle();
 		void SetTitle(QString title);
 
-		QString GetTitle();
+		int GetId();
+
+		BoardColumn GetColumn();
 	private slots:
 		void on_btnAddNote_clicked();
 
@@ -37,6 +42,7 @@ class WidgetNotes : public QWidget
 	private:
 		Ui::WidgetNotes *ui;
 
+		int id = -1;
 		Notes notes;
 		QString title;
 

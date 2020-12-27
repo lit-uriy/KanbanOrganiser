@@ -3,6 +3,7 @@
 
 #include <QWidget>
 
+
 namespace Ui {
 class WidgetBoard;
 }
@@ -15,11 +16,19 @@ class WidgetBoard : public QWidget
 		explicit WidgetBoard(QWidget *parent = nullptr);
 		~WidgetBoard();
 
-	private slots:
-		void on_btnAddColumn_clicked();
+		class Board GetBoard();
+		void SetBoard(class Board board);
 
 	private:
 		Ui::WidgetBoard *ui;
+
+		QList<class WidgetNotes*> columns;
+		void updateListView(Board board);
+		void clearColumns();
+		void addColumnToListView(class BoardColumn column,int id);
+	private slots:
+		void on_btnAddColumn_clicked();
+
 };
 
 #endif // WIDGETBOARD_H

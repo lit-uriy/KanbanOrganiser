@@ -4,6 +4,7 @@
 #include <QTextStream>
 
 #include "datastructures/notes/noteswriterxml.h"
+#include "datastructures/board/boardwriterxml.h"
 
 AppDataWriterXml::AppDataWriterXml()
 {
@@ -17,6 +18,10 @@ QDomElement AppDataWriterXml::Save(AppData appData, QDomDocument document)
 	NotesWriterXml notesWriterXml;
 	root.appendChild(notesWriterXml.Save(appData.notes,document));
 
+
+	BoardWriterXml boardWriterXml;
+	root.appendChild(boardWriterXml.Save(appData.board,document));
+
 	return root;
 }
 
@@ -28,12 +33,17 @@ QString AppDataWriterXml::GetRootElementName()
 AppData AppDataWriterXml::Load(QDomElement root)
 {
 	AppData appData;
-	NotesWriterXml notesWriterXml;
 
+	NotesWriterXml notesWriterXml;
 	QDomElement elementNotes = root.firstChildElement(notesWriterXml.GetRootElementName());
 	Notes notes = notesWriterXml.Load(elementNotes);
-
 	appData.notes = notes;
+
+	BoardWriterXml boardWriterXml;
+	QDomElement elementBoard = root.firstChildElement(boardWriterXml.GetRootElementName());
+	Board board = boardWriterXml.Load(elementBoard);
+	appData.board = board;
+
 	return appData;
 }
 

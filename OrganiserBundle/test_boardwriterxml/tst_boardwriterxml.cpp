@@ -17,6 +17,8 @@ void test_BoardWriterXml::writeBoardToXml()
 	QDateTime creationDate = QDateTime(QDate(2020,1,1),QTime(10,10));
 
 	Board board;
+	QString boardTitle = "TEst";
+	board.title = boardTitle;
 	BoardColumn column("Column1");
 
 	Card card(title,description,creationDate);
@@ -33,6 +35,7 @@ void test_BoardWriterXml::writeBoardToXml()
 	BoardColumn columnLoaded = board.GetColumnAt(0);
 
 	QVERIFY(column == columnLoaded);
+	QVERIFY(board.title == boardTitle);
 }
 
 QTEST_APPLESS_MAIN(test_BoardWriterXml)

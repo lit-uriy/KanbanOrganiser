@@ -3,6 +3,7 @@
 
 
 #include "datastructures/notes/notes.h"
+#include "datastructures/board/board.h"
 
 class AppData
 {
@@ -12,6 +13,7 @@ class AppData
 		bool IsValid();
 
 		Notes notes;
+		Board board;
 };
 
 #endif // APPDATA_H

@@ -10,6 +10,8 @@ class Board
 	public:
 		Board();
 
+		QString title;
+
 		void AddColumn(BoardColumn column);
 		void EditColumnName(int index, QString title) throw(GeneralException);
 		void DeleteColumn(int index) throw(GeneralException);
@@ -22,6 +24,8 @@ class Board
 		void DeleteCardFromColumn(int columnIndex, int cardIndex) throw(GeneralException);
 
 		void MoveCard(int columnFrom,int cardIndex,int columnTo) throw(GeneralException);
+
+		bool IsValid(){return true;}//TODO:
 	private:
 		QList<BoardColumn> columns;
 };

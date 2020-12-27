@@ -30,6 +30,8 @@ void WindowMain::saveAppDataToFile()
 	AppData appData;
 	appData.notes = ui->wdtNotes->GetNotes();
 
+	appData.board= ui->wdtBoard->GetBoard();
+
 	AppDataWriterXml writer;
 	writer.WriteToFile(appData,"C:/Users/Hato/Desktop/test.xml");
 }
@@ -40,6 +42,7 @@ void WindowMain::loadAppDataFromFile()
 	AppData appData = writer.ReadFromFile("C:/Users/Hato/Desktop/test.xml");
 
 	ui->wdtNotes->SetNotes(appData.notes);
+	ui->wdtBoard->SetBoard(appData.board);
 }
 
 

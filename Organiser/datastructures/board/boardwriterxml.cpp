@@ -11,8 +11,9 @@ QDomElement BoardWriterXml::Save(Board board, QDomDocument document)
 {
 	QDomElement root = document.createElement(GetRootElementName());
 
-	BoardColumnWriterXml columnWriter;
+	root.setAttribute("title", board.title);
 
+	BoardColumnWriterXml columnWriter;
 	for(int i=0; i < board.GetColumnCount();i++)
 	{
 		BoardColumn column = board.GetColumnAt(i);
@@ -33,6 +34,7 @@ QString BoardWriterXml::GetRootElementName()
 Board BoardWriterXml::Load(QDomElement root)
 {
 	Board board;
+	board.title = root.attribute("title");
 
 	BoardColumnWriterXml columnWriter;
 	for(QDomElement elementCard = root.firstChildElement(columnWriter.GetRootElementName());!elementCard.isNull();elementCard = elementCard.nextSiblingElement(columnWriter.GetRootElementName()))
