@@ -28,16 +28,8 @@ class WidgetNotes : public QWidget
 		int GetId();
 
 		BoardColumn GetColumn();
-	private slots:
-		void on_btnAddNote_clicked();
 
-		void on_twdNotes_customContextMenuRequested(const QPoint &pos);
-
-		void on_actionEditCard_triggered();
-
-		void on_actionDeleteCard_triggered();
-
-		void on_twdNotes_cellDoubleClicked(int row, int column);
+		void SetId(int id);
 
 	private:
 		Ui::WidgetNotes *ui;
@@ -54,9 +46,33 @@ class WidgetNotes : public QWidget
 		int getSelectedCardID();
 		class CellNotes* getSelectedCell();
 		int getSelectedCellIndex();
+		void deleteCard(int id);
+
+	private slots:
+		void OnCardDropped(Card* card, int position);
+		void OnCardMoved(CellNotes* cell);
+
+		void on_btnAddNote_clicked();
+
+		void on_twdNotes_customContextMenuRequested(const QPoint &pos);
+
+		void on_actionEditCard_triggered();
+
+		void on_actionDeleteCard_triggered();
+
+		void on_twdNotes_cellDoubleClicked(int row, int column);
+
+		void on_btnColumnOptions_clicked();
+
+		void on_actionRenameColumn_triggered();
+
+		void on_actionDeleteColumn_triggered();
+
+
 
 	signals:
 		void SaveRequest();
+		void DeleteRequest(int id);
 };
 
 

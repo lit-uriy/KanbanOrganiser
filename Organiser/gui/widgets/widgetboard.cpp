@@ -2,8 +2,8 @@
 #include "ui_widgetboard.h"
 
 #include "widgetnotes.h"
-
 #include "datastructures/board/board.h"
+#include "gui/dialogs/dialogcolumnedit.h"
 
 WidgetBoard::WidgetBoard(QWidget *parent) :
 	QWidget(parent),
@@ -60,18 +60,41 @@ void WidgetBoard::addColumnToListView(BoardColumn column,int id)
 {
 	WidgetNotes* columnWidget = new WidgetNotes(column,id,this);
 
-	columnWidget->setFixedWidth(200);//TODO:
+	columnWidget->setFixedWidth(250);//TODO:
 	ui->wdtColumnList->layout()->addWidget(columnWidget);
 
+	connect(columnWidget,&WidgetNotes::DeleteRequest,this,&WidgetBoard::DeleteColumn);
 	columns.append(columnWidget);
+}
+
+void WidgetBoard::DeleteColumn(int id)
+{
+	if(id > -1 && id < columns.size())
+	{
+		ui->wdtColumnList->layout()->removeWidget(columns[id]);
+		columns[id]->deleteLater();
+		columns.removeAt(id);
+
+		updateColumnIds();
+	}
+}
+
+void WidgetBoard::updateColumnIds()
+{
+	for(int i=0; i < columns.size();i++)
+	{
+		columns[i]->SetId(i);
+	}
 }
 
 void WidgetBoard::on_btnAddColumn_clicked()
 {
-	BoardColumn column;
+	DialogColumnEdit dialogColumnEdit(tr("New column"));
 
-	//TODO: SetT
-	column.title = "TEst";
-
-	addColumnToListView(column,columns.size());
+	if(dialogColumnEdit.exec() == QDialog::Accepted)
+	{
+		BoardColumn column;
+		column.title = dialogColumnEdit.GetTitle();
+		addColumnToListView(column,columns.size());
+	}
 }

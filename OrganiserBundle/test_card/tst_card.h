@@ -14,6 +14,7 @@ class TestCard : public QObject
 	private slots:
 		void test_cardCreation();
 		void test_compare();
+		void test_EncodeDecode();
 
 };
 

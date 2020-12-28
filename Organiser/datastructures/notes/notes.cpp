@@ -18,6 +18,17 @@ void Notes::AddCard(Card card)
 	cards.append(card);
 }
 
+void Notes::AddCardAt(int index, Card card)
+{
+	if(index < 0 || index > cards.size())
+	{
+		throw GeneralException("Index out of range");
+		return;
+	}
+
+	cards.insert(index,card);
+}
+
 int Notes::GetCardsCount()
 {
 	return cards.size();

@@ -34,6 +34,26 @@ void test_notes::addCardToNotes()
 	QVERIFY(card == card2CLone);
 }
 
+void test_notes::addCardToNotesAtPosition()
+{
+	Notes notes;
+	Card cardFirst("Title", "Desc", QDateTime());
+	Card cardSecond("Title2", "Desc2", QDateTime());
+	Card cardFirstAgain("Title3", "Desc3", QDateTime());
+
+	notes.AddCard(cardFirst);
+	notes.AddCard(cardSecond);
+
+	notes.AddCardAt(0,cardFirstAgain);
+
+
+	Card cardFirstAgainClone = notes.GetCardAt(0);
+	Card cardFirstClone = notes.GetCardAt(1);
+
+	QVERIFY(cardFirstAgain == cardFirstAgainClone);
+	QVERIFY(cardFirst == cardFirstClone);
+}
+
 void test_notes::getCardOutOfRangeException()
 {
 	Notes notes;

@@ -10,3 +10,7 @@ SUBDIRS += \
     test_appdatawriterxml \
     test_cardwriterxml \
     test_noteswriterxml
+
+HEADERS +=
+
+SOURCES +=

@@ -32,6 +32,8 @@ SOURCES += \
     datastructures/card/card.cpp \
     datastructures/card/cardwriterxml.cpp \
     gui/dialogs/dialogcard.cpp \
+    gui/dialogs/dialogcolumnedit.cpp \
+    gui/widgets/notestablewidget.cpp \
     gui/widgets/widgetboard.cpp \
     main.cpp \
     datastructures/notes/noteswriterxml.cpp \
@@ -51,6 +53,8 @@ HEADERS += \
     datastructures/notes/notes.h \
     datastructures/card/card.h \
     gui/dialogs/dialogcard.h \
+    gui/dialogs/dialogcolumnedit.h \
+    gui/widgets/notestablewidget.h \
     gui/widgets/widgetboard.h \
     datastructures/notes/noteswriterxml.h \
     gui/widgets/cellnotes.h \
@@ -59,6 +63,7 @@ HEADERS += \
 
 FORMS += \
     gui/dialogs/dialogcard.ui \
+    gui/dialogs/dialogcolumnedit.ui \
     gui/widgets/cellnotes.ui \
     gui/widgets/widgetboard.ui \
     gui/widgets/widgetnotes.ui \

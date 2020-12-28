@@ -4,6 +4,7 @@
 #include "datastructures/card/card.h"
 #include "gui/dialogs/dialogcard.h"
 #include "cellnotes.h"
+#include "gui/dialogs/dialogcolumnedit.h"
 
 #include <QMenu>
 
@@ -14,6 +15,8 @@ WidgetNotes::WidgetNotes(QWidget *parent) :
 {
 	ui->setupUi(this);
 	ui->lblTitle->setText("");
+
+	setAcceptDrops(true);
 }
 
 WidgetNotes::WidgetNotes(BoardColumn column, int id,QWidget *parent) :
@@ -26,12 +29,23 @@ WidgetNotes::WidgetNotes(BoardColumn column, int id,QWidget *parent) :
 	this->id = id;
 
 	ui->lblTitle->setText(title);
+
+	connect(ui->twdNotes,&NotesTableWidget::CardDropped,this,&WidgetNotes::OnCardDropped);
 }
 
 
 WidgetNotes::~WidgetNotes()
 {
 	delete ui;
+}
+
+void WidgetNotes::OnCardDropped(Card* card, int position)
+{
+	Card cardNew(card);
+	delete card;
+
+	notes.AddCardAt(position,cardNew);
+	updateListView();
 }
 
 QString WidgetNotes::GetTitle()
@@ -76,6 +90,11 @@ BoardColumn WidgetNotes::GetColumn()
 	return column;
 }
 
+void WidgetNotes::SetId(int id)
+{
+	this->id = id;
+}
+
 void WidgetNotes::updateListView()
 {
 	const int count = notes.GetCardsCount();
@@ -95,7 +114,13 @@ void WidgetNotes::addCardToListView(Card card, int id)
 	ui->twdNotes->insertRow(0);
 
 	CellNotes* cell = new CellNotes(card,id,ui->twdNotes);
+	connect(cell,&CellNotes::CardMoved,this,&WidgetNotes::OnCardMoved);
 	ui->twdNotes->setCellWidget(0,0,cell);
+}
+
+void WidgetNotes::OnCardMoved(CellNotes* cell)
+{
+	deleteCard(cell->GetId());
 }
 
 void WidgetNotes::on_btnAddNote_clicked()
@@ -202,6 +227,11 @@ int WidgetNotes::getSelectedCellIndex()
 void WidgetNotes::on_actionDeleteCard_triggered()
 {
 	int id = getSelectedCardID();
+	deleteCard(id);
+}
+
+void WidgetNotes::deleteCard(int id)
+{
 	if(id == -1)
 	{
 		return;
@@ -211,4 +241,31 @@ void WidgetNotes::on_actionDeleteCard_triggered()
 	updateListView();
 
 	emit SaveRequest();
+}
+
+void WidgetNotes::on_btnColumnOptions_clicked()
+{
+	QMenu menu(this);
+
+	menu.addAction(ui->actionRenameColumn);
+	menu.addSeparator();
+	menu.addAction(ui->actionDeleteColumn);
+
+	QPoint position = ui->btnColumnOptions->mapToGlobal(QPoint(0-ui->btnColumnOptions->width(),ui->btnColumnOptions->height()));
+	menu.exec(position);
+}
+
+void WidgetNotes::on_actionRenameColumn_triggered()
+{
+	DialogColumnEdit dialogColumnEdit(title);
+
+	if(dialogColumnEdit.exec() == QDialog::Accepted)
+	{
+		SetTitle(dialogColumnEdit.GetTitle());
+	}
+}
+
+void WidgetNotes::on_actionDeleteColumn_triggered()
+{
+	emit DeleteRequest(id);
 }

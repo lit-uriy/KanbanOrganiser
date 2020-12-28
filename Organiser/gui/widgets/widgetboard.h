@@ -26,7 +26,10 @@ class WidgetBoard : public QWidget
 		void updateListView(Board board);
 		void clearColumns();
 		void addColumnToListView(class BoardColumn column,int id);
+		void updateColumnIds();
 	private slots:
+		void DeleteColumn(int id);
+
 		void on_btnAddColumn_clicked();
 
 };

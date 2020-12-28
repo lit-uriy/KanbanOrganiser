@@ -50,5 +50,18 @@ void TestCard::test_compare()
 	QVERIFY(card != carDiffCreateDate);
 }
 
+void TestCard::test_EncodeDecode()
+{
+	QString title = "titleText";
+	QString description  = "descriptionText";
+	QDateTime creationDate = QDateTime(QDate(2020,1,1),QTime(10,10));
+
+	Card card(title,description,creationDate);
+	QByteArray cardDecoded(card.Encode());
+
+
+	QVERIFY(card == cardDecoded);
+}
+
 QTEST_APPLESS_MAIN(TestCard)
 

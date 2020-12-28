@@ -13,6 +13,7 @@ class Notes
 		static Notes CreateInvalid();
 
 		void AddCard(Card card);
+		void AddCardAt(int index, Card card);
 
 		int GetCardsCount();
 

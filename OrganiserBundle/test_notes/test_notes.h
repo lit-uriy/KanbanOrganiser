@@ -13,6 +13,7 @@ class test_notes : public QObject
 
 	private slots:
 		void addCardToNotes();
+		void addCardToNotesAtPosition();
 		void getCardOutOfRangeException();
 		void deleteCardFromNotes();
 		void editCardInNotes();

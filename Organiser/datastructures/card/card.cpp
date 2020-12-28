@@ -5,6 +5,23 @@ Card::Card()
 
 }
 
+Card::Card(QByteArray data)
+{
+	SetDataFromArray(data);
+}
+
+Card::Card(Card* copy)
+{
+	this->title = copy->title;
+	this->description = copy->description;
+
+	this->priority = copy->priority;
+	this->status = copy->status;
+
+	this->creationDate = copy->creationDate;
+	this->finishedDate = copy->finishedDate;
+}
+
 Card::Card(QString title, QString description, QDateTime creationDate)
 {
 	this->title = title;
@@ -30,6 +47,70 @@ bool Card::IsNull()
 	}
 
 	return false;
+}
+
+QByteArray Card::Encode()
+{
+	QByteArray data;
+
+	data.append((int)title.length());
+	data.append(title);
+
+	data.append((int)description.length());
+	data.append(description);
+
+	data.append((int)1);
+	data.append((int)priority);
+
+	data.append((int)1);
+	data.append((int)status);
+
+	QString temp = creationDate.toString("yyyy-MM-dd hh:mm:ss");
+
+	data.append((int)temp.length());
+	data.append(temp);
+
+	temp = finishedDate.toString("yyyy-MM-dd hh:mm:ss");
+	data.append((int)temp.length());
+	data.append(temp);
+
+	return data;
+}
+
+void Card::SetDataFromArray(QByteArray data)
+{
+	int currentIndex = 0;
+	int length = data.mid(0,1)[0];
+
+	currentIndex += 1;
+
+	title = data.mid(currentIndex,length);
+	currentIndex += length;
+
+	length = data.mid(currentIndex,1)[0];
+	currentIndex += 1;
+	description = data.mid(currentIndex,length);
+	currentIndex += length;
+
+	length = data.mid(currentIndex,1)[0];
+	currentIndex += 1;
+	priority = (Priority)data.mid(currentIndex,length).toInt();
+	currentIndex += length;
+
+	length = data.mid(currentIndex,1)[0];
+	currentIndex += 1;
+	status = (Status)data.mid(currentIndex,length).toInt();
+	currentIndex += length;
+
+	length = data.mid(currentIndex,1)[0];
+	currentIndex += 1;
+	creationDate = QDateTime::fromString(QString(data.mid(currentIndex,length)),"yyyy-MM-dd hh:mm:ss");
+	currentIndex += length;
+
+	length = data.mid(currentIndex,1)[0];
+	currentIndex += 1;
+	finishedDate = QDateTime::fromString(QString(data.mid(currentIndex,length)),"yyyy-MM-dd hh:mm:ss");
+	currentIndex += length;
 }
 
 bool Card::isEqual(const Card &other)

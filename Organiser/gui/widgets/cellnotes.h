@@ -19,6 +19,11 @@ class CellNotes : public QWidget
 
 		void UpdateCard(Card card);
 		int GetId();
+
+	protected:
+		void mousePressEvent(QMouseEvent *event) override;
+		void mouseMoveEvent(QMouseEvent *event) override;
+		QPoint dragStartPosition;
 	private:
 		Ui::CellNotes *ui;
 
@@ -31,6 +36,8 @@ class CellNotes : public QWidget
 		void setStatusIcon(Card::Status status);
 
 		void setPriorityIcon(Card::Priority priority);
+	signals:
+		void CardMoved(CellNotes* cellNote);
 };
 
 #endif // CELLNOTES_H

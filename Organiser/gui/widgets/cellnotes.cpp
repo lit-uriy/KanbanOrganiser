@@ -29,6 +29,49 @@ int CellNotes::GetId()
 	return id;
 }
 
+#include <QMouseEvent>
+#include <QDrag>
+#include <QMimeData>
+
+void CellNotes::mousePressEvent(QMouseEvent *event)
+{
+	QWidget::mousePressEvent(event);
+
+	if (event->button() == Qt::LeftButton)
+	{
+		//dragStartPosition = event->pos();
+	}
+}
+
+void CellNotes::mouseMoveEvent(QMouseEvent *event)
+{
+	QWidget::mouseMoveEvent(event);
+
+	if (!(event->buttons() & Qt::LeftButton))
+	{
+		return;
+	}
+
+	if ((event->pos() - dragStartPosition).manhattanLength() < QApplication::startDragDistance())
+	{
+		return;
+	}
+
+	QDrag *drag = new QDrag(this);
+	QMimeData *mimeData = new QMimeData;
+
+	QByteArray dat = card.Encode();
+	mimeData->setData("organiser/card", dat);
+	drag->setMimeData(mimeData);
+
+	Qt::DropAction dropAction = drag->exec(Qt::MoveAction);
+
+	if(dropAction == Qt::DropAction::MoveAction)
+	{
+		emit CardMoved(this);
+	}
+}
+
 void CellNotes::setWidgetData(Card card)
 {
 	ui->lblTitle->setText(card.title);

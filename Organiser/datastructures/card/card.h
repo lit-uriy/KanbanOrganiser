@@ -8,6 +8,8 @@ class Card
 {
 	public:
 		Card();
+		Card(Card* copy);
+		Card(QByteArray data);
 		Card(QString title, QString description, QDateTime creationDate);
 
 		bool operator==(const Card &other);
@@ -26,6 +28,10 @@ class Card
 		QDateTime finishedDate;
 
 		bool IsNull();
+
+		QByteArray Encode();
+		void SetDataFromArray(QByteArray data);
+
 	private:
 		bool isEqual(const Card &other);
 };
