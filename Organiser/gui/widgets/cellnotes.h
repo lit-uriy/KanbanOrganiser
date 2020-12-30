@@ -20,6 +20,7 @@ class CellNotes : public QWidget
 		void UpdateCard(Card card);
 		int GetId();
 
+		Card GetCard();
 	protected:
 		void mousePressEvent(QMouseEvent *event) override;
 		void mouseMoveEvent(QMouseEvent *event) override;
@@ -38,6 +39,10 @@ class CellNotes : public QWidget
 		void setPriorityIcon(Card::Priority priority);
 	signals:
 		void CardMoved(CellNotes* cellNote);
+		void CardMovedSuccess(CellNotes* cellNote, bool success);
+
+		void CardDelete(CellNotes* cellNote);
+		void CardAdd(CellNotes* cellNote);
 };
 
 #endif // CELLNOTES_H

@@ -34,6 +34,8 @@ class WidgetNotes : public QWidget
 	private:
 		Ui::WidgetNotes *ui;
 
+		bool internalDrag = false;
+
 		int id = -1;
 		Notes notes;
 		QString title;
@@ -49,8 +51,9 @@ class WidgetNotes : public QWidget
 		void deleteCard(int id);
 
 	private slots:
+		void OnCardMovedSuccess(CellNotes* cell,bool success);
 		void OnCardDropped(Card* card, int position);
-		void OnCardMoved(CellNotes* cell);
+
 
 		void on_btnAddNote_clicked();
 

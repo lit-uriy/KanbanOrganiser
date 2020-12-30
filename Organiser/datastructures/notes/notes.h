@@ -15,6 +15,8 @@ class Notes
 		void AddCard(Card card);
 		void AddCardAt(int index, Card card);
 
+		int Find(Card card);
+
 		int GetCardsCount();
 
 		QList<Card> GetCards();

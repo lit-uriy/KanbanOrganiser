@@ -17,6 +17,7 @@ class test_notes : public QObject
 		void getCardOutOfRangeException();
 		void deleteCardFromNotes();
 		void editCardInNotes();
+		void findCard();
 
 };
 

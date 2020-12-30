@@ -29,6 +29,11 @@ int CellNotes::GetId()
 	return id;
 }
 
+Card CellNotes::GetCard()
+{
+	return card;
+}
+
 #include <QMouseEvent>
 #include <QDrag>
 #include <QMimeData>
@@ -64,12 +69,21 @@ void CellNotes::mouseMoveEvent(QMouseEvent *event)
 	mimeData->setData("organiser/card", dat);
 	drag->setMimeData(mimeData);
 
+	//emit CardDelete(this);
+
+	//emit CardMoved(this);
+
 	Qt::DropAction dropAction = drag->exec(Qt::MoveAction);
 
 	if(dropAction == Qt::DropAction::MoveAction)
 	{
-		emit CardMoved(this);
+		emit CardMovedSuccess(this,true);
 	}
+	else
+	{
+		emit CardMovedSuccess(this,false);
+	}
+
 }
 
 void CellNotes::setWidgetData(Card card)

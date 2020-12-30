@@ -132,5 +132,40 @@ void test_notes::editCardInNotes()
 	}
 }
 
+
+void test_notes::findCard()
+{
+	Notes notes;
+
+	Card card("Title","Desc", QDateTime(QDate(2020,1,1),QTime(10,10)));
+	notes.AddCard(card);
+
+	Card card2("Title2","Desc2", QDateTime(QDate(2019,2,4),QTime(4,8)));
+	notes.AddCard(card2);
+
+	Card card3("Title3","Desc3", QDateTime(QDate(2019,2,4),QTime(4,8)));
+
+	int index2 = notes.Find(card2);
+	Card card2Copy = notes.GetCardAt(index2);
+
+	int index3 = notes.Find(card3);
+
+
+	QVERIFY(card2 == card2Copy);
+	QVERIFY(card != card2Copy);
+
+	try
+	{
+		notes.GetCardAt(index3);
+		QFAIL("Failed to catch exception in GetCardAt");
+	}
+	catch (GeneralException exception)
+	{
+
+	}
+
+
+}
+
 QTEST_APPLESS_MAIN(test_notes)
 

@@ -39,15 +39,6 @@ WidgetNotes::~WidgetNotes()
 	delete ui;
 }
 
-void WidgetNotes::OnCardDropped(Card* card, int position)
-{
-	Card cardNew(card);
-	delete card;
-
-	notes.AddCardAt(position,cardNew);
-	updateListView();
-}
-
 QString WidgetNotes::GetTitle()
 {
 	return title;
@@ -114,13 +105,54 @@ void WidgetNotes::addCardToListView(Card card, int id)
 	ui->twdNotes->insertRow(0);
 
 	CellNotes* cell = new CellNotes(card,id,ui->twdNotes);
-	connect(cell,&CellNotes::CardMoved,this,&WidgetNotes::OnCardMoved);
+	connect(cell,&CellNotes::CardMovedSuccess,this,&WidgetNotes::OnCardMovedSuccess);
 	ui->twdNotes->setCellWidget(0,0,cell);
 }
 
-void WidgetNotes::OnCardMoved(CellNotes* cell)
+void WidgetNotes::OnCardMovedSuccess(CellNotes* cell,bool success)
 {
-	deleteCard(cell->GetId());
+	if(!internalDrag && success)
+	{
+		deleteCard(cell->GetId());
+	}
+
+	internalDrag = false;
+}
+
+void WidgetNotes::OnCardDropped(Card* card, int position)
+{
+	const int cardIndex = notes.Find(card);
+
+	internalDrag = cardIndex > -1;
+
+	if(internalDrag)
+	{
+		Card cardNew(card);
+		delete card;
+
+
+		if(cardIndex == position)
+		{
+			return;
+		}
+
+		if(cardIndex < position)
+		{
+			position--;
+		}
+
+		deleteCard(cardIndex);
+		notes.AddCardAt(position,cardNew);
+		updateListView();
+	}
+	else
+	{
+		Card cardNew(card);
+		delete card;
+
+		notes.AddCardAt(position,cardNew);
+		updateListView();
+	}
 }
 
 void WidgetNotes::on_btnAddNote_clicked()

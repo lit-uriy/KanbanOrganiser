@@ -29,6 +29,19 @@ void Notes::AddCardAt(int index, Card card)
 	cards.insert(index,card);
 }
 
+int Notes::Find(Card card)
+{
+	for(int i=0; i < cards.size();i++)
+	{
+		if(card == cards.at(i))
+		{
+			return i;
+		}
+	}
+
+	return -1;
+}
+
 int Notes::GetCardsCount()
 {
 	return cards.size();

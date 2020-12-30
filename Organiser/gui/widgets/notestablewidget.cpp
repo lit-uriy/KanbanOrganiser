@@ -2,11 +2,53 @@
 
 #include <QDragMoveEvent>
 #include <QMimeData>
+#include <QDropEvent>
 
+#include <QPainter>
+#include <QDebug>
+#include <QCoreApplication>
+#include <QScrollBar>
 
 NotesTableWidget::NotesTableWidget(QWidget *parent) : QTableWidget(parent)
 {
 
+}
+
+
+void NotesTableWidget::paintEvent(QPaintEvent* event)
+{
+	QTableWidget::paintEvent(event);
+	drawDropIndicator();
+}
+
+void NotesTableWidget::drawDropIndicator()
+{
+	qDebug() << "drawDropIndicator: " << dropPosition;
+	if(dropPosition == -1)
+	{
+		return;
+	}
+
+	QPainter paint(viewport());
+
+	QPen pen(Qt::blue);
+	pen.setWidth(10);
+	paint.setPen(pen);
+
+	int t = verticalScrollBar()->value();
+	int dropY = getDropPositionY() - verticalScrollBar()->value();
+	paint.drawLine(0, dropY, width(), dropY);
+}
+
+int NotesTableWidget::getDropPositionY()
+{
+	int Y = 0;
+	for(int i=0; i < dropPosition;i++)
+	{
+		Y += rowHeight(i);
+	}
+
+	return Y;
 }
 
 void NotesTableWidget::dragEnterEvent(QDragEnterEvent * event)
@@ -17,16 +59,28 @@ void NotesTableWidget::dragEnterEvent(QDragEnterEvent * event)
 	}
 }
 
+void NotesTableWidget::dragLeaveEvent(QDragLeaveEvent *event)
+{
+	dropPosition = -1;
+	viewport()->update();
+}
+
+
 void NotesTableWidget::dragMoveEvent(QDragMoveEvent *event)
 {
 	if(event->mimeData()->hasFormat("organiser/card"))
 	{
 		event->accept();
+		dropPosition = getDropPosition(event);
+		viewport()->update();
 	}
-}
+	else
+	{
+		dropPosition = -1;
+		viewport()->update();
+	}
 
-#include <QMimeData>
-#include <QDropEvent>
+}
 
 void NotesTableWidget::dropEvent(QDropEvent *event)
 {
@@ -35,11 +89,32 @@ void NotesTableWidget::dropEvent(QDropEvent *event)
 		Card* card = new Card(event->mimeData()->data("organiser/card"));
 		event->acceptProposedAction();
 
-		emit CardDropped(card, getDropPosition(event));
+		emit CardDropped(card, rowCount()-getDropPosition(event));
 	}
+
+	dropPosition = -1;
+	viewport()->update();
+	QCoreApplication::processEvents(QEventLoop::AllEvents,1000);
 }
 
 int NotesTableWidget::getDropPosition(QDropEvent *event)
 {
-	return 0;//TODO:
+	const int eventY = event->pos().y();
+
+	const int rows = rowCount();
+
+	for(int i=0; i < rows;i++)
+	{
+		const int height = rowHeight(i);
+		const int start = rowViewportPosition(i) - height/2;
+		const int end = start + height;
+
+
+		if(eventY < end && start < eventY )
+		{
+			return i;
+		}
+	}
+
+	return rows;
 }

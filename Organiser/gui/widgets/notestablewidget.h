@@ -12,10 +12,19 @@ class NotesTableWidget : public QTableWidget
 		NotesTableWidget(QWidget *parent = nullptr);
 
 		void dragEnterEvent(QDragEnterEvent * event) override;
+		void dragLeaveEvent(QDragLeaveEvent *event) override;
 		void dragMoveEvent(QDragMoveEvent *event) override;
 		void dropEvent(QDropEvent *event) override;
 
+	protected:
+		void paintEvent(QPaintEvent *event) override;
+
 	private:
+
+		int dropPosition = -1;
+		void drawDropIndicator();
+		int getDropPositionY();
+
 		int getDropPosition(QDropEvent *event);
 
 	signals:
