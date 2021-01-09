@@ -27,6 +27,7 @@ Board WidgetBoard::GetBoard()
 		board.AddColumn(column);
 	}
 
+	board.title = title;
 	return board;
 }
 
@@ -43,6 +44,7 @@ void WidgetBoard::updateListView(Board board)
 		BoardColumn column = board.GetColumnAt(i);
 		addColumnToListView(column,i);
 	}
+	title = board.title;
 }
 
 void WidgetBoard::clearColumns()

@@ -9,4 +9,10 @@
         <file>resources/icons/priority_low.png</file>
         <file>resources/icons/priority_mid.png</file>
     </qresource>
+    <qresource prefix="/themes">
+        <file>resources/theme/output/dark.css</file>
+    </qresource>
+    <qresource prefix="/themes/dark">
+        <file>resources/theme/output/dark/arrow-down.png</file>
+    </qresource>
 </RCC>

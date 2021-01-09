@@ -145,7 +145,11 @@
        </widget>
       </item>
       <item>
-       <widget class="QPlainTextEdit" name="tedDescription"/>
+       <widget class="QPlainTextEdit" name="tedDescription">
+        <property name="frameShape">
+         <enum>QFrame::NoFrame</enum>
+        </property>
+       </widget>
       </item>
      </layout>
     </widget>

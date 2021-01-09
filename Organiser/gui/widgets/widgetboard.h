@@ -22,8 +22,11 @@ class WidgetBoard : public QWidget
 	private:
 		Ui::WidgetBoard *ui;
 
+		QString title;
+
 		QList<class WidgetNotes*> columns;
 		void updateListView(Board board);
+
 		void clearColumns();
 		void addColumnToListView(class BoardColumn column,int id);
 		void updateColumnIds();

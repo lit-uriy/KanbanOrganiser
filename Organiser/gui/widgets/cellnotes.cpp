@@ -3,6 +3,10 @@
 
 #include <QIcon>
 
+#include <QMouseEvent>
+#include <QDrag>
+#include <QMimeData>
+
 CellNotes::CellNotes(Card card, int id, QWidget *parent) :
 	QWidget(parent),
 	ui(new Ui::CellNotes)
@@ -34,18 +38,37 @@ Card CellNotes::GetCard()
 	return card;
 }
 
-#include <QMouseEvent>
-#include <QDrag>
-#include <QMimeData>
+#include <QStyle>
+#include <QStyleOption>
+#include <QPainter>
+
+void CellNotes::paintEvent(QPaintEvent *)
+{
+	QStyleOption opt;
+	opt.init(this);
+	QPainter p(this);
+	style()->drawPrimitive(QStyle::PE_Widget, &opt, &p, this);
+}
 
 void CellNotes::mousePressEvent(QMouseEvent *event)
 {
 	QWidget::mousePressEvent(event);
 
+	setProperty("pressed", true);
+	this->style()->polish(this);
+
 	if (event->button() == Qt::LeftButton)
 	{
 		//dragStartPosition = event->pos();
 	}
+}
+
+void CellNotes::mouseReleaseEvent(QMouseEvent *event)
+{
+	QWidget::mouseReleaseEvent(event);
+
+	this->setProperty("pressed", false);
+	this->style()->polish(this);
 }
 
 void CellNotes::mouseMoveEvent(QMouseEvent *event)
@@ -62,6 +85,7 @@ void CellNotes::mouseMoveEvent(QMouseEvent *event)
 		return;
 	}
 
+
 	QDrag *drag = new QDrag(this);
 	QMimeData *mimeData = new QMimeData;
 
@@ -74,6 +98,10 @@ void CellNotes::mouseMoveEvent(QMouseEvent *event)
 	//emit CardMoved(this);
 
 	Qt::DropAction dropAction = drag->exec(Qt::MoveAction);
+
+
+	setProperty("pressed", false);
+	this->style()->polish(this);
 
 	if(dropAction == Qt::DropAction::MoveAction)
 	{

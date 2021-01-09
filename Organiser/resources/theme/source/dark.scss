@@ -1,0 +1,335 @@
+$backgroundPrimary: #323232;
+$backgroundSecondary: #424242;
+$backgroundDark: #212121;
+
+$accentPrimary: #42A5F5;
+$accentSecondary: #64B5F6;
+$accentDark: #1565C0;
+
+$textPrimary: #EEEEEE;
+$textPrimaryLight: #FAFAFA;
+$textPrimaryGray: #AAAAAA;
+$textPrimaryReversed: #212121;
+$fontFamily: "Verdana";
+
+$transparent: #00000000;
+
+
+$buttonColor: #656565;
+$buttonColorHover : #4442A5F5;
+
+$scrollHandle: #424242;
+
+
+
+
+QWidget
+{
+	background-color: $backgroundDark;
+}
+
+QWidget[transparent=true]
+{
+	background-color: $transparent;
+}
+
+CellNotes
+{
+	background-color: $backgroundSecondary;
+	border-radius: 2px;
+	margin: 2px;
+}
+
+
+CellNotes:hover
+{
+	background-color: $accentPrimary;
+	border-radius: 2px;
+}
+
+CellNotes[pressed=true]
+{
+	background-color: $accentDark;
+	border-radius: 2px;
+}
+
+
+
+QWidget[column=true]
+{
+	background-color: $backgroundPrimary;
+}
+
+QLabel
+{
+	background-color: $transparent;
+	color: $textPrimary;
+	font-weight: bold;
+	font-family: $fontFamily;
+}
+
+QPushButton
+{	
+	background-color: $transparent;
+	border-color: $buttonColor;
+	color: $textPrimary;
+	border-radius: 3px;
+	padding: 5px;
+	font-weight: bold;
+	border: 1px solid $buttonColor;
+
+}
+
+QPushButton::hover
+{
+	background-color: $buttonColorHover;
+	border-color: $accentPrimary;
+
+}
+
+QPushButton::pressed
+{
+	background-color: $accentPrimary;
+	color: $textPrimaryReversed;
+}
+
+QSpinBox,
+QLineEdit,
+QTextEdit,
+QPlainTextEdit
+{
+	background-color: $backgroundPrimary;
+	color: $textPrimary;
+	border: 1px solid $buttonColor;
+	border-radius: 2px;
+	padding : 2px;
+
+}
+
+QSpinBox:hover,
+QLineEdit:hover,
+QTextEdit:hover,
+QPlainTextEdit:hover
+{
+	border: 1px solid $accentPrimary;
+
+}
+
+QSpinBox:focus,
+QLineEdit:focus,
+QTextEdit:focus,
+QPlainTextEdit:focus
+{
+	border: 1px solid $accentPrimary;
+	background-color: $backgroundDark;
+
+}
+
+QSpinBox::up-button:hover, QSpinBox::down-button:hover
+{
+    background-color: $transparent;
+    border: 0px solid $transparent;
+
+}
+
+QSpinBox::up-button:disabled, QSpinBox::down-button:disabled
+{
+	background-color: $transparent;
+	color: $backgroundPrimary;
+
+}
+
+QSpinBox::up-button:pressed, QSpinBox::down-button:pressed
+{
+    background-color: $accentPrimary;
+}
+
+
+/*-----QComboBox-----*/
+QComboBox 
+{
+	background-color: $backgroundPrimary;
+	border: 1px solid $buttonColor;
+	color: $textPrimary;
+	font-weight: bold;
+	font-size: 11px;
+	padding: 2px;
+	border-radius: 2px;
+}
+
+QComboBox::hover
+{
+	background-color: $backgroundDark;
+	border-color: $accentPrimary;
+}
+
+QComboBox QListView
+{
+    color: #00FF00;
+	background-color: $backgroundDark;
+	border-radius: 1px;
+    border: 1px solid $accentSecondary;
+}
+
+QComboBox QListview::item
+{
+    color: #FF0000;
+	background-color: $backgroundDark;
+}
+
+QComboBox QAbstractItemView
+{
+    color: $textPrimary;
+    selection-background-color: $accentPrimary;
+}
+
+QComboBox::disabled
+{
+	color: $textPrimaryGray;
+}
+
+QComboBox:editable 
+{
+    background: $transparent;
+}
+
+
+QComboBox::drop-down 
+{
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+    width: 15px;
+	background-color: $transparent;
+}
+
+QComboBox::down-arrow
+{
+     image: url(:/themes/dark/resources/theme/output/dark/arrow-down.png);
+}
+
+
+QScrollBar
+{
+    background-color: $backgroundPrimary;
+}
+
+QScrollBar:vertical
+{
+    width: 6px;
+    margin: 0px;
+}
+
+QScrollBar::handle
+{
+    background-color: $scrollHandle;
+    min-height: 20px;
+	border-radius : 3px;
+}
+
+QScrollBar::handle:hover
+{
+    background-color: $accentPrimary;
+}
+
+QScrollBar::handle:pressed
+{
+    background-color: $accentDark;
+}
+
+QScrollBar::add-line:vertical
+{
+    background-color: $backgroundPrimary;
+    height: 0px;
+    subcontrol-position: bottom;
+    subcontrol-origin: margin;
+
+}
+
+
+QScrollBar::sub-line
+{
+    background-color: $backgroundPrimary;
+    height: 0px;
+    subcontrol-position: top;
+    subcontrol-origin: margin;
+
+}
+
+QScrollBar::up-arrow:vertical
+{
+    width: 0px;
+    height: 0px;
+
+}
+
+
+QScrollBar::down-arrow:vertical
+{
+    width: 0px;
+    height: 0px;
+
+}
+
+QScrollBar::add-page, QScrollBar::sub-page
+{
+    background: $backgroundPrimary;
+}
+
+
+
+QTabBar
+{
+	font-weight: bold;
+}
+
+QTabBar::tab
+{
+	background-color: $backgroundPrimary;
+	color: $textPrimary;
+	border-width: 0px;
+	padding-top: 6px;
+	padding-left: 8px;
+	padding-right: 8px;
+	padding-bottom: 6px;
+
+}
+
+
+QTabBar::tab:hover,
+QTabBar::tab:selected:hover
+
+{
+    background-color: $accentDark;
+
+}
+
+QTabBar::tab:selected
+{
+	color: $textPrimary;
+	border-bottom : 4px solid;
+    border-color: $accentPrimary;
+
+}
+
+
+QTabWidget::pane 
+{
+	background-color: $backgroundPrimary;
+	color: $textPrimary;
+    border: 0px solid;
+    border-color: #424242;
+
+}
+
+/*-----QTable-----*/
+QTableWidget 
+{
+	background-color : $backgroundPrimary;
+    gridline-color: $transparent;
+	outline: 0;
+}
+
+QTableWidget::item:selected
+{
+	background-color: $transparent; 
+}

@@ -16,28 +16,25 @@
   <property name="styleSheet">
    <string notr="true"/>
   </property>
-  <property name="card" stdset="0">
-   <bool>true</bool>
-  </property>
   <layout class="QVBoxLayout" name="verticalLayout_3">
    <property name="spacing">
     <number>0</number>
    </property>
    <property name="leftMargin">
-    <number>2</number>
+    <number>4</number>
    </property>
    <property name="topMargin">
-    <number>2</number>
+    <number>4</number>
    </property>
    <property name="rightMargin">
-    <number>2</number>
+    <number>4</number>
    </property>
    <property name="bottomMargin">
-    <number>2</number>
+    <number>4</number>
    </property>
    <item>
     <widget class="QWidget" name="widget" native="true">
-     <property name="card" stdset="0">
+     <property name="transparent" stdset="0">
       <bool>true</bool>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout">
@@ -45,16 +42,16 @@
        <number>0</number>
       </property>
       <property name="leftMargin">
-       <number>2</number>
+       <number>0</number>
       </property>
       <property name="topMargin">
-       <number>2</number>
+       <number>0</number>
       </property>
       <property name="rightMargin">
-       <number>2</number>
+       <number>0</number>
       </property>
       <property name="bottomMargin">
-       <number>2</number>
+       <number>0</number>
       </property>
       <item>
        <widget class="QWidget" name="wdtTitle" native="true">

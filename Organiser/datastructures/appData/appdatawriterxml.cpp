@@ -20,7 +20,17 @@ QDomElement AppDataWriterXml::Save(AppData appData, QDomDocument document)
 
 
 	BoardWriterXml boardWriterXml;
-	root.appendChild(boardWriterXml.Save(appData.board,document));
+
+	QDomElement boardList = document.createElement("BoardList");
+
+	for(int i=0; i < appData.boards.size();i++)
+	{
+		boardList.appendChild(boardWriterXml.Save(appData.boards.at(i),document));
+	}
+
+	root.appendChild(boardList);
+
+	document.appendChild(root);
 
 	return root;
 }
@@ -40,9 +50,14 @@ AppData AppDataWriterXml::Load(QDomElement root)
 	appData.notes = notes;
 
 	BoardWriterXml boardWriterXml;
-	QDomElement elementBoard = root.firstChildElement(boardWriterXml.GetRootElementName());
-	Board board = boardWriterXml.Load(elementBoard);
-	appData.board = board;
+
+	QDomElement elementBoardList = root.firstChildElement("BoardList");
+
+	for(QDomElement elementBoard = elementBoardList.firstChildElement(boardWriterXml.GetRootElementName());!elementBoard.isNull();elementBoard = elementBoard.nextSiblingElement(boardWriterXml.GetRootElementName()))
+	{
+		Board board = boardWriterXml.Load(elementBoard);
+		appData.boards.append(board);
+	}
 
 	return appData;
 }

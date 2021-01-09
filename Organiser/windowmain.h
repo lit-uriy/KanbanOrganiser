@@ -7,6 +7,9 @@ QT_BEGIN_NAMESPACE
 namespace Ui { class WindowMain; }
 QT_END_NAMESPACE
 
+#include <QSystemTrayIcon>
+#include <QMenu>
+
 class WindowMain : public QMainWindow
 {
 		Q_OBJECT
@@ -15,17 +18,38 @@ class WindowMain : public QMainWindow
 		WindowMain(QWidget *parent = nullptr);
 		~WindowMain();
 
+	protected:
+
+		void closeEvent(QCloseEvent *event) override;
+	private:
+		Ui::WindowMain *ui;
+
+		bool minimizedToTray = false;
+		QMenu menu;
+		QSystemTrayIcon trayIcon;
+
+		void showTrayIcon();
+		void updateTrayIconMenu();
+
+		void updateTrayIcon();
+
+		void minimizeToTray();
+		void maximizeFromTray();
+		void exitApp();
+
+		void saveAppDataToFile();
+		void loadAppDataFromFile();
+
 	private slots:
 		void saveAppData();
+		void onTrayClick(QSystemTrayIcon::ActivationReason reason);
 
 		void on_btnTest1_clicked();
 
 		void on_btnTest2_clicked();
 
-	private:
-		Ui::WindowMain *ui;
-
-		void saveAppDataToFile();
-		void loadAppDataFromFile();
+		void on_actionTrayShow_triggered();
+		void on_actionTrayMinimize_triggered();
+		void on_actionTrayQuit_triggered();
 };
 #endif // WINDOWMAIN_H

@@ -21,9 +21,16 @@ class CellNotes : public QWidget
 		int GetId();
 
 		Card GetCard();
+
+
 	protected:
+
+		void paintEvent(QPaintEvent *) override;
 		void mousePressEvent(QMouseEvent *event) override;
 		void mouseMoveEvent(QMouseEvent *event) override;
+		void mouseReleaseEvent(QMouseEvent *event) override;
+
+
 		QPoint dragStartPosition;
 	private:
 		Ui::CellNotes *ui;
@@ -43,6 +50,7 @@ class CellNotes : public QWidget
 
 		void CardDelete(CellNotes* cellNote);
 		void CardAdd(CellNotes* cellNote);
+
 };
 
 #endif // CELLNOTES_H

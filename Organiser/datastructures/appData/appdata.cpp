@@ -13,10 +13,5 @@ bool AppData::IsValid()
 		return false;
 	}
 
-	if(!board.IsValid())
-	{
-		return false;
-	}
-
 	return true;
 }

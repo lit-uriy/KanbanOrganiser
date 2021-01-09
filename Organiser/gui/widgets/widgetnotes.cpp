@@ -17,6 +17,8 @@ WidgetNotes::WidgetNotes(QWidget *parent) :
 	ui->lblTitle->setText("");
 
 	setAcceptDrops(true);
+
+	connect(ui->twdNotes,&NotesTableWidget::CardDropped,this,&WidgetNotes::OnCardDropped);
 }
 
 WidgetNotes::WidgetNotes(BoardColumn column, int id,QWidget *parent) :

@@ -1,0 +1,240 @@
+QWidget {
+  background-color: #212121;
+}
+
+QWidget[transparent=true] {
+  background-color: #00000000;
+}
+
+CellNotes {
+  background-color: #424242;
+  border-radius: 2px;
+  margin: 2px;
+}
+
+CellNotes:hover {
+  background-color: #42A5F5;
+  border-radius: 2px;
+}
+
+CellNotes[pressed=true] {
+  background-color: #1565C0;
+  border-radius: 2px;
+}
+
+QWidget[column=true] {
+  background-color: #323232;
+}
+
+QLabel {
+  background-color: #00000000;
+  color: #EEEEEE;
+  font-weight: bold;
+  font-family: "Verdana";
+}
+
+QPushButton {
+  background-color: #00000000;
+  border-color: #656565;
+  color: #EEEEEE;
+  border-radius: 3px;
+  padding: 5px;
+  font-weight: bold;
+  border: 1px solid #656565;
+}
+
+QPushButton::hover {
+  background-color: #4442A5F5;
+  border-color: #42A5F5;
+}
+
+QPushButton::pressed {
+  background-color: #42A5F5;
+  color: #212121;
+}
+
+QSpinBox,
+QLineEdit,
+QTextEdit,
+QPlainTextEdit {
+  background-color: #323232;
+  color: #EEEEEE;
+  border: 1px solid #656565;
+  border-radius: 2px;
+  padding: 2px;
+}
+
+QSpinBox:hover,
+QLineEdit:hover,
+QTextEdit:hover,
+QPlainTextEdit:hover {
+  border: 1px solid #42A5F5;
+}
+
+QSpinBox:focus,
+QLineEdit:focus,
+QTextEdit:focus,
+QPlainTextEdit:focus {
+  border: 1px solid #42A5F5;
+  background-color: #212121;
+}
+
+QSpinBox::up-button:hover, QSpinBox::down-button:hover {
+  background-color: #00000000;
+  border: 0px solid #00000000;
+}
+
+QSpinBox::up-button:disabled, QSpinBox::down-button:disabled {
+  background-color: #00000000;
+  color: #323232;
+}
+
+QSpinBox::up-button:pressed, QSpinBox::down-button:pressed {
+  background-color: #42A5F5;
+}
+
+/*-----QComboBox-----*/
+QComboBox {
+  background-color: #323232;
+  border: 1px solid #656565;
+  color: #EEEEEE;
+  font-weight: bold;
+  font-size: 11px;
+  padding: 2px;
+  border-radius: 2px;
+}
+
+QComboBox::hover {
+  background-color: #212121;
+  border-color: #42A5F5;
+}
+
+QComboBox QListView {
+  color: #00FF00;
+  background-color: #212121;
+  border-radius: 1px;
+  border: 1px solid #64B5F6;
+}
+
+QComboBox QListview::item {
+  color: #FF0000;
+  background-color: #212121;
+}
+
+QComboBox QAbstractItemView {
+  color: #EEEEEE;
+  selection-background-color: #42A5F5;
+}
+
+QComboBox::disabled {
+  color: #AAAAAA;
+}
+
+QComboBox:editable {
+  background: #00000000;
+}
+
+QComboBox::drop-down {
+  subcontrol-origin: padding;
+  subcontrol-position: top right;
+  width: 15px;
+  background-color: #00000000;
+}
+
+QComboBox::down-arrow {
+  image: url(:/themes/dark/resources/theme/output/dark/arrow-down.png);
+}
+
+QScrollBar {
+  background-color: #323232;
+}
+
+QScrollBar:vertical {
+  width: 6px;
+  margin: 0px;
+}
+
+QScrollBar::handle {
+  background-color: #424242;
+  min-height: 20px;
+  border-radius: 3px;
+}
+
+QScrollBar::handle:hover {
+  background-color: #42A5F5;
+}
+
+QScrollBar::handle:pressed {
+  background-color: #1565C0;
+}
+
+QScrollBar::add-line:vertical {
+  background-color: #323232;
+  height: 0px;
+  subcontrol-position: bottom;
+  subcontrol-origin: margin;
+}
+
+QScrollBar::sub-line {
+  background-color: #323232;
+  height: 0px;
+  subcontrol-position: top;
+  subcontrol-origin: margin;
+}
+
+QScrollBar::up-arrow:vertical {
+  width: 0px;
+  height: 0px;
+}
+
+QScrollBar::down-arrow:vertical {
+  width: 0px;
+  height: 0px;
+}
+
+QScrollBar::add-page, QScrollBar::sub-page {
+  background: #323232;
+}
+
+QTabBar {
+  font-weight: bold;
+}
+
+QTabBar::tab {
+  background-color: #323232;
+  color: #EEEEEE;
+  border-width: 0px;
+  padding-top: 6px;
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-bottom: 6px;
+}
+
+QTabBar::tab:hover,
+QTabBar::tab:selected:hover {
+  background-color: #1565C0;
+}
+
+QTabBar::tab:selected {
+  color: #EEEEEE;
+  border-bottom: 4px solid;
+  border-color: #42A5F5;
+}
+
+QTabWidget::pane {
+  background-color: #323232;
+  color: #EEEEEE;
+  border: 0px solid;
+  border-color: #424242;
+}
+
+/*-----QTable-----*/
+QTableWidget {
+  background-color: #323232;
+  gridline-color: #00000000;
+  outline: 0;
+}
+
+QTableWidget::item:selected {
+  background-color: #00000000;
+}

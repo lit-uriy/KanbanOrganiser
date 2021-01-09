@@ -35,6 +35,7 @@ SOURCES += \
     gui/dialogs/dialogcolumnedit.cpp \
     gui/widgets/notestablewidget.cpp \
     gui/widgets/widgetboard.cpp \
+    gui/widgets/widgetboardlist.cpp \
     main.cpp \
     datastructures/notes/noteswriterxml.cpp \
     gui/widgets/cellnotes.cpp \
@@ -58,6 +59,7 @@ HEADERS += \
     gui/widgets/widgetboard.h \
     datastructures/notes/noteswriterxml.h \
     gui/widgets/cellnotes.h \
+    gui/widgets/widgetboardlist.h \
     gui/widgets/widgetnotes.h \
     windowmain.h
 
@@ -66,6 +68,7 @@ FORMS += \
     gui/dialogs/dialogcolumnedit.ui \
     gui/widgets/cellnotes.ui \
     gui/widgets/widgetboard.ui \
+    gui/widgets/widgetboardlist.ui \
     gui/widgets/widgetnotes.ui \
     windowmain.ui
 

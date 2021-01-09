@@ -19,6 +19,9 @@ class NotesTableWidget : public QTableWidget
 	protected:
 		void paintEvent(QPaintEvent *event) override;
 
+	protected slots:
+		//void selectionChanged(const QItemSelection &selected, const QItemSelection &deselected) override;
+
 	private:
 
 		int dropPosition = -1;
@@ -27,6 +30,8 @@ class NotesTableWidget : public QTableWidget
 
 		int getDropPosition(QDropEvent *event);
 
+
+		void setCellSelected(int index);
 	signals:
 		void CardDropped(Card* card,int index);
 };

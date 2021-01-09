@@ -21,6 +21,28 @@ void NotesTableWidget::paintEvent(QPaintEvent* event)
 	drawDropIndicator();
 }
 
+/*
+void NotesTableWidget::selectionChanged(const QItemSelection &selected, const QItemSelection &deselected)
+{
+	QTableWidget::selectionChanged(selected,deselected);
+
+	QModelIndexList list = selected.indexes();
+
+	QModelIndex index = list.at(0);
+	int row = index.row();
+
+	setCellSelected(row);
+}
+
+#include "cellnotes.h"
+
+void NotesTableWidget::setCellSelected(int index)
+{
+	CellNotes* cell = dynamic_cast<CellNotes*>(cellWidget(index,0));
+
+	//cell->SetSelected(true);
+}
+*/
 void NotesTableWidget::drawDropIndicator()
 {
 	qDebug() << "drawDropIndicator: " << dropPosition;

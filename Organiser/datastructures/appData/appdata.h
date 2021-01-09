@@ -13,7 +13,7 @@ class AppData
 		bool IsValid();
 
 		Notes notes;
-		Board board;
+		QList<Board> boards;
 };
 
 #endif // APPDATA_H

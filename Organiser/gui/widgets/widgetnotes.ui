@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>300</height>
+    <height>644</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -137,6 +137,18 @@ QWidget#wdtTitlebar
       </item>
       <item>
        <widget class="QWidget" name="wdtTable" native="true">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>16777215</height>
+         </size>
+        </property>
         <property name="styleSheet">
          <string notr="true"/>
         </property>
@@ -145,7 +157,7 @@ QWidget#wdtTitlebar
           <number>0</number>
          </property>
          <property name="leftMargin">
-          <number>6</number>
+          <number>0</number>
          </property>
          <property name="topMargin">
           <number>0</number>
@@ -158,6 +170,12 @@ QWidget#wdtTitlebar
          </property>
          <item>
           <widget class="NotesTableWidget" name="twdNotes">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="MinimumExpanding">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
            <property name="contextMenuPolicy">
             <enum>Qt::CustomContextMenu</enum>
            </property>
@@ -168,10 +186,13 @@ QWidget#wdtTitlebar
             <enum>QFrame::NoFrame</enum>
            </property>
            <property name="verticalScrollBarPolicy">
-            <enum>Qt::ScrollBarAlwaysOn</enum>
+            <enum>Qt::ScrollBarAsNeeded</enum>
            </property>
            <property name="horizontalScrollBarPolicy">
             <enum>Qt::ScrollBarAlwaysOff</enum>
+           </property>
+           <property name="sizeAdjustPolicy">
+            <enum>QAbstractScrollArea::AdjustIgnored</enum>
            </property>
            <property name="dragDropMode">
             <enum>QAbstractItemView::DragDrop</enum>
@@ -184,6 +205,12 @@ QWidget#wdtTitlebar
            </property>
            <property name="horizontalScrollMode">
             <enum>QAbstractItemView::ScrollPerPixel</enum>
+           </property>
+           <property name="showGrid">
+            <bool>false</bool>
+           </property>
+           <property name="gridStyle">
+            <enum>Qt::NoPen</enum>
            </property>
            <attribute name="horizontalHeaderVisible">
             <bool>false</bool>
