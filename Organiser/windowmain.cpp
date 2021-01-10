@@ -156,12 +156,32 @@ void WindowMain::exitApp()
 	close();
 }
 
+#include <QSettings>
+
+void WindowMain::setBootAtStartup(bool enabled)
+{
+	//TODO: Cos nie dziala
+	QSettings bootUpSettings("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", QSettings::NativeFormat);
+
+	const QString appName = "Organiser";//TODO:
+	if (enabled)
+	{
+		QString app_path = "\"" + QCoreApplication::applicationFilePath() + "\"";
+		bootUpSettings.setValue(appName, app_path);
+	}
+	else
+	{
+		bootUpSettings.remove(appName);
+	}
+
+}
+
 void WindowMain::on_btnTest1_clicked()
 {
-
+	setBootAtStartup(true);
 }
 
 void WindowMain::on_btnTest2_clicked()
 {
-
+	setBootAtStartup(false);
 }

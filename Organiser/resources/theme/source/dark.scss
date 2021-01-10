@@ -53,7 +53,10 @@ CellNotes[pressed=true]
 	border-radius: 2px;
 }
 
-
+NotesTableWidget
+{
+	qproperty-dropLineColor: $accentPrimary;
+}
 
 QWidget[column=true]
 {
@@ -61,6 +64,14 @@ QWidget[column=true]
 }
 
 QLabel
+{
+	background-color: $transparent;
+	color: $textPrimary;
+	font-weight: bold;
+	font-family: $fontFamily;
+}
+
+QCheckBox
 {
 	background-color: $transparent;
 	color: $textPrimary;
@@ -96,7 +107,8 @@ QPushButton::pressed
 QSpinBox,
 QLineEdit,
 QTextEdit,
-QPlainTextEdit
+QPlainTextEdit,
+QDateTimeEdit
 {
 	background-color: $backgroundPrimary;
 	color: $textPrimary;
@@ -109,7 +121,8 @@ QPlainTextEdit
 QSpinBox:hover,
 QLineEdit:hover,
 QTextEdit:hover,
-QPlainTextEdit:hover
+QPlainTextEdit:hover,
+QDateTimeEdit:hover
 {
 	border: 1px solid $accentPrimary;
 
@@ -118,7 +131,8 @@ QPlainTextEdit:hover
 QSpinBox:focus,
 QLineEdit:focus,
 QTextEdit:focus,
-QPlainTextEdit:focus
+QPlainTextEdit:focus,
+QDateTimeEdit:focus
 {
 	border: 1px solid $accentPrimary;
 	background-color: $backgroundDark;
@@ -194,7 +208,8 @@ QComboBox:editable
 }
 
 
-QComboBox::drop-down 
+QComboBox::drop-down,
+QDateTimeEdit::drop-down
 {
     subcontrol-origin: padding;
     subcontrol-position: top right;
@@ -202,7 +217,9 @@ QComboBox::drop-down
 	background-color: $transparent;
 }
 
-QComboBox::down-arrow
+QComboBox::down-arrow,
+QDateTimeEdit::down-arrow
+
 {
      image: url(:/themes/dark/resources/theme/output/dark/arrow-down.png);
 }

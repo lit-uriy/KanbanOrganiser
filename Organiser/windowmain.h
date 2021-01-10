@@ -40,6 +40,8 @@ class WindowMain : public QMainWindow
 		void saveAppDataToFile();
 		void loadAppDataFromFile();
 
+		void setBootAtStartup(bool enabled);
+
 	private slots:
 		void saveAppData();
 		void onTrayClick(QSystemTrayIcon::ActivationReason reason);

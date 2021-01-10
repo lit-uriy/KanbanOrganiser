@@ -8,6 +8,8 @@ DialogCard::DialogCard(QWidget *parent) :
 	ui(new Ui::DialogCard)
 {
 	ui->setupUi(this);
+	setDefaultDeadline();
+	ui->cbxHasDeadline->setChecked(false);
 }
 
 DialogCard::DialogCard(Card card, QWidget *parent) :
@@ -28,6 +30,30 @@ void DialogCard::setWidgetData(Card card)
 
 	ui->cbxPriority->setCurrentIndex((int)card.priority);
 	ui->cbxStatus->setCurrentIndex((int)card.status);
+
+	if(card.startDate.isValid())
+	{
+		ui->cbxHasDeadline->setChecked(true);
+		ui->dteStartTime->setDateTime(card.startDate);
+
+		ui->dteDeadline->setDateTime(card.deadline);
+		ui->dteDeadline->setMinimumDateTime(ui->dteStartTime->dateTime());
+	}
+	else
+	{
+		ui->cbxHasDeadline->setChecked(false);
+		setDefaultDeadline();
+	}
+
+}
+
+
+void DialogCard::setDefaultDeadline()
+{
+	ui->dteStartTime->setDateTime(QDateTime::currentDateTime());
+
+	ui->dteDeadline->setDateTime(QDateTime::currentDateTime().addDays(1));
+	ui->dteDeadline->setMinimumDateTime(ui->dteStartTime->dateTime());
 }
 
 void DialogCard::changeAcceptButtonToApply()
@@ -64,6 +90,17 @@ Card DialogCard::GetCard()
 		card.finishedDate = QDateTime::currentDateTime();
 	}
 
+	if(ui->cbxHasDeadline->isChecked())
+	{
+		card.startDate = ui->dteStartTime->dateTime();
+		card.deadline = ui->dteDeadline->dateTime();
+	}
+	else
+	{
+		card.startDate = QDateTime();
+		card.deadline = QDateTime();
+	}
+
 	return card;
 }
 
@@ -75,4 +112,20 @@ void DialogCard::on_btnAccept_clicked()
 void DialogCard::on_btnCancel_clicked()
 {
 	reject();
+}
+
+void DialogCard::on_cbxHasDeadline_clicked(bool checked)
+{
+	setDeadlineEnabled(checked);
+}
+
+void DialogCard::setDeadlineEnabled(bool enabled)
+{
+	ui->dteStartTime->setEnabled(enabled);
+	ui->dteDeadline->setEnabled(enabled);
+}
+
+void DialogCard::on_dteStartTime_dateTimeChanged(const QDateTime &dateTime)
+{
+	ui->dteDeadline->setMinimumDateTime(ui->dteStartTime->dateTime());
 }

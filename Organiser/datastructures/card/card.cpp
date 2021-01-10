@@ -22,6 +22,12 @@ Card::Card(Card* copy)
 	this->finishedDate = copy->finishedDate;
 }
 
+Card::Card(QString title, QString description, QDateTime creationDate, QDateTime startDate,QDateTime deadline) : Card(title,description,creationDate)
+{
+	this->startDate = startDate;
+	this->deadline = deadline;
+}
+
 Card::Card(QString title, QString description, QDateTime creationDate)
 {
 	this->title = title;
@@ -66,11 +72,18 @@ QByteArray Card::Encode()
 	data.append((int)status);
 
 	QString temp = creationDate.toString("yyyy-MM-dd hh:mm:ss");
-
 	data.append((int)temp.length());
 	data.append(temp);
 
 	temp = finishedDate.toString("yyyy-MM-dd hh:mm:ss");
+	data.append((int)temp.length());
+	data.append(temp);
+
+	temp = startDate.toString("yyyy-MM-dd hh:mm:ss");
+	data.append((int)temp.length());
+	data.append(temp);
+
+	temp = deadline.toString("yyyy-MM-dd hh:mm:ss");
 	data.append((int)temp.length());
 	data.append(temp);
 
@@ -111,19 +124,45 @@ void Card::SetDataFromArray(QByteArray data)
 	currentIndex += 1;
 	finishedDate = QDateTime::fromString(QString(data.mid(currentIndex,length)),"yyyy-MM-dd hh:mm:ss");
 	currentIndex += length;
+
+	length = data.mid(currentIndex,1)[0];
+	currentIndex += 1;
+	startDate = QDateTime::fromString(QString(data.mid(currentIndex,length)),"yyyy-MM-dd hh:mm:ss");
+	currentIndex += length;
+
+	length = data.mid(currentIndex,1)[0];
+	currentIndex += 1;
+	deadline = QDateTime::fromString(QString(data.mid(currentIndex,length)),"yyyy-MM-dd hh:mm:ss");
+	currentIndex += length;
+}
+
+QDateTime Card::GetFinishingDate()
+{
+	if(status == Status::Started)
+	{
+		return deadline;
+	}
+	else
+	{
+		return finishedDate;
+	}
 }
 
 bool Card::isEqual(const Card &other)
 {
+
 	if(this->title.compare(other.title) == 0 &&
 			this->description.compare(other.description) == 0 &&
 			this->creationDate == other.creationDate &&
-			this->priority == priority &&
-			this->status == status &&
-			this->finishedDate == finishedDate)
+			this->priority == other.priority &&
+			this->status == other.status &&
+			this->finishedDate == other.finishedDate &&
+			this->startDate == other.startDate &&
+			this->deadline == other.deadline)
 	{
 		return true;
 	}
 
 	return false;
 }
+

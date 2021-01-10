@@ -1,6 +1,7 @@
 #ifndef BOARDCOLUMNWRITERXML_H
 #define BOARDCOLUMNWRITERXML_H
 
+#include "boardcolumn.h"
 #include <QDomDocument>
 
 class BoardColumnWriterXml
@@ -9,8 +10,8 @@ class BoardColumnWriterXml
 		BoardColumnWriterXml();
 		QString GetRootElementName();
 
-		QDomElement Save(class BoardColumn column, QDomDocument document);
-		class BoardColumn Load(QDomElement root);
+		QDomElement Save(BoardColumn column, QDomDocument document);
+		BoardColumn Load(QDomElement root);
 	private:
 };
 

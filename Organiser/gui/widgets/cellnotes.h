@@ -40,7 +40,8 @@ class CellNotes : public QWidget
 
 		void setWidgetData(Card card);
 
-		void setStatusIconAndLabel(Card::Status status, QDateTime finishedDate);
+		void setStartStatusIconAndLabel(QDateTime startDate);
+		void setFinishedStatusIconAndLabel(Card::Status status, QDateTime finishedDate);
 		void setStatusIcon(Card::Status status);
 
 		void setPriorityIcon(Card::Priority priority);

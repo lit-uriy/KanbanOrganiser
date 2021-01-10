@@ -12,6 +12,8 @@ class Card
 		Card(QByteArray data);
 		Card(QString title, QString description, QDateTime creationDate);
 
+		Card(QString title, QString description, QDateTime creationDate, QDateTime startDate,QDateTime deadline);
+
 		bool operator==(const Card &other);
 		bool operator!=(const Card &other);
 
@@ -27,11 +29,15 @@ class Card
 		QDateTime creationDate;
 		QDateTime finishedDate;
 
+		QDateTime startDate;
+		QDateTime deadline;
+
 		bool IsNull();
 
 		QByteArray Encode();
 		void SetDataFromArray(QByteArray data);
 
+		QDateTime GetFinishingDate();
 	private:
 		bool isEqual(const Card &other);
 };

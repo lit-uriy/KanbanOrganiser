@@ -22,11 +22,22 @@ CellNotes[pressed=true] {
   border-radius: 2px;
 }
 
+NotesTableWidget {
+  qproperty-dropLineColor: #42A5F5;
+}
+
 QWidget[column=true] {
   background-color: #323232;
 }
 
 QLabel {
+  background-color: #00000000;
+  color: #EEEEEE;
+  font-weight: bold;
+  font-family: "Verdana";
+}
+
+QCheckBox {
   background-color: #00000000;
   color: #EEEEEE;
   font-weight: bold;
@@ -56,7 +67,8 @@ QPushButton::pressed {
 QSpinBox,
 QLineEdit,
 QTextEdit,
-QPlainTextEdit {
+QPlainTextEdit,
+QDateTimeEdit {
   background-color: #323232;
   color: #EEEEEE;
   border: 1px solid #656565;
@@ -67,14 +79,16 @@ QPlainTextEdit {
 QSpinBox:hover,
 QLineEdit:hover,
 QTextEdit:hover,
-QPlainTextEdit:hover {
+QPlainTextEdit:hover,
+QDateTimeEdit:hover {
   border: 1px solid #42A5F5;
 }
 
 QSpinBox:focus,
 QLineEdit:focus,
 QTextEdit:focus,
-QPlainTextEdit:focus {
+QPlainTextEdit:focus,
+QDateTimeEdit:focus {
   border: 1px solid #42A5F5;
   background-color: #212121;
 }
@@ -134,14 +148,16 @@ QComboBox:editable {
   background: #00000000;
 }
 
-QComboBox::drop-down {
+QComboBox::drop-down,
+QDateTimeEdit::drop-down {
   subcontrol-origin: padding;
   subcontrol-position: top right;
   width: 15px;
   background-color: #00000000;
 }
 
-QComboBox::down-arrow {
+QComboBox::down-arrow,
+QDateTimeEdit::down-arrow {
   image: url(:/themes/dark/resources/theme/output/dark/arrow-down.png);
 }
 

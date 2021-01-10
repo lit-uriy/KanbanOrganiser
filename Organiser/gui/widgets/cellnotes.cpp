@@ -120,24 +120,36 @@ void CellNotes::setWidgetData(Card card)
 
 	ui->lblDescription->setText(card.description);
 
-	ui->lblStartTime->setText(card.creationDate.toString());
-
-	setStatusIconAndLabel(card.status,card.finishedDate);
+	setStartStatusIconAndLabel(card.startDate);
+	setFinishedStatusIconAndLabel(card.status,card.GetFinishingDate());
 
 	setPriorityIcon(card.priority);
 }
 
-void CellNotes::setStatusIconAndLabel(Card::Status status, QDateTime finishedDate)
+void CellNotes::setStartStatusIconAndLabel(QDateTime startDate)
 {
-	if(status == Card::Status::Started)
+	if(startDate.isValid())
 	{
-		ui->wdtFinishedTime->setVisible(false);
+		ui->wdtStartedTime->setVisible(true);
+		ui->lblStartTime->setText(startDate.toString("yyyy-MM-dd hh:mm"));//TODO:
 	}
 	else
 	{
+		ui->wdtStartedTime->setVisible(false);
+	}
+}
+
+void CellNotes::setFinishedStatusIconAndLabel(Card::Status status, QDateTime finishedDate)
+{
+	if(finishedDate.isValid())
+	{
 		ui->wdtFinishedTime->setVisible(true);
-		ui->lblFinishedTime->setText(finishedDate.toString());
+		ui->lblFinishedTime->setText(finishedDate.toString("yyyy-MM-dd hh:mm"));//TODO:
 		setStatusIcon(status);
+	}
+	else
+	{
+		ui->wdtFinishedTime->setVisible(false);
 	}
 }
 
@@ -148,6 +160,7 @@ void CellNotes::setStatusIcon(Card::Status status)
 	switch(status)
 	{
 		case Card::Status::Started:
+			path = ":/icons/resources/icons/edit.png";//TODO:
 			break;
 		case Card::Status::Finished:
 			path = ":/icons/resources/icons/check.png";

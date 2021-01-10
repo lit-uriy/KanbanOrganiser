@@ -62,7 +62,7 @@ void WidgetBoard::addColumnToListView(BoardColumn column,int id)
 {
 	WidgetNotes* columnWidget = new WidgetNotes(column,id,this);
 
-	columnWidget->setFixedWidth(250);//TODO:
+	columnWidget->setFixedWidth(300);//TODO:
 	ui->wdtColumnList->layout()->addWidget(columnWidget);
 
 	connect(columnWidget,&WidgetNotes::DeleteRequest,this,&WidgetBoard::DeleteColumn);

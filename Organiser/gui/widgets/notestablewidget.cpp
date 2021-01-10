@@ -45,7 +45,6 @@ void NotesTableWidget::setCellSelected(int index)
 */
 void NotesTableWidget::drawDropIndicator()
 {
-	qDebug() << "drawDropIndicator: " << dropPosition;
 	if(dropPosition == -1)
 	{
 		return;
@@ -53,11 +52,10 @@ void NotesTableWidget::drawDropIndicator()
 
 	QPainter paint(viewport());
 
-	QPen pen(Qt::blue);
-	pen.setWidth(10);
+	QPen pen(dropLineColor);
+	pen.setWidth(3);
 	paint.setPen(pen);
 
-	int t = verticalScrollBar()->value();
 	int dropY = getDropPositionY() - verticalScrollBar()->value();
 	paint.drawLine(0, dropY, width(), dropY);
 }

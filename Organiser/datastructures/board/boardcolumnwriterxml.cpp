@@ -1,6 +1,5 @@
 #include "boardcolumnwriterxml.h"
 
-#include "boardcolumn.h"
 #include "datastructures/card/cardwriterxml.h"
 
 BoardColumnWriterXml::BoardColumnWriterXml()

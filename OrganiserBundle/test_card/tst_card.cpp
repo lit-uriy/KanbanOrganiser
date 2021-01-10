@@ -21,11 +21,16 @@ void TestCard::test_cardCreation()
 	QString description  = "descriptionText";
 	QDateTime creationDate = QDateTime::currentDateTime();
 
-	Card* card = new Card(title,description,creationDate);
+	QDateTime startDate = QDateTime(QDate(2020,1,1),QTime(10,10));
+	QDateTime deadline = QDateTime(QDate(2021,2,10),QTime(11,9));
+
+	Card* card = new Card(title,description,creationDate,startDate,deadline);
 
 	QCOMPARE(title, card->title);
 	QCOMPARE(description, card->description);
 	QCOMPARE(creationDate, card->creationDate);
+	QCOMPARE(startDate, card->startDate);
+	QCOMPARE(deadline, card->deadline);
 }
 
 void TestCard::test_compare()
@@ -56,8 +61,11 @@ void TestCard::test_EncodeDecode()
 	QString description  = "descriptionText";
 	QDateTime creationDate = QDateTime(QDate(2020,1,1),QTime(10,10));
 
-	Card card(title,description,creationDate);
-	QByteArray cardDecoded(card.Encode());
+	QDateTime startDate = QDateTime(QDate(2020,1,10),QTime(9,9));
+	QDateTime deadline = QDateTime(QDate(2020,2,2),QTime(11,11));
+
+	Card card(title,description,creationDate,startDate,deadline);
+	Card cardDecoded(card.Encode());
 
 
 	QVERIFY(card == cardDecoded);

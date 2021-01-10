@@ -25,6 +25,10 @@ class DialogCard : public QDialog
 
 		void on_btnCancel_clicked();
 
+		void on_cbxHasDeadline_clicked(bool checked);
+
+		void on_dteStartTime_dateTimeChanged(const QDateTime &dateTime);
+
 	private:
 		Ui::DialogCard *ui;
 
@@ -32,6 +36,9 @@ class DialogCard : public QDialog
 
 		void setWidgetData(Card card);
 		void changeAcceptButtonToApply();
+
+		void setDefaultDeadline();
+		void setDeadlineEnabled(bool enabled);
 };
 
 #endif // DIALOGCARD_H
