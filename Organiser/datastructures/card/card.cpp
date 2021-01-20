@@ -2,15 +2,20 @@
 
 Card::Card()
 {
-
+	id = generateId();
 }
 
-Card::Card(QByteArray data)
+unsigned long long Card::generateId()
+{
+	return QDateTime::currentMSecsSinceEpoch();
+}
+
+Card::Card(QByteArray data) : Card()
 {
 	SetDataFromArray(data);
 }
 
-Card::Card(Card* copy)
+Card::Card(Card* copy) : Card()
 {
 	this->title = copy->title;
 	this->description = copy->description;
@@ -28,7 +33,7 @@ Card::Card(QString title, QString description, QDateTime creationDate, QDateTime
 	this->deadline = deadline;
 }
 
-Card::Card(QString title, QString description, QDateTime creationDate)
+Card::Card(QString title, QString description, QDateTime creationDate) : Card()
 {
 	this->title = title;
 	this->description = description;
@@ -59,6 +64,10 @@ QByteArray Card::Encode()
 {
 	QByteArray data;
 
+	QString temp = QString::number(id);
+	data.append(temp.length());
+	data.append(temp);
+
 	data.append((int)title.length());
 	data.append(title);
 
@@ -71,7 +80,7 @@ QByteArray Card::Encode()
 	data.append((int)1);
 	data.append((int)status);
 
-	QString temp = creationDate.toString("yyyy-MM-dd hh:mm:ss");
+	temp = creationDate.toString("yyyy-MM-dd hh:mm:ss");
 	data.append((int)temp.length());
 	data.append(temp);
 
@@ -93,10 +102,14 @@ QByteArray Card::Encode()
 void Card::SetDataFromArray(QByteArray data)
 {
 	int currentIndex = 0;
+
 	int length = data.mid(0,1)[0];
-
 	currentIndex += 1;
+	id = data.mid(currentIndex,length).toULongLong();
+	currentIndex += length;
 
+	length = data.mid(currentIndex,1)[0];
+	currentIndex += 1;
 	title = data.mid(currentIndex,length);
 	currentIndex += length;
 
@@ -150,7 +163,6 @@ QDateTime Card::GetFinishingDate()
 
 bool Card::isEqual(const Card &other)
 {
-
 	if(this->title.compare(other.title) == 0 &&
 			this->description.compare(other.description) == 0 &&
 			this->creationDate == other.creationDate &&

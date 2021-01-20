@@ -29,6 +29,7 @@ SOURCES += \
     datastructures/board/boardcolumn.cpp \
     datastructures/board/boardcolumnwriterxml.cpp \
     datastructures/board/boardwriterxml.cpp \
+    datastructures/calendar/calendar.cpp \
     datastructures/card/card.cpp \
     datastructures/card/cardwriterxml.cpp \
     gui/dialogs/dialogcard.cpp \
@@ -49,6 +50,7 @@ HEADERS += \
     datastructures/board/boardcolumn.h \
     datastructures/board/boardcolumnwriterxml.h \
     datastructures/board/boardwriterxml.h \
+    datastructures/calendar/calendar.h \
     datastructures/card/cardwriterxml.h \
     exceptions/generalexception.h \
     datastructures/notes/notes.h \

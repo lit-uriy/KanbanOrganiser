@@ -17,6 +17,8 @@ class Card
 		bool operator==(const Card &other);
 		bool operator!=(const Card &other);
 
+		unsigned long long id = 0;
+
 		QString title;
 		QString description;
 
@@ -39,6 +41,8 @@ class Card
 
 		QDateTime GetFinishingDate();
 	private:
+		unsigned long long generateId();
+
 		bool isEqual(const Card &other);
 };
 

@@ -59,7 +59,7 @@ void Board::AddCardToColumn(int columnIndex, Card card) throw(GeneralException)
 	columns[columnIndex].AddCard(card);
 }
 
-void Board::ReplcaeCardInColumn(int columnIndex, int cardIndex, Card card) throw(GeneralException)
+void Board::ReplaceCardInColumn(int columnIndex, int cardIndex, Card card) throw(GeneralException)
 {
 	if(columnIndex < 0 || columnIndex >= columns.size())
 	{

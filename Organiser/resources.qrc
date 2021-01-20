@@ -14,5 +14,16 @@
     </qresource>
     <qresource prefix="/themes/dark">
         <file>resources/theme/output/dark/arrow-down.png</file>
+        <file>resources/theme/output/dark/arrow-down-hover.png</file>
+        <file>resources/theme/output/dark/arrow-down-pressed.png</file>
+        <file>resources/theme/output/dark/arrow-left.png</file>
+        <file>resources/theme/output/dark/arrow-right.png</file>
+        <file>resources/theme/output/dark/arrow-left-hover.png</file>
+        <file>resources/theme/output/dark/arrow-left-pressed.png</file>
+        <file>resources/theme/output/dark/arrow-right-hover.png</file>
+        <file>resources/theme/output/dark/arrow-right-pressed.png</file>
+        <file>resources/theme/output/dark/arrow-up.png</file>
+        <file>resources/theme/output/dark/arrow-up-hover.png</file>
+        <file>resources/theme/output/dark/arrow-up-pressed.png</file>
     </qresource>
 </RCC>

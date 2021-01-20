@@ -20,7 +20,7 @@ class Board
 		BoardColumn GetColumnAt(int index) throw(GeneralException);
 
 		void AddCardToColumn(int columnIndex, Card card) throw(GeneralException);
-		void ReplcaeCardInColumn(int columnIndex, int cardIndex, Card card) throw(GeneralException);
+		void ReplaceCardInColumn(int columnIndex, int cardIndex, Card card) throw(GeneralException);
 		void DeleteCardFromColumn(int columnIndex, int cardIndex) throw(GeneralException);
 
 		void MoveCard(int columnFrom,int cardIndex,int columnTo) throw(GeneralException);

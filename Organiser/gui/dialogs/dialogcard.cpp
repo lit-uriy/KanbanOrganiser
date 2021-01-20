@@ -10,6 +10,7 @@ DialogCard::DialogCard(QWidget *parent) :
 	ui->setupUi(this);
 	setDefaultDeadline();
 	ui->cbxHasDeadline->setChecked(false);
+	setDeadlineEnabled(false);
 }
 
 DialogCard::DialogCard(Card card, QWidget *parent) :
@@ -33,6 +34,7 @@ void DialogCard::setWidgetData(Card card)
 
 	if(card.startDate.isValid())
 	{
+		setDeadlineEnabled(true);
 		ui->cbxHasDeadline->setChecked(true);
 		ui->dteStartTime->setDateTime(card.startDate);
 
@@ -41,6 +43,7 @@ void DialogCard::setWidgetData(Card card)
 	}
 	else
 	{
+		setDeadlineEnabled(false);
 		ui->cbxHasDeadline->setChecked(false);
 		setDefaultDeadline();
 	}

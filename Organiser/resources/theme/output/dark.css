@@ -93,6 +93,15 @@ QDateTimeEdit:focus {
   background-color: #212121;
 }
 
+QSpinBox:disabled,
+QLineEdit:disabled,
+QTextEdit:disabled,
+QPlainTextEdit:disabled,
+QDateTimeEdit:disabled {
+  background-color: #424242;
+  color: #AAAAAA;
+}
+
 QSpinBox::up-button:hover, QSpinBox::down-button:hover {
   background-color: #00000000;
   border: 0px solid #00000000;
@@ -159,6 +168,11 @@ QDateTimeEdit::drop-down {
 QComboBox::down-arrow,
 QDateTimeEdit::down-arrow {
   image: url(:/themes/dark/resources/theme/output/dark/arrow-down.png);
+}
+
+QComboBox::down-arrow:hover,
+QDateTimeEdit::down-arrow:hover {
+  image: url(:/themes/dark/resources/theme/output/dark/arrow-down-hover.png);
 }
 
 QScrollBar {
@@ -253,4 +267,135 @@ QTableWidget {
 
 QTableWidget::item:selected {
   background-color: #00000000;
+}
+
+/*-----QMenu-----*/
+QMenu {
+  background-color: #323232;
+  border: 1px solid;
+  border-color: #CDCDCD;
+}
+
+QMenu::separator {
+  height: 1px;
+  background: #CDCDCD;
+  margin-left: 8px;
+  margin-right: 8px;
+}
+
+QMenu::item {
+  background-color: #00000000;
+  color: #EEEEEE;
+  font-family: "Verdana";
+  font-weight: bold;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 20px;
+  padding-right: 16px;
+}
+
+QMenu::item:selected {
+  background-color: #42A5F5;
+}
+
+QMenu::item:pressed {
+  background-color: #1565C0;
+}
+
+/*-----QCalendarWidget-----*/
+QCalendarWidget QToolButton {
+  height: 24px;
+  min-width: 64px;
+  icon-size: 24px, 24px;
+  background-color: #323232;
+  border: none;
+  font-size: 12px;
+  font-weight: bold;
+  color: #EEEEEE;
+}
+
+QCalendarWidget QToolButton:hover {
+  color: #EEEEEE;
+}
+
+/* header row */
+QCalendarWidget QWidget {
+  alternate-background-color: #424242;
+}
+
+/* normal days */
+QCalendarWidget QAbstractItemView:enabled {
+  font-size: 12px;
+  font-weight: bold;
+  color: #EEEEEE;
+  background-color: #323232;
+  selection-background-color: #42A5F5;
+  selection-color: #323232;
+}
+
+/* days in other months */
+/* navigation bar */
+QCalendarWidget QWidget#qt_calendar_navigationbar {
+  background-color: #323232;
+}
+
+QCalendarWidget QAbstractItemView:disabled {
+  color: #AAAAAA;
+}
+
+QCalendarWidget QWidget#qt_calendar_prevmonth {
+  height: 24px;
+  width: 24px;
+  icon-size: 24px;
+  qproperty-icon: url(:/themes/dark/resources/theme/output/dark/arrow-left.png);
+}
+
+QCalendarWidget QWidget#qt_calendar_nextmonth {
+  height: 24px;
+  width: 24px;
+  icon-size: 24px;
+  qproperty-icon: url(:/themes/dark/resources/theme/output/dark/arrow-up.png);
+}
+
+/*-----QCheckBox-----*/
+QCheckBox {
+  background-color: #00000000;
+  color: #EEEEEE;
+  font-weight: bold;
+  font-family: "Verdana";
+}
+
+QCheckBox::indicator {
+  color: #FFb1b1;
+  background-color: #212121;
+  border: 2px solid #656565;
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+}
+
+QCheckBox::indicator:checked {
+  image: url("./ressources/check.png");
+  /*To replace*/
+  background-color: #42A5F5;
+  border: 2px solid #42A5F5;
+}
+
+QCheckBox::indicator:unchecked:hover {
+  border: 2px solid #64B5F6;
+  border-radius: 2px;
+}
+
+QCheckBox::indicator:checked:hover {
+  border: 2px solid #64B5F6;
+  background-color: #64B5F6;
+}
+
+QCheckBox::disabled {
+  color: #AAAAAA;
+}
+
+QCheckBox::indicator:disabled {
+  background-color: #AAAAAA;
+  border: 2px solid #AAAAAA;
 }

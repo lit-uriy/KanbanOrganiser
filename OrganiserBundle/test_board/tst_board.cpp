@@ -117,7 +117,7 @@ void test_board::replaceCardInColumnInBoard()
 	board.AddCardToColumn(0,card);
 
 	Card cardOther("TitleOther","DescOther", QDateTime(QDate(2020,1,1),QTime(10,10)));
-	board.ReplcaeCardInColumn(0,0,cardOther);
+	board.ReplaceCardInColumn(0,0,cardOther);
 
 	BoardColumn column2FromNotes = board.GetColumnAt(0);
 

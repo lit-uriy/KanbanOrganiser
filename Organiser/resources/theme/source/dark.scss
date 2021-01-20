@@ -20,7 +20,7 @@ $buttonColorHover : #4442A5F5;
 
 $scrollHandle: #424242;
 
-
+$menuBorder: #CDCDCD;
 
 
 QWidget
@@ -139,6 +139,18 @@ QDateTimeEdit:focus
 
 }
 
+
+QSpinBox:disabled,
+QLineEdit:disabled,
+QTextEdit:disabled,
+QPlainTextEdit:disabled,
+QDateTimeEdit:disabled
+{
+	background-color: $backgroundSecondary;
+	color: $textPrimaryGray;
+
+}
+
 QSpinBox::up-button:hover, QSpinBox::down-button:hover
 {
     background-color: $transparent;
@@ -221,9 +233,16 @@ QComboBox::down-arrow,
 QDateTimeEdit::down-arrow
 
 {
-     image: url(:/themes/dark/resources/theme/output/dark/arrow-down.png);
+    image: url(:/themes/dark/resources/theme/output/dark/arrow-down.png);
 }
 
+
+QComboBox::down-arrow:hover,
+QDateTimeEdit::down-arrow:hover
+
+{
+    image: url(:/themes/dark/resources/theme/output/dark/arrow-down-hover.png);
+}
 
 QScrollBar
 {
@@ -349,4 +368,167 @@ QTableWidget
 QTableWidget::item:selected
 {
 	background-color: $transparent; 
+}
+
+
+/*-----QMenu-----*/
+QMenu 
+{
+	background-color : $backgroundPrimary;
+	border : 1px solid;
+    border-color: $menuBorder;
+}
+
+QMenu::separator 
+{
+    height: 1px;
+    background: $menuBorder;
+    margin-left: 8px;
+    margin-right: 8px;
+}
+
+QMenu::item 
+{
+    background-color: $transparent;
+	color: $textPrimary;
+	font-family: $fontFamily;
+	font-weight: bold;
+	padding-top: 4px;
+	padding-bottom: 4px;
+	padding-left: 20px;
+	padding-right: 16px;
+}
+
+QMenu::item:selected
+{
+    background-color: $accentPrimary;
+}
+
+QMenu::item:pressed
+{
+    background-color: $accentDark;
+}
+
+
+/*-----QCalendarWidget-----*/
+
+QCalendarWidget QToolButton 
+{
+  	height: 24px;
+  	min-width: 64px;
+  	icon-size: 24px, 24px;
+  	background-color: $backgroundPrimary;
+	border: none;
+	
+  	font-size: 12px;  
+	font-weight: bold;
+  	color: $textPrimary; 
+}
+
+QCalendarWidget QToolButton:hover
+{
+  	color: $textPrimary; 
+} 
+
+/* header row */
+QCalendarWidget QWidget
+{
+	alternate-background-color: $backgroundSecondary;
+}
+   
+/* normal days */
+QCalendarWidget QAbstractItemView:enabled 
+{
+  	font-size: 12px;  
+	font-weight: bold;
+  	color: $textPrimary;  
+  	background-color: $backgroundPrimary;  
+  	selection-background-color: $accentPrimary; 
+  	selection-color: $backgroundPrimary; 
+}
+   
+/* days in other months */
+/* navigation bar */
+QCalendarWidget QWidget#qt_calendar_navigationbar
+{ 
+  background-color: $backgroundPrimary; 
+}
+
+QCalendarWidget QAbstractItemView:disabled 
+{ 
+	color: $textPrimaryGray; 
+}
+
+
+QCalendarWidget QWidget#qt_calendar_prevmonth
+{
+  	height: 24px;
+  	width: 24px;
+    icon-size: 24px;
+    qproperty-icon: url(:/themes/dark/resources/theme/output/dark/arrow-left.png);
+}
+
+QCalendarWidget QWidget#qt_calendar_nextmonth  
+{
+  	height: 24px;
+  	width: 24px;
+    icon-size: 24px;
+    qproperty-icon: url(:/themes/dark/resources/theme/output/dark/arrow-up.png);
+}
+
+/*-----QCheckBox-----*/
+QCheckBox
+{
+
+	background-color: $transparent;
+	color: $textPrimary;
+	font-weight: bold;
+	font-family: $fontFamily;
+}
+
+
+QCheckBox::indicator
+{
+    color: #FFb1b1;
+    background-color: $backgroundDark;
+    border: 2px solid $buttonColor;
+    width: 10px;
+    height: 10px;
+	border-radius: 2px;
+
+}
+
+
+QCheckBox::indicator:checked
+{
+    image:url("./ressources/check.png"); /*To replace*/
+	background-color: $accentPrimary;
+    border: 2px solid $accentPrimary;
+
+}
+
+
+QCheckBox::indicator:unchecked:hover
+{
+    border: 2px solid $accentSecondary;
+	border-radius: 2px;
+}
+
+QCheckBox::indicator:checked:hover
+{
+    border: 2px solid $accentSecondary;
+	background-color: $accentSecondary;
+}
+
+QCheckBox::disabled
+{
+	color: $textPrimaryGray;
+
+}
+
+
+QCheckBox::indicator:disabled
+{
+	background-color: $textPrimaryGray;
+    border: 2px solid $textPrimaryGray;
 }

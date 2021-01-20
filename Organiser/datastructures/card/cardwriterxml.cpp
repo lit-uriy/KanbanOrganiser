@@ -13,6 +13,8 @@ QDomElement CardWriterXml::Save(Card card, QDomDocument document)
 {
 	QDomElement root = document.createElement(GetRootElementName());
 
+	root.setAttribute("id", card.id);
+
 	root.setAttribute("title", card.title);
 	root.setAttribute("description", card.description);
 
@@ -38,6 +40,7 @@ QString CardWriterXml::GetRootElementName()
 Card CardWriterXml::Load(QDomElement root)
 {
 	Card card;
+	card.id = root.attribute("id").toULongLong();
 	card.title = root.attribute("title");
 	card.description = root.attribute("description");
 
