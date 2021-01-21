@@ -2,6 +2,7 @@
 #define TST_CALENDAR_H
 
 #include <QtTest>
+#include "datastructures/appData/appdata.h"
 
 // add necessary includes here
 
@@ -13,6 +14,9 @@ class calendar : public QObject
 		calendar();
 		~calendar();
 
+		AppData appData;
+		Card card;
+		Card card2;
 	private slots:
 		void getDayCards();
 		void getWeekCards();
