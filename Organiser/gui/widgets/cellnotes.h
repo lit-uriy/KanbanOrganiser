@@ -22,7 +22,7 @@ class CellNotes : public QWidget
 
 		Card GetCard();
 
-
+		void SetDatesVisibility(bool visible);
 	protected:
 
 		void paintEvent(QPaintEvent *) override;

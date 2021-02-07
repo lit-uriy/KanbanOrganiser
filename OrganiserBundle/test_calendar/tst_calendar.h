@@ -17,6 +17,7 @@ class calendar : public QObject
 		AppData appData;
 		Card card;
 		Card card2;
+		Card card3;
 	private slots:
 		void getDayCards();
 		void getWeekCards();

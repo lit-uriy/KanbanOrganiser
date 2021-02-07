@@ -37,6 +37,8 @@ SOURCES += \
     gui/widgets/notestablewidget.cpp \
     gui/widgets/widgetboard.cpp \
     gui/widgets/widgetboardlist.cpp \
+    gui/widgets/widgetcalendar.cpp \
+    gui/widgets/widgetreminders.cpp \
     main.cpp \
     datastructures/notes/noteswriterxml.cpp \
     gui/widgets/cellnotes.cpp \
@@ -62,7 +64,9 @@ HEADERS += \
     datastructures/notes/noteswriterxml.h \
     gui/widgets/cellnotes.h \
     gui/widgets/widgetboardlist.h \
+    gui/widgets/widgetcalendar.h \
     gui/widgets/widgetnotes.h \
+    gui/widgets/widgetreminders.h \
     windowmain.h
 
 FORMS += \
@@ -71,7 +75,9 @@ FORMS += \
     gui/widgets/cellnotes.ui \
     gui/widgets/widgetboard.ui \
     gui/widgets/widgetboardlist.ui \
+    gui/widgets/widgetcalendar.ui \
     gui/widgets/widgetnotes.ui \
+    gui/widgets/widgetreminders.ui \
     windowmain.ui
 
 # Default rules for deployment.

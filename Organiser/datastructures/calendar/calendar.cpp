@@ -39,8 +39,8 @@ QList<Card> Calendar::GetCardsForWeek(QDate date, AppData appData)
 
 	int dayNumber = date.dayOfWeek()-1;
 
-	QDate startDay = date.addDays(-dayNumber);
-	QDate endDay = startDay.addDays(6);
+	QDate weekStartDay = date.addDays(-dayNumber);
+	QDate weekEndDay = weekStartDay.addDays(6);
 
 	for(int i=0; i < appData.boards.size();i++)
 	{
@@ -54,15 +54,18 @@ QList<Card> Calendar::GetCardsForWeek(QDate date, AppData appData)
 			{
 				Card card = column.GetCardAt(k);
 
-				if(card.startDate.date() <= startDay && startDay <= card.deadline.date())
+				QDate cardStartDay = card.startDate.date();
+				QDate cardEndDay = card.deadline.date();
+
+				if(weekStartDay <= cardStartDay && cardStartDay <= weekEndDay)
 				{
 					cards.append(card);
 				}
-				else if(card.startDate.date() <= endDay && endDay <= card.deadline.date())
+				else if(weekStartDay <= cardEndDay && cardEndDay <= weekEndDay)
 				{
 					cards.append(card);
 				}
-				else if(startDay <= card.startDate.date() && card.startDate.date() <= endDay)
+				else if(cardEndDay <= weekStartDay && weekEndDay <= cardEndDay)
 				{
 					cards.append(card);
 				}

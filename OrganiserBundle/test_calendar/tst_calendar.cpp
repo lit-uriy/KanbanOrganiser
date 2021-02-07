@@ -14,6 +14,10 @@ calendar::calendar()
 	QDateTime startDay2 = QDateTime(QDate(2020,1,8),QTime(10,10));
 	QDateTime deadline2 = QDateTime(QDate(2020,1,20),QTime(10,10));
 
+
+	QDateTime startDay3 = QDateTime(QDate(2019,12,8),QTime(10,10));
+	QDateTime deadline3 = QDateTime(QDate(2020,1,1),QTime(10,10));
+
 	Board board;
 	QString boardTitle = "TEst";
 	board.title = boardTitle;
@@ -21,9 +25,11 @@ calendar::calendar()
 
 	card = Card(title,description,creationDate,startDay,deadline);
 	card2 = Card(title,description,creationDate,startDay2,deadline2);
+	card3 = Card(title,description,creationDate,startDay3,deadline3);
 
 	column.AddCard(card);
 	column.AddCard(card2);
+	column.AddCard(card3);
 
 	board.AddColumn(column);
 
@@ -78,7 +84,7 @@ void calendar::getWeekCards()
 
 
 	QList<Card> cards2 = calendar.GetCardsForWeek(QDate(2020,01,11),appData);
-	if(cards.size() == 1)
+	if(cards2.size() == 1)
 	{
 		Card cardSame = cards.at(0);
 

@@ -7,6 +7,10 @@
 #include <QDrag>
 #include <QMimeData>
 
+#include <QStyle>
+#include <QStyleOption>
+#include <QPainter>
+
 CellNotes::CellNotes(Card card, int id, QWidget *parent) :
 	QWidget(parent),
 	ui(new Ui::CellNotes)
@@ -38,9 +42,11 @@ Card CellNotes::GetCard()
 	return card;
 }
 
-#include <QStyle>
-#include <QStyleOption>
-#include <QPainter>
+void CellNotes::SetDatesVisibility(bool visible)
+{
+	ui->lblStartTime->setVisible(visible);
+	ui->lblFinishedTime->setVisible(visible);
+}
 
 void CellNotes::paintEvent(QPaintEvent *)
 {
@@ -131,7 +137,9 @@ void CellNotes::setStartStatusIconAndLabel(QDateTime startDate)
 	if(startDate.isValid())
 	{
 		ui->wdtStartedTime->setVisible(true);
-		ui->lblStartTime->setText(startDate.toString("yyyy-MM-dd hh:mm"));//TODO:
+		QString date = startDate.toString("yyyy-MM-dd hh:mm");//TODO:
+		ui->lblStartTime->setText(date);
+		ui->lblStartTime->setToolTip(date);
 	}
 	else
 	{
@@ -144,7 +152,9 @@ void CellNotes::setFinishedStatusIconAndLabel(Card::Status status, QDateTime fin
 	if(finishedDate.isValid())
 	{
 		ui->wdtFinishedTime->setVisible(true);
-		ui->lblFinishedTime->setText(finishedDate.toString("yyyy-MM-dd hh:mm"));//TODO:
+		QString date = finishedDate.toString("yyyy-MM-dd hh:mm");//TODO:
+		ui->lblFinishedTime->setText(date);
+		ui->lblFinishedTime->setToolTip(date);
 		setStatusIcon(status);
 	}
 	else

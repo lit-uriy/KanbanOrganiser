@@ -20,12 +20,16 @@ class WindowMain : public QMainWindow
 
 	protected:
 
+		void showEvent(QShowEvent *event) override;
 		void closeEvent(QCloseEvent *event) override;
 	private:
 		Ui::WindowMain *ui;
 
+		void tempLoad();//TODO:Delete later
+
 		bool minimizedToTray = false;
 		QMenu menu;
+
 		QSystemTrayIcon trayIcon;
 
 		void showTrayIcon();

@@ -2,6 +2,7 @@
 #include "ui_windowmain.h"
 
 #include <QCloseEvent>
+#include <QTimer>
 
 #include "datastructures/appData/appdata.h"
 #include "datastructures/appData/appdatawriterxml.h"
@@ -15,12 +16,36 @@ WindowMain::WindowMain(QWidget *parent)
 
 	showTrayIcon();
 	connect(ui->wdtNotes,&WidgetNotes::SaveRequest,this,&WindowMain::saveAppData);
+
+	tempLoad();
+
+	QTimer::singleShot(1000,this,[this](){
+		//TODO:Change to launcher screen
+		minimizeToTray();
+	});
+}
+
+void WindowMain::tempLoad()
+{
+
+	AppData appData;
+	appData.notes = ui->wdtNotes->GetNotes();
+
+	appData.boards = ui->wdtBoard->GetBoardList();
+	ui->wdtCalendar->SetAppData(appData);
+	ui->wdtCalendar->SetWeeklyCards(QDate::currentDate());
+
+
+	ui->wdtReminders->SetAppData(appData);
+	ui->wdtReminders->UpdateData(QDate::currentDate());
+
 }
 
 void WindowMain::loadAppDataFromFile()
 {
 	AppDataWriterXml writer;
-	AppData appData = writer.ReadFromFile("C:/Users/Hato/Desktop/test.xml");
+	QString exePath = QCoreApplication::applicationDirPath();
+	AppData appData = writer.ReadFromFile(exePath + "/calendar.xml");
 
 	ui->wdtNotes->SetNotes(appData.notes);
 
@@ -31,6 +56,11 @@ WindowMain::~WindowMain()
 {
 	saveAppData();
 	delete ui;
+}
+
+void WindowMain::showEvent(QShowEvent *event)
+{
+	QMainWindow::showEvent(event);
 }
 
 void WindowMain::saveAppData()
@@ -46,7 +76,8 @@ void WindowMain::saveAppDataToFile()
 	appData.boards = ui->wdtBoard->GetBoardList();
 
 	AppDataWriterXml writer;
-	writer.WriteToFile(appData,"C:/Users/Hato/Desktop/test.xml");
+	QString exePath = QCoreApplication::applicationDirPath();
+	writer.WriteToFile(appData,exePath + "/calendar.xml");
 }
 
 #include <QDebug>
@@ -102,9 +133,9 @@ void WindowMain::updateTrayIconMenu()
 
 void WindowMain::updateTrayIcon()
 {
-	QIcon icon(":/icons/resources/icons/calendar_start.png");
+	QIcon icon(":/icons/resources/icons/featherlight-icon.png");
 	trayIcon.setIcon(icon);
-	trayIcon.setToolTip(tr("Test"));
+	trayIcon.setToolTip(tr("Featherlight organiser"));
 }
 
 void WindowMain::closeEvent(QCloseEvent* event)
