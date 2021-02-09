@@ -5,12 +5,13 @@
 
 #include "datastructures/notes/notes.h"
 #include "datastructures/board/boardcolumn.h"
+#include "widgettab.h"
 
 namespace Ui {
 class WidgetNotes;
 }
 
-class WidgetNotes : public QWidget
+class WidgetNotes : public WidgetTab
 {
 		Q_OBJECT
 
@@ -33,6 +34,7 @@ class WidgetNotes : public QWidget
 
 	private:
 		Ui::WidgetNotes *ui;
+		constexpr static QSize size = QSize(300,600);
 
 		bool internalDrag = false;
 

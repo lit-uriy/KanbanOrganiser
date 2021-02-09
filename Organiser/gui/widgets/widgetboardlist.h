@@ -2,6 +2,7 @@
 #define WIDGETBOARDLIST_H
 
 #include <QWidget>
+#include "widgettab.h"
 
 #include "datastructures/board/board.h"
 
@@ -9,7 +10,7 @@ namespace Ui {
 class WidgetBoardList;
 }
 
-class WidgetBoardList : public QWidget
+class WidgetBoardList : public WidgetTab
 {
 		Q_OBJECT
 
@@ -21,6 +22,7 @@ class WidgetBoardList : public QWidget
 		QList<Board> GetBoardList();
 	private:
 		Ui::WidgetBoardList *ui;
+		constexpr static QSize size = QSize(910,600);
 
 		int oldIndex = -1;
 		QList<Board> boards;

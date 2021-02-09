@@ -10,7 +10,7 @@
 
 
 WidgetNotes::WidgetNotes(QWidget *parent) :
-	QWidget(parent),
+	WidgetTab(size,parent),
 	ui(new Ui::WidgetNotes)
 {
 	ui->setupUi(this);
@@ -22,7 +22,7 @@ WidgetNotes::WidgetNotes(QWidget *parent) :
 }
 
 WidgetNotes::WidgetNotes(BoardColumn column, int id,QWidget *parent) :
-	QWidget(parent),
+	WidgetTab(QSize(100,100),parent),
 	ui(new Ui::WidgetNotes)
 {
 	ui->setupUi(this);

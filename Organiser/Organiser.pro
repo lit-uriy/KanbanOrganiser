@@ -39,6 +39,7 @@ SOURCES += \
     gui/widgets/widgetboardlist.cpp \
     gui/widgets/widgetcalendar.cpp \
     gui/widgets/widgetreminders.cpp \
+    gui/widgets/widgettab.cpp \
     main.cpp \
     datastructures/notes/noteswriterxml.cpp \
     gui/widgets/cellnotes.cpp \
@@ -67,6 +68,7 @@ HEADERS += \
     gui/widgets/widgetcalendar.h \
     gui/widgets/widgetnotes.h \
     gui/widgets/widgetreminders.h \
+    gui/widgets/widgettab.h \
     windowmain.h
 
 FORMS += \

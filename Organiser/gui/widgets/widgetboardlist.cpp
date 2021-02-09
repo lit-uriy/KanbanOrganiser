@@ -2,7 +2,7 @@
 #include "ui_widgetboardlist.h"
 
 WidgetBoardList::WidgetBoardList(QWidget *parent) :
-	QWidget(parent),
+	WidgetTab(size,parent),
 	ui(new Ui::WidgetBoardList)
 {
 	ui->setupUi(this);

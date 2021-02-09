@@ -3,15 +3,20 @@
 
 #include <QCloseEvent>
 #include <QTimer>
+#include <QDesktopWidget>
 
 #include "datastructures/appData/appdata.h"
 #include "datastructures/appData/appdatawriterxml.h"
+
+#include <QDebug>
 
 WindowMain::WindowMain(QWidget *parent)
 	: QMainWindow(parent)
 	, ui(new Ui::WindowMain)
 {
 	ui->setupUi(this);
+
+	setWindowFlags(Qt::FramelessWindowHint);
 	loadAppDataFromFile();
 
 	showTrayIcon();
@@ -19,10 +24,30 @@ WindowMain::WindowMain(QWidget *parent)
 
 	tempLoad();
 
+	connect(&minimizeTimer,&QTimer::timeout,this,[this](){
+		minimizeToTray();
+	});
+
 	QTimer::singleShot(1000,this,[this](){
 		//TODO:Change to launcher screen
 		minimizeToTray();
 	});
+
+	QObject::connect(qApp, &QGuiApplication::applicationStateChanged, this, [=](Qt::ApplicationState state){
+		qDebug() << state;
+
+		if(state == Qt::ApplicationState::ApplicationInactive)
+		{
+			minimizeTimer.start(100);
+			//minimizeToTray();
+		}
+		else
+		{
+			minimizeTimer.stop();
+		}
+	});
+
+	on_tabReminders_currentChanged(0);
 }
 
 void WindowMain::tempLoad()
@@ -215,4 +240,38 @@ void WindowMain::on_btnTest1_clicked()
 void WindowMain::on_btnTest2_clicked()
 {
 	setBootAtStartup(false);
+}
+
+void WindowMain::on_tabReminders_currentChanged(int index)
+{
+	QSize size;
+	switch(index)
+	{
+		case 0:
+			size = ui->wdtNotes->GetSize();
+			break;
+		case 1:
+			size = ui->wdtBoard->GetSize();
+			break;
+		case 2:
+			size = ui->wdtCalendar->GetSize();
+			break;
+		case 3:
+			size = ui->wdtReminders->GetSize();
+			break;
+	}
+
+	setScreenGeometry(size);
+}
+
+
+void WindowMain::setScreenGeometry(QSize size)
+{
+	QDesktopWidget *desktop = QApplication::desktop();
+	QRect rec = desktop->availableGeometry();
+
+	int x = rec.width() - size.width();
+	int y = rec.height() - size.height();
+	setGeometry(x,y,size.width(),size.height());
+	setFixedSize(size);
 }

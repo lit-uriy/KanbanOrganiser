@@ -7,7 +7,7 @@
 #include "cellnotes.h"
 
 WidgetCalendar::WidgetCalendar(QWidget *parent) :
-	QWidget(parent),
+	WidgetTab(size,parent),
 	ui(new Ui::WidgetCalendar)
 {
 	ui->setupUi(this);

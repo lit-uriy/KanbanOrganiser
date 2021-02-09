@@ -9,6 +9,7 @@ QT_END_NAMESPACE
 
 #include <QSystemTrayIcon>
 #include <QMenu>
+#include <QTimer>
 
 class WindowMain : public QMainWindow
 {
@@ -26,6 +27,8 @@ class WindowMain : public QMainWindow
 		Ui::WindowMain *ui;
 
 		void tempLoad();//TODO:Delete later
+
+		QTimer minimizeTimer;
 
 		bool minimizedToTray = false;
 		QMenu menu;
@@ -46,6 +49,7 @@ class WindowMain : public QMainWindow
 
 		void setBootAtStartup(bool enabled);
 
+		void setScreenGeometry(QSize size);
 	private slots:
 		void saveAppData();
 		void onTrayClick(QSystemTrayIcon::ActivationReason reason);
@@ -57,5 +61,6 @@ class WindowMain : public QMainWindow
 		void on_actionTrayShow_triggered();
 		void on_actionTrayMinimize_triggered();
 		void on_actionTrayQuit_triggered();
+		void on_tabReminders_currentChanged(int index);
 };
 #endif // WINDOWMAIN_H

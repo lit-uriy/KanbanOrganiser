@@ -5,12 +5,13 @@
 
 #include "datastructures/appData/appdata.h"
 #include "datastructures/calendar/calendar.h"
+#include "widgettab.h"
 
 namespace Ui {
 class WidgetReminders;
 }
 
-class WidgetReminders : public QWidget
+class WidgetReminders : public WidgetTab
 {
 		Q_OBJECT
 
@@ -22,6 +23,8 @@ class WidgetReminders : public QWidget
 		void UpdateData(QDate date);
 	private:
 		Ui::WidgetReminders *ui;
+		constexpr static QSize size = QSize(300,600);
+
 
 		Calendar calendar;
 		AppData appData;

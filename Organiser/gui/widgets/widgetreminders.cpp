@@ -4,7 +4,7 @@
 #include "cellnotes.h"
 
 WidgetReminders::WidgetReminders(QWidget *parent) :
-	QWidget(parent),
+	WidgetTab(size,parent),
 	ui(new Ui::WidgetReminders)
 {
 	ui->setupUi(this);

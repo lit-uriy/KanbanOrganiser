@@ -12,6 +12,10 @@ SUBDIRS += \
     test_cardwriterxml \
     test_noteswriterxml
 
-HEADERS +=
+HEADERS += \
 
-SOURCES +=
+SOURCES += \
+
+CONFIG += qt
+
+QT += widgets

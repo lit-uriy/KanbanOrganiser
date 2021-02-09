@@ -5,12 +5,14 @@
 
 #include "datastructures/appData/appdata.h"
 #include "datastructures/calendar/calendar.h"
+#include "widgettab.h"
+
 
 namespace Ui {
 class WidgetCalendar;
 }
 
-class WidgetCalendar : public QWidget
+class WidgetCalendar : public WidgetTab
 {
 		Q_OBJECT
 
@@ -22,6 +24,7 @@ class WidgetCalendar : public QWidget
 		void SetWeeklyCards(QDate date);
 	private:
 		Ui::WidgetCalendar *ui;
+		constexpr static QSize size = QSize(1200,600);
 
 		QDate currentDate;
 
