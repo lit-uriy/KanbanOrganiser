@@ -2,6 +2,7 @@
 #include "ui_widgetreminders.h"
 
 #include "cellnotes.h"
+#include "gui/dialogs/dialogcard.h"
 
 WidgetReminders::WidgetReminders(QWidget *parent) :
 	WidgetTab(size,parent),
@@ -18,6 +19,7 @@ WidgetReminders::~WidgetReminders()
 void WidgetReminders::SetAppData(AppData appData)
 {
 	this->appData = appData;
+	this->reminders = appData.reminders;
 }
 
 void WidgetReminders::UpdateData(QDate date)
@@ -33,6 +35,11 @@ void WidgetReminders::UpdateData(QDate date)
 	}
 }
 
+Reminders WidgetReminders::GetReminders()
+{
+	return reminders;
+}
+
 void WidgetReminders::addCardToListView(Card card, int id)
 {
 	ui->twdReminders->insertRow(0);
@@ -40,4 +47,18 @@ void WidgetReminders::addCardToListView(Card card, int id)
 	CellNotes* cell = new CellNotes(card,id,ui->twdReminders);
 	cell->SetDatesVisibility(false);
 	ui->twdReminders->setCellWidget(0,0,cell);
+}
+
+void WidgetReminders::on_pushButton_clicked()
+{
+	DialogCard dialogCard(this);
+
+	if(dialogCard.exec() == QDialog::Accepted)
+	{
+		ReminderCard card = dialogCard.GetReminderCard();
+
+		reminders.AddCard(card);
+
+		emit SaveRequest();
+	}
 }

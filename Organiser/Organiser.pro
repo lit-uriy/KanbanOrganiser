@@ -32,6 +32,10 @@ SOURCES += \
     datastructures/calendar/calendar.cpp \
     datastructures/card/card.cpp \
     datastructures/card/cardwriterxml.cpp \
+    datastructures/reminders/remindercard.cpp \
+    datastructures/reminders/remindercardwritterxml.cpp \
+    datastructures/reminders/reminders.cpp \
+    datastructures/reminders/reminderswritterxml.cpp \
     gui/dialogs/dialogcard.cpp \
     gui/dialogs/dialogcolumnedit.cpp \
     gui/widgets/notestablewidget.cpp \
@@ -49,12 +53,17 @@ SOURCES += \
 HEADERS += \
     datastructures/appData/appdata.h \
     datastructures/ appData/appdatawriterxml.h \
+    datastructures/appData/appdatawriterxml.h \
     datastructures/board/board.h \
     datastructures/board/boardcolumn.h \
     datastructures/board/boardcolumnwriterxml.h \
     datastructures/board/boardwriterxml.h \
     datastructures/calendar/calendar.h \
     datastructures/card/cardwriterxml.h \
+    datastructures/reminders/remindercard.h \
+    datastructures/reminders/remindercardwritterxml.h \
+    datastructures/reminders/reminders.h \
+    datastructures/reminders/reminderswritterxml.h \
     exceptions/generalexception.h \
     datastructures/notes/notes.h \
     datastructures/card/card.h \

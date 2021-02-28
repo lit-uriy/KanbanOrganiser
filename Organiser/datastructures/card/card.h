@@ -31,7 +31,7 @@ class Card
 		QDateTime creationDate;
 		QDateTime finishedDate;
 
-		QDateTime startDate;
+		QDateTime startDate;//Remind date for reminderCard
 		QDateTime deadline;
 
 		bool IsNull();

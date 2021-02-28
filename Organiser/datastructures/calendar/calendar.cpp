@@ -29,6 +29,15 @@ QList<Card> Calendar::GetCardsForDay(QDate date, AppData appData)
 		}
 	}
 
+	for(int i=0; i < appData.reminders.GetCardsCount();i++)
+	{
+		ReminderCard card = appData.reminders.GetCardAt(i);
+		if(card.startDate.date() <= date && date <= card.deadline.date())
+		{
+			cards.append(card);
+		}
+	}
+
 	return cards;
 }
 
@@ -73,5 +82,24 @@ QList<Card> Calendar::GetCardsForWeek(QDate date, AppData appData)
 		}
 	}
 
+	for(int i=0; i < appData.reminders.GetCardsCount();i++)
+	{
+		ReminderCard card = appData.reminders.GetCardAt(i);
+		QDate cardStartDay = card.startDate.date();
+		QDate cardEndDay = card.deadline.date();
+
+		if(weekStartDay <= cardStartDay && cardStartDay <= weekEndDay)
+		{
+			cards.append(card);
+		}
+		else if(weekStartDay <= cardEndDay && cardEndDay <= weekEndDay)
+		{
+			cards.append(card);
+		}
+		else if(cardEndDay <= weekStartDay && weekEndDay <= cardEndDay)
+		{
+			cards.append(card);
+		}
+	}
 	return cards;
 }

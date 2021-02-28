@@ -5,6 +5,7 @@
 
 #include "datastructures/notes/noteswriterxml.h"
 #include "datastructures/board/boardwriterxml.h"
+#include "datastructures/reminders/reminderswritterxml.h"
 
 AppDataWriterXml::AppDataWriterXml()
 {
@@ -20,15 +21,17 @@ QDomElement AppDataWriterXml::Save(AppData appData, QDomDocument document)
 
 
 	BoardWriterXml boardWriterXml;
-
 	QDomElement boardList = document.createElement("BoardList");
-
 	for(int i=0; i < appData.boards.size();i++)
 	{
 		boardList.appendChild(boardWriterXml.Save(appData.boards.at(i),document));
 	}
-
 	root.appendChild(boardList);
+
+
+	RemindersWritterXml remindersWriterXml;
+	root.appendChild(remindersWriterXml.Save(appData.reminders,document));
+
 
 	document.appendChild(root);
 
@@ -58,6 +61,11 @@ AppData AppDataWriterXml::Load(QDomElement root)
 		Board board = boardWriterXml.Load(elementBoard);
 		appData.boards.append(board);
 	}
+
+	RemindersWritterXml remindersWriterXml;
+	QDomElement elementReminders = root.firstChildElement(remindersWriterXml.GetRootElementName());
+	Reminders reminders = remindersWriterXml.Load(elementReminders);
+	appData.reminders = reminders;
 
 	return appData;
 }

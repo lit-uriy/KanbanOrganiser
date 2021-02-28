@@ -15,12 +15,14 @@ WindowMain::WindowMain(QWidget *parent)
 	, ui(new Ui::WindowMain)
 {
 	ui->setupUi(this);
+	ui->stackedWidget->setCurrentIndex(0);
 
 	setWindowFlags(Qt::FramelessWindowHint);
 	loadAppDataFromFile();
 
 	showTrayIcon();
 	connect(ui->wdtNotes,&WidgetNotes::SaveRequest,this,&WindowMain::saveAppData);
+	connect(ui->wdtReminders,&WidgetReminders::SaveRequest,this,&WindowMain::saveAppData);
 
 	tempLoad();
 
@@ -28,9 +30,11 @@ WindowMain::WindowMain(QWidget *parent)
 		minimizeToTray();
 	});
 
-	QTimer::singleShot(1000,this,[this](){
+	QTimer::singleShot(3000,this,[this](){
 		//TODO:Change to launcher screen
 		minimizeToTray();
+		ui->stackedWidget->setCurrentIndex(1);
+		on_tabReminders_currentChanged(ui->tabReminders->currentIndex());
 	});
 
 	QObject::connect(qApp, &QGuiApplication::applicationStateChanged, this, [=](Qt::ApplicationState state){
@@ -61,6 +65,7 @@ void WindowMain::tempLoad()
 	ui->wdtCalendar->SetWeeklyCards(QDate::currentDate());
 
 
+	appData.reminders = ui->wdtReminders->GetReminders();
 	ui->wdtReminders->SetAppData(appData);
 	ui->wdtReminders->UpdateData(QDate::currentDate());
 
@@ -75,6 +80,7 @@ void WindowMain::loadAppDataFromFile()
 	ui->wdtNotes->SetNotes(appData.notes);
 
 	ui->wdtBoard->SetBoardList(appData.boards);
+	ui->wdtReminders->SetAppData(appData);
 }
 
 WindowMain::~WindowMain()
@@ -100,12 +106,11 @@ void WindowMain::saveAppDataToFile()
 
 	appData.boards = ui->wdtBoard->GetBoardList();
 
+	appData.reminders = ui->wdtReminders->GetReminders();
 	AppDataWriterXml writer;
 	QString exePath = QCoreApplication::applicationDirPath();
 	writer.WriteToFile(appData,exePath + "/calendar.xml");
 }
-
-#include <QDebug>
 
 void WindowMain::showTrayIcon()
 {
@@ -185,6 +190,10 @@ void WindowMain::on_actionTrayShow_triggered()
 void WindowMain::maximizeFromTray()
 {
 	this->show();
+
+		this->activateWindow();
+		this->raise();
+
 	minimizedToTray = false;
 	updateTrayIconMenu();
 }
@@ -245,21 +254,29 @@ void WindowMain::on_btnTest2_clicked()
 void WindowMain::on_tabReminders_currentChanged(int index)
 {
 	QSize size;
-	switch(index)
+	if(ui->stackedWidget->currentIndex() == 0)
 	{
-		case 0:
-			size = ui->wdtNotes->GetSize();
-			break;
-		case 1:
-			size = ui->wdtBoard->GetSize();
-			break;
-		case 2:
-			size = ui->wdtCalendar->GetSize();
-			break;
-		case 3:
-			size = ui->wdtReminders->GetSize();
-			break;
+		size = QSize(300,240);
 	}
+	else
+	{
+		switch(index)
+		{
+			case 0:
+				size = ui->wdtNotes->GetSize();
+				break;
+			case 1:
+				size = ui->wdtBoard->GetSize();
+				break;
+			case 2:
+				size = ui->wdtCalendar->GetSize();
+				break;
+			case 3:
+				size = ui->wdtReminders->GetSize();
+				break;
+		}
+	}
+
 
 	setScreenGeometry(size);
 }

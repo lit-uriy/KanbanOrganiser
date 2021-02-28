@@ -5,6 +5,7 @@
 
 #include "datastructures/appData/appdata.h"
 #include "datastructures/calendar/calendar.h"
+#include "datastructures/reminders/reminders.h"
 #include "widgettab.h"
 
 namespace Ui {
@@ -21,14 +22,26 @@ class WidgetReminders : public WidgetTab
 
 		void SetAppData(AppData appData);
 		void UpdateData(QDate date);
+
+		Reminders GetReminders();
+	private slots:
+		void on_pushButton_clicked();
+
 	private:
 		Ui::WidgetReminders *ui;
 		constexpr static QSize size = QSize(300,600);
 
 
 		Calendar calendar;
+		Reminders reminders;
 		AppData appData;
+
 		void addCardToListView(Card card, int id);
+
+		void addReminder();
+
+	signals:
+		void SaveRequest();
 };
 
 #endif // WIDGETREMINDERS_H

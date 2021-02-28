@@ -4,6 +4,7 @@
 
 #include "datastructures/notes/notes.h"
 #include "datastructures/board/board.h"
+#include "datastructures/reminders/reminders.h"
 
 class AppData
 {
@@ -14,6 +15,8 @@ class AppData
 
 		Notes notes;
 		QList<Board> boards;
+		Reminders reminders;
+
 };
 
 #endif // APPDATA_H

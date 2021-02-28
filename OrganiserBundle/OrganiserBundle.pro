@@ -10,7 +10,8 @@ SUBDIRS += \
     test_notes \
     test_appdatawriterxml \
     test_cardwriterxml \
-    test_noteswriterxml
+    test_noteswriterxml \
+    test_reminders
 
 HEADERS += \
 

@@ -4,6 +4,7 @@
 #include <QDialog>
 
 #include "datastructures/card/card.h"
+#include "datastructures/reminders/remindercard.h"
 
 namespace Ui {
 class DialogCard;
@@ -18,7 +19,8 @@ class DialogCard : public QDialog
 		explicit DialogCard(Card card, QWidget *parent = nullptr);
 		~DialogCard();
 
-		class Card GetCard();
+		Card GetCard();
+		ReminderCard GetReminderCard();
 
 	private slots:
 		void on_btnAccept_clicked();
