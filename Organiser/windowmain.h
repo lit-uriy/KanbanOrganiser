@@ -61,6 +61,10 @@ class WindowMain : public QMainWindow
 		void on_actionTrayShow_triggered();
 		void on_actionTrayMinimize_triggered();
 		void on_actionTrayQuit_triggered();
-		void on_tabReminders_currentChanged(int index);
+		void on_tabWidget_currentChanged(int index);
+		void on_btnNotes_clicked();
+		void on_btnBoard_clicked();
+		void on_btnCalendar_clicked();
+		void on_btnReminders_clicked();
 };
 #endif // WINDOWMAIN_H

@@ -20,7 +20,6 @@ class DialogCard : public QDialog
 		~DialogCard();
 
 		Card GetCard();
-		ReminderCard GetReminderCard();
 
 	private slots:
 		void on_btnAccept_clicked();

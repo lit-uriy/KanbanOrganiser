@@ -107,44 +107,6 @@ Card DialogCard::GetCard()
 	return card;
 }
 
-ReminderCard DialogCard::GetReminderCard()
-{
-	ReminderCard reminderCard;
-	reminderCard.title = ui->tedTitle->text();
-	reminderCard.description = ui->tedDescription->toPlainText();
-
-	if(!reminderCard.creationDate.isValid())
-	{
-		reminderCard.creationDate = QDateTime::currentDateTime();
-	}
-
-	reminderCard.priority = (Card::Priority) ui->cbxPriority->currentIndex();
-
-	Card::Status status = (Card::Status)ui->cbxStatus->currentIndex();
-	reminderCard.status = status;
-
-	if(status == Card::Status::Started)
-	{
-		reminderCard.finishedDate = QDateTime();
-	}
-	else
-	{
-		reminderCard.finishedDate = QDateTime::currentDateTime();
-	}
-
-	if(ui->cbxHasDeadline->isChecked())
-	{
-		reminderCard.startDate = ui->dteStartTime->dateTime();
-		reminderCard.deadline = ui->dteDeadline->dateTime();
-	}
-	else
-	{
-		reminderCard.startDate = QDateTime();
-		reminderCard.deadline = QDateTime();
-	}
-
-	return reminderCard;
-}
 
 void DialogCard::on_btnAccept_clicked()
 {

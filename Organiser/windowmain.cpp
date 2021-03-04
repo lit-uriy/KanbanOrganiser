@@ -34,7 +34,7 @@ WindowMain::WindowMain(QWidget *parent)
 		//TODO:Change to launcher screen
 		minimizeToTray();
 		ui->stackedWidget->setCurrentIndex(1);
-		on_tabReminders_currentChanged(ui->tabReminders->currentIndex());
+		on_tabWidget_currentChanged(ui->tabWidget->currentIndex());
 	});
 
 	QObject::connect(qApp, &QGuiApplication::applicationStateChanged, this, [=](Qt::ApplicationState state){
@@ -51,7 +51,7 @@ WindowMain::WindowMain(QWidget *parent)
 		}
 	});
 
-	on_tabReminders_currentChanged(0);
+	on_tabWidget_currentChanged(0);
 }
 
 void WindowMain::tempLoad()
@@ -163,7 +163,7 @@ void WindowMain::updateTrayIconMenu()
 
 void WindowMain::updateTrayIcon()
 {
-	QIcon icon(":/icons/resources/icons/featherlight-icon.png");
+	QIcon icon(":/icons/resources/icons/organiser_icon.png");
 	trayIcon.setIcon(icon);
 	trayIcon.setToolTip(tr("Featherlight organiser"));
 }
@@ -251,7 +251,7 @@ void WindowMain::on_btnTest2_clicked()
 	setBootAtStartup(false);
 }
 
-void WindowMain::on_tabReminders_currentChanged(int index)
+void WindowMain::on_tabWidget_currentChanged(int index)
 {
 	QSize size;
 	if(ui->stackedWidget->currentIndex() == 0)
@@ -291,4 +291,24 @@ void WindowMain::setScreenGeometry(QSize size)
 	int y = rec.height() - size.height();
 	setGeometry(x,y,size.width(),size.height());
 	setFixedSize(size);
+}
+
+void WindowMain::on_btnNotes_clicked()
+{
+	ui->tabWidget->setCurrentWidget(ui->tabNotes);
+}
+
+void WindowMain::on_btnBoard_clicked()
+{
+	ui->tabWidget->setCurrentWidget(ui->tabBoards);
+}
+
+void WindowMain::on_btnCalendar_clicked()
+{
+	ui->tabWidget->setCurrentWidget(ui->tabCalendar);
+}
+
+void WindowMain::on_btnReminders_clicked()
+{
+	ui->tabWidget->setCurrentWidget(ui->tabReminders);
 }

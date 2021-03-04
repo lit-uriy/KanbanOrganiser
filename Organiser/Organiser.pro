@@ -38,6 +38,7 @@ SOURCES += \
     datastructures/reminders/reminderswritterxml.cpp \
     gui/dialogs/dialogcard.cpp \
     gui/dialogs/dialogcolumnedit.cpp \
+    gui/dialogs/dialogreminder.cpp \
     gui/widgets/notestablewidget.cpp \
     gui/widgets/widgetboard.cpp \
     gui/widgets/widgetboardlist.cpp \
@@ -69,6 +70,7 @@ HEADERS += \
     datastructures/card/card.h \
     gui/dialogs/dialogcard.h \
     gui/dialogs/dialogcolumnedit.h \
+    gui/dialogs/dialogreminder.h \
     gui/widgets/notestablewidget.h \
     gui/widgets/widgetboard.h \
     datastructures/notes/noteswriterxml.h \
@@ -83,6 +85,7 @@ HEADERS += \
 FORMS += \
     gui/dialogs/dialogcard.ui \
     gui/dialogs/dialogcolumnedit.ui \
+    gui/dialogs/dialogreminder.ui \
     gui/widgets/cellnotes.ui \
     gui/widgets/widgetboard.ui \
     gui/widgets/widgetboardlist.ui \

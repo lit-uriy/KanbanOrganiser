@@ -2,7 +2,7 @@
 #include "ui_widgetreminders.h"
 
 #include "cellnotes.h"
-#include "gui/dialogs/dialogcard.h"
+#include "gui/dialogs/dialogreminder.h"
 
 WidgetReminders::WidgetReminders(QWidget *parent) :
 	WidgetTab(size,parent),
@@ -51,7 +51,7 @@ void WidgetReminders::addCardToListView(Card card, int id)
 
 void WidgetReminders::on_pushButton_clicked()
 {
-	DialogCard dialogCard(this);
+	DialogReminder dialogCard(this);
 
 	if(dialogCard.exec() == QDialog::Accepted)
 	{
