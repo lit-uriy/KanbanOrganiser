@@ -399,3 +399,13 @@ QCheckBox::indicator:disabled {
   background-color: #AAAAAA;
   border: 2px solid #AAAAAA;
 }
+
+QProgressBar:horizontal {
+  height: 3px;
+  border-radius: 0px;
+  background: #212121;
+}
+
+QProgressBar::chunk:horizontal {
+  background: #42A5F5;
+}

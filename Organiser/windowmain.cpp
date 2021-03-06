@@ -9,15 +9,21 @@
 #include "datastructures/appData/appdatawriterxml.h"
 
 #include <QDebug>
+#include <QPropertyAnimation>
+#include <QEasingCurve>
 
 WindowMain::WindowMain(QWidget *parent)
 	: QMainWindow(parent)
 	, ui(new Ui::WindowMain)
 {
 	ui->setupUi(this);
-	ui->stackedWidget->setCurrentIndex(0);
-
 	setWindowFlags(Qt::FramelessWindowHint);
+
+
+
+
+	startSplashScreen();
+
 	loadAppDataFromFile();
 
 	showTrayIcon();
@@ -30,12 +36,6 @@ WindowMain::WindowMain(QWidget *parent)
 		minimizeToTray();
 	});
 
-	QTimer::singleShot(3000,this,[this](){
-		//TODO:Change to launcher screen
-		minimizeToTray();
-		ui->stackedWidget->setCurrentIndex(1);
-		on_tabWidget_currentChanged(ui->tabWidget->currentIndex());
-	});
 
 	QObject::connect(qApp, &QGuiApplication::applicationStateChanged, this, [=](Qt::ApplicationState state){
 		qDebug() << state;
@@ -51,7 +51,47 @@ WindowMain::WindowMain(QWidget *parent)
 		}
 	});
 
+
+}
+
+void WindowMain::startSplashScreen()
+{
+	ui->stackedWidget->setCurrentIndex(0);
 	on_tabWidget_currentChanged(0);
+
+	ui->prbLoading->setValue(0);
+	ui->prbLoading->setMaximum(100);
+
+	setWindowOpacity(0.0);
+	QPropertyAnimation *a1 = new QPropertyAnimation(this, "windowOpacity"); // As top level window, uses this one.
+	a1->setDuration(splashDuration);
+	a1->setStartValue(0.0);
+	a1->setKeyValueAt(0.25,1.0);
+	a1->setKeyValueAt(0.75,1.0);
+	a1->setEndValue(0.0);
+	a1->setEasingCurve(QEasingCurve::Linear);
+	a1->start(QPropertyAnimation::DeleteWhenStopped);
+	connect(a1,&QPropertyAnimation::finished,this,[this](){
+		this->setWindowOpacity(1);
+		closeSplashScreen();
+	});
+
+	QPropertyAnimation *a2 = new QPropertyAnimation(ui->prbLoading, "value"); // As top level window, uses this one.
+	a2->setDuration(splashDuration);
+	a2->setStartValue(0.0);
+	a2->setKeyValueAt(0.25,0.0);
+	a2->setKeyValueAt(0.75,100.0);
+	a2->setEndValue(100.0);
+	a2->setEasingCurve(QEasingCurve::Linear);
+	a2->start(QPropertyAnimation::DeleteWhenStopped);
+
+}
+
+void WindowMain::closeSplashScreen()
+{
+	minimizeToTray();
+	ui->stackedWidget->setCurrentIndex(1);
+	on_tabWidget_currentChanged(ui->tabWidget->currentIndex());
 }
 
 void WindowMain::tempLoad()

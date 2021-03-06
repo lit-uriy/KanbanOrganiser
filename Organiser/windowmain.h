@@ -26,6 +26,10 @@ class WindowMain : public QMainWindow
 	private:
 		Ui::WindowMain *ui;
 
+		const int splashDuration = 1000;
+		void startSplashScreen();
+		void closeSplashScreen();
+
 		void tempLoad();//TODO:Delete later
 
 		QTimer minimizeTimer;
@@ -51,6 +55,7 @@ class WindowMain : public QMainWindow
 
 		void setScreenGeometry(QSize size);
 	private slots:
+
 		void saveAppData();
 		void onTrayClick(QSystemTrayIcon::ActivationReason reason);
 
