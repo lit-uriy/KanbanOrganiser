@@ -103,3 +103,24 @@ QList<Card> Calendar::GetCardsForWeek(QDate date, AppData appData)
 	}
 	return cards;
 }
+
+
+QList<CalendarDay> Calendar::GetCalendarDaysForMonth(QDate date,AppData appData)
+{
+	QList<CalendarDay> list;
+
+	const int daysInMonth = date.daysInMonth();
+
+	for(int i=0; i < daysInMonth;i++)
+	{
+		QDate day(date.year(),date.month(),i);
+		int count = GetCardsForDay(day,appData).size();
+
+		if(count > 0)
+		{
+			list.append(CalendarDay(day,count));
+		}
+	}
+
+	return list;
+}

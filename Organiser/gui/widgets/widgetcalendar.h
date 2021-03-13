@@ -24,7 +24,7 @@ class WidgetCalendar : public WidgetTab
 		void SetWeeklyCards(QDate date);
 	private:
 		Ui::WidgetCalendar *ui;
-		constexpr static QSize size = QSize(1200,600);
+		constexpr static QSize size = QSize(600,600);
 
 		QDate currentDate;
 
@@ -40,6 +40,7 @@ class WidgetCalendar : public WidgetTab
 	private slots:
 		void onPreviousClicked();
 		void onNextClicked();
+		void on_calendarWidget_currentPageChanged(int year, int month);
 };
 
 #endif // WIDGETCALENDAR_H

@@ -40,6 +40,7 @@ SOURCES += \
     gui/dialogs/dialogcolumnedit.cpp \
     gui/dialogs/dialogreminder.cpp \
     gui/widgets/notestablewidget.cpp \
+    gui/widgets/remindercalendar.cpp \
     gui/widgets/widgetboard.cpp \
     gui/widgets/widgetboardlist.cpp \
     gui/widgets/widgetcalendar.cpp \
@@ -71,7 +72,9 @@ HEADERS += \
     gui/dialogs/dialogcard.h \
     gui/dialogs/dialogcolumnedit.h \
     gui/dialogs/dialogreminder.h \
+    datastructures/calendar/calendarday.h \
     gui/widgets/notestablewidget.h \
+    gui/widgets/remindercalendar.h \
     gui/widgets/widgetboard.h \
     datastructures/notes/noteswriterxml.h \
     gui/widgets/cellnotes.h \

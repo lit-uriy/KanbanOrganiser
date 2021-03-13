@@ -20,23 +20,14 @@
    <string>Form</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
-   <property name="spacing">
-    <number>0</number>
-   </property>
-   <property name="leftMargin">
-    <number>0</number>
-   </property>
-   <property name="topMargin">
-    <number>0</number>
-   </property>
-   <property name="rightMargin">
-    <number>0</number>
-   </property>
-   <property name="bottomMargin">
-    <number>0</number>
-   </property>
    <item>
     <widget class="QWidget" name="wdtMain" native="true">
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>100</height>
+      </size>
+     </property>
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <property name="spacing">
        <number>0</number>
@@ -76,8 +67,8 @@
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>720</width>
-           <height>270</height>
+           <width>702</width>
+           <height>70</height>
           </rect>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -140,8 +131,43 @@
      </layout>
     </widget>
    </item>
+   <item>
+    <widget class="QWidget" name="widget_2" native="true">
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="ReminderCalendar" name="calendarWidget">
+        <property name="maximumSize">
+         <size>
+          <width>300</width>
+          <height>300</height>
+         </size>
+        </property>
+        <property name="horizontalHeaderFormat">
+         <enum>QCalendarWidget::ShortDayNames</enum>
+        </property>
+        <property name="verticalHeaderFormat">
+         <enum>QCalendarWidget::NoVerticalHeader</enum>
+        </property>
+        <property name="navigationBarVisible">
+         <bool>true</bool>
+        </property>
+        <property name="dateEditEnabled">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>ReminderCalendar</class>
+   <extends>QCalendarWidget</extends>
+   <header>gui/widgets/remindercalendar.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

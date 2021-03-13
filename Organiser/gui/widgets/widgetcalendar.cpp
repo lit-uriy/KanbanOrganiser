@@ -4,6 +4,7 @@
 #include <QLabel>
 #include <QPushButton>
 
+#include "remindercalendar.h"
 #include "cellnotes.h"
 
 WidgetCalendar::WidgetCalendar(QWidget *parent) :
@@ -162,4 +163,12 @@ void WidgetCalendar::addCellWeekly(QGridLayout* gridLayout, Card card, QDate sta
 	cell->SetDatesVisibility(false);
 	gridLayout->addWidget(cell,row,start,1,length);
 
+}
+
+void WidgetCalendar::on_calendarWidget_currentPageChanged(int year, int month)
+{
+
+	QList<CalendarDay> calendarDays = calendar.GetCalendarDaysForMonth(QDate(year,month,1),appData);
+
+	ui->calendarWidget->SetCalendarDays(calendarDays);
 }

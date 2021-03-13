@@ -4,6 +4,7 @@
 #include <QList>
 #include "datastructures/card/card.h"
 #include "datastructures/appData/appdata.h"
+#include "calendarday.h"
 
 class Calendar
 {
@@ -14,6 +15,7 @@ class Calendar
 
 		QList<Card> GetCardsForWeek(QDate date, AppData appData);
 
+		QList<CalendarDay> GetCalendarDaysForMonth(QDate date,AppData appData);
 };
 
 #endif // CALENDAR_H
