@@ -41,7 +41,7 @@ class WidgetReminders : public WidgetTab
 		void addReminder();
 
 	signals:
-		void SaveRequest();
+		void reminderAdded();
 };
 
 #endif // WIDGETREMINDERS_H

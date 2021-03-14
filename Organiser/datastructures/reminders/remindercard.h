@@ -19,6 +19,7 @@ class ReminderCard : public Card
 		RemindInterval remindInterval = RemindInterval::None;
 
 
+		bool IsNull() override;
 		bool operator==(const ReminderCard &other);
 		bool operator!=(const ReminderCard &other);
 };

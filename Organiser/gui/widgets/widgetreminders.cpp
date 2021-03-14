@@ -16,6 +16,11 @@ WidgetReminders::~WidgetReminders()
 	delete ui;
 }
 
+Reminders WidgetReminders::GetReminders()
+{
+	return reminders;
+}
+
 void WidgetReminders::SetAppData(AppData appData)
 {
 	this->appData = appData;
@@ -33,11 +38,8 @@ void WidgetReminders::UpdateData(QDate date)
 		Card card = cards.at(i);
 		addCardToListView(card,i);
 	}
-}
 
-Reminders WidgetReminders::GetReminders()
-{
-	return reminders;
+
 }
 
 void WidgetReminders::addCardToListView(Card card, int id)
@@ -59,6 +61,6 @@ void WidgetReminders::on_pushButton_clicked()
 
 		reminders.AddCard(card);
 
-		emit SaveRequest();
+		emit reminderAdded();
 	}
 }

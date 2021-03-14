@@ -34,7 +34,7 @@ class Card
 		QDateTime startDate;//Remind date for reminderCard
 		QDateTime deadline;
 
-		bool IsNull();
+		virtual bool IsNull();
 
 		QByteArray Encode();
 		void SetDataFromArray(QByteArray data);

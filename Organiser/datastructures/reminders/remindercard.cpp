@@ -28,3 +28,13 @@ bool ReminderCard::operator!=(const ReminderCard &other)
 
 	return false;
 }
+
+bool ReminderCard::IsNull()
+{
+	if(title.isNull())
+	{
+		return true;
+	}
+
+	return false;
+}

@@ -16,6 +16,7 @@ class Calendar
 		QList<Card> GetCardsForWeek(QDate date, AppData appData);
 
 		QList<CalendarDay> GetCalendarDaysForMonth(QDate date,AppData appData);
+
 };
 
 #endif // CALENDAR_H

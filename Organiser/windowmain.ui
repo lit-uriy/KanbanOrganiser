@@ -222,6 +222,17 @@
                </spacer>
               </item>
               <item>
+               <widget class="QPushButton" name="btnCalendar">
+                <property name="text">
+                 <string notr="true"/>
+                </property>
+                <property name="icon">
+                 <iconset resource="resources.qrc">
+                  <normaloff>:/icons/resources/icons/calendar.png</normaloff>:/icons/resources/icons/calendar.png</iconset>
+                </property>
+               </widget>
+              </item>
+              <item>
                <widget class="QPushButton" name="btnNotes">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
@@ -230,28 +241,22 @@
                  </sizepolicy>
                 </property>
                 <property name="text">
-                 <string notr="true">N</string>
+                 <string notr="true"/>
+                </property>
+                <property name="icon">
+                 <iconset resource="resources.qrc">
+                  <normaloff>:/icons/resources/icons/notes.png</normaloff>:/icons/resources/icons/notes.png</iconset>
                 </property>
                </widget>
               </item>
               <item>
                <widget class="QPushButton" name="btnBoard">
                 <property name="text">
-                 <string notr="true">B</string>
+                 <string notr="true"/>
                 </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QPushButton" name="btnCalendar">
-                <property name="text">
-                 <string notr="true">C</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QPushButton" name="btnReminders">
-                <property name="text">
-                 <string notr="true">R</string>
+                <property name="icon">
+                 <iconset resource="resources.qrc">
+                  <normaloff>:/icons/resources/icons/board.png</normaloff>:/icons/resources/icons/board.png</iconset>
                 </property>
                </widget>
               </item>
@@ -277,74 +282,8 @@
                <number>0</number>
               </property>
               <item>
-               <widget class="QTabWidget" name="tabWidget">
-                <property name="tabPosition">
-                 <enum>QTabWidget::North</enum>
-                </property>
-                <property name="currentIndex">
-                 <number>2</number>
-                </property>
-                <widget class="QWidget" name="tabNotes">
-                 <attribute name="title">
-                  <string>Notes</string>
-                 </attribute>
-                 <layout class="QVBoxLayout" name="verticalLayout_2">
-                  <property name="spacing">
-                   <number>0</number>
-                  </property>
-                  <property name="leftMargin">
-                   <number>0</number>
-                  </property>
-                  <property name="topMargin">
-                   <number>0</number>
-                  </property>
-                  <property name="rightMargin">
-                   <number>0</number>
-                  </property>
-                  <property name="bottomMargin">
-                   <number>0</number>
-                  </property>
-                  <item>
-                   <widget class="WidgetNotes" name="wdtNotes" native="true">
-                    <property name="sizePolicy">
-                     <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                      <horstretch>0</horstretch>
-                      <verstretch>1</verstretch>
-                     </sizepolicy>
-                    </property>
-                   </widget>
-                  </item>
-                 </layout>
-                </widget>
-                <widget class="QWidget" name="tabBoards">
-                 <attribute name="title">
-                  <string>Board</string>
-                 </attribute>
-                 <layout class="QVBoxLayout" name="verticalLayout_3">
-                  <property name="spacing">
-                   <number>0</number>
-                  </property>
-                  <property name="leftMargin">
-                   <number>0</number>
-                  </property>
-                  <property name="topMargin">
-                   <number>0</number>
-                  </property>
-                  <property name="rightMargin">
-                   <number>0</number>
-                  </property>
-                  <property name="bottomMargin">
-                   <number>0</number>
-                  </property>
-                  <item>
-                   <widget class="WidgetBoardList" name="wdtBoard" native="true"/>
-                  </item>
-                 </layout>
-                </widget>
-                <widget class="QWidget" name="tabCalendar">
-                 <attribute name="title">
-                  <string>Calendar</string>
-                 </attribute>
+               <widget class="QStackedWidget" name="tabWidget">
+                <widget class="QWidget" name="tabCalendar" native="true">
                  <layout class="QVBoxLayout" name="verticalLayout_4">
                   <property name="spacing">
                    <number>0</number>
@@ -379,11 +318,8 @@
                   </item>
                  </layout>
                 </widget>
-                <widget class="QWidget" name="tabReminders">
-                 <attribute name="title">
-                  <string>Reminders</string>
-                 </attribute>
-                 <layout class="QVBoxLayout" name="verticalLayout_5">
+                <widget class="QWidget" name="tabNotes" native="true">
+                 <layout class="QVBoxLayout" name="verticalLayout_2">
                   <property name="spacing">
                    <number>0</number>
                   </property>
@@ -400,7 +336,36 @@
                    <number>0</number>
                   </property>
                   <item>
-                   <widget class="WidgetReminders" name="wdtReminders" native="true"/>
+                   <widget class="WidgetNotes" name="wdtNotes" native="true">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                      <horstretch>0</horstretch>
+                      <verstretch>1</verstretch>
+                     </sizepolicy>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </widget>
+                <widget class="QWidget" name="tabBoards" native="true">
+                 <layout class="QVBoxLayout" name="verticalLayout_3">
+                  <property name="spacing">
+                   <number>0</number>
+                  </property>
+                  <property name="leftMargin">
+                   <number>0</number>
+                  </property>
+                  <property name="topMargin">
+                   <number>0</number>
+                  </property>
+                  <property name="rightMargin">
+                   <number>0</number>
+                  </property>
+                  <property name="bottomMargin">
+                   <number>0</number>
+                  </property>
+                  <item>
+                   <widget class="WidgetBoardList" name="wdtBoard" native="true"/>
                   </item>
                  </layout>
                 </widget>
@@ -451,12 +416,6 @@
    <class>WidgetCalendar</class>
    <extends>QWidget</extends>
    <header>gui/widgets/widgetcalendar.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>WidgetReminders</class>
-   <extends>QWidget</extends>
-   <header>gui/widgets/widgetreminders.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

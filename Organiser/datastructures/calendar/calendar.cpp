@@ -32,7 +32,7 @@ QList<Card> Calendar::GetCardsForDay(QDate date, AppData appData)
 	for(int i=0; i < appData.reminders.GetCardsCount();i++)
 	{
 		ReminderCard card = appData.reminders.GetCardAt(i);
-		if(card.startDate.date() <= date && date <= card.deadline.date())
+		if(card.startDate.date() == date)
 		{
 			cards.append(card);
 		}

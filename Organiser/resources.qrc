@@ -10,6 +10,9 @@
         <file>resources/icons/priority_mid.png</file>
         <file>resources/icons/featherlight-icon.png</file>
         <file>resources/icons/organiser_icon.png</file>
+        <file>resources/icons/board.png</file>
+        <file>resources/icons/calendar.png</file>
+        <file>resources/icons/notes.png</file>
     </qresource>
     <qresource prefix="/themes">
         <file>resources/theme/output/dark.css</file>

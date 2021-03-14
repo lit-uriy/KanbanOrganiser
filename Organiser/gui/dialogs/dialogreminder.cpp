@@ -6,6 +6,8 @@ DialogReminder::DialogReminder(QWidget *parent) :
 	ui(new Ui::DialogReminder)
 {
 	ui->setupUi(this);
+	card.startDate = QDateTime::currentDateTime().addSecs(60*60);
+	setWidgetData(card);
 }
 
 DialogReminder::DialogReminder(ReminderCard card,  QWidget *parent)  :
