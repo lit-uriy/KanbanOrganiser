@@ -104,6 +104,13 @@ QPushButton::pressed
 	color: $textPrimaryReversed;
 }
 
+QPushButton::checked
+{
+	background-color: $accentSecondary;
+	color: $textPrimaryReversed;
+}
+
+
 QSpinBox,
 QLineEdit,
 QTextEdit,

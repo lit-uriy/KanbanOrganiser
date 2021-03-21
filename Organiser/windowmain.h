@@ -10,6 +10,7 @@ QT_END_NAMESPACE
 #include <QSystemTrayIcon>
 #include <QMenu>
 #include <QTimer>
+#include "gui/widgets/pushbuttonselectable.h"
 
 class WindowMain : public QMainWindow
 {
@@ -55,6 +56,7 @@ class WindowMain : public QMainWindow
 
 		void setScreenGeometry(QSize size);
 	private slots:
+		void onSelectableButtonClicked(PushButtonSelectable* button);
 
 		void saveAppData();
 		void onTrayClick(QSystemTrayIcon::ActivationReason reason);

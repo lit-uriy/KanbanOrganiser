@@ -12,6 +12,8 @@
 #include <QPropertyAnimation>
 #include <QEasingCurve>
 
+#include <QButtonGroup>
+
 WindowMain::WindowMain(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::WindowMain)
@@ -38,7 +40,7 @@ WindowMain::WindowMain(QWidget *parent)
 
 
     QObject::connect(qApp, &QGuiApplication::applicationStateChanged, this, [=](Qt::ApplicationState state){
-        qDebug() << state;
+		//qDebug() << state;
 
         if(state == Qt::ApplicationState::ApplicationInactive)
         {
@@ -52,8 +54,30 @@ WindowMain::WindowMain(QWidget *parent)
     });
 
 
+
+	connect(ui->btnCalendar,&QPushButton::clicked,this, [this](){
+		onSelectableButtonClicked(ui->btnCalendar);
+	});
+	connect(ui->btnNotes,&QPushButton::clicked,this, [this](){
+		onSelectableButtonClicked(ui->btnNotes);
+	});
+	connect(ui->btnBoard,&QPushButton::clicked,this, [this](){
+		onSelectableButtonClicked(ui->btnBoard);
+	});
 }
 
+void WindowMain::onSelectableButtonClicked(PushButtonSelectable* button)
+{
+	ui->btnCalendar->SetSelected(false);
+	ui->btnNotes->SetSelected(false);
+	ui->btnBoard->SetSelected(false);
+
+	PushButtonSelectable* btn = dynamic_cast<PushButtonSelectable*>(button);
+	if(btn != nullptr)
+	{
+		btn->SetSelected(true);
+	}
+}
 void WindowMain::startSplashScreen()
 {
     ui->stackedWidget->setCurrentIndex(0);
@@ -338,5 +362,6 @@ void WindowMain::on_btnBoard_clicked()
 void WindowMain::on_btnCalendar_clicked()
 {
     ui->tabWidget->setCurrentWidget(ui->tabCalendar);
+	ui->btnCalendar->SetSelected(true);
 }
 

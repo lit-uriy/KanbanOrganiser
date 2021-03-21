@@ -64,6 +64,11 @@ QPushButton::pressed {
   color: #212121;
 }
 
+QPushButton::checked {
+  background-color: #64B5F6;
+  color: #212121;
+}
+
 QSpinBox,
 QLineEdit,
 QTextEdit,

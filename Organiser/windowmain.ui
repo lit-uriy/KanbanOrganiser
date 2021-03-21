@@ -222,7 +222,7 @@
                </spacer>
               </item>
               <item>
-               <widget class="QPushButton" name="btnCalendar">
+               <widget class="PushButtonSelectable" name="btnCalendar">
                 <property name="text">
                  <string notr="true"/>
                 </property>
@@ -230,10 +230,13 @@
                  <iconset resource="resources.qrc">
                   <normaloff>:/icons/resources/icons/calendar.png</normaloff>:/icons/resources/icons/calendar.png</iconset>
                 </property>
+                <property name="checkable">
+                 <bool>true</bool>
+                </property>
                </widget>
               </item>
               <item>
-               <widget class="QPushButton" name="btnNotes">
+               <widget class="PushButtonSelectable" name="btnNotes">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
                   <horstretch>0</horstretch>
@@ -247,16 +250,22 @@
                  <iconset resource="resources.qrc">
                   <normaloff>:/icons/resources/icons/notes.png</normaloff>:/icons/resources/icons/notes.png</iconset>
                 </property>
+                <property name="checkable">
+                 <bool>true</bool>
+                </property>
                </widget>
               </item>
               <item>
-               <widget class="QPushButton" name="btnBoard">
+               <widget class="PushButtonSelectable" name="btnBoard">
                 <property name="text">
                  <string notr="true"/>
                 </property>
                 <property name="icon">
                  <iconset resource="resources.qrc">
                   <normaloff>:/icons/resources/icons/board.png</normaloff>:/icons/resources/icons/board.png</iconset>
+                </property>
+                <property name="checkable">
+                 <bool>true</bool>
                 </property>
                </widget>
               </item>
@@ -283,7 +292,7 @@
               </property>
               <item>
                <widget class="QStackedWidget" name="tabWidget">
-                <widget class="QWidget" name="tabCalendar" native="true">
+                <widget class="QWidget" name="tabCalendar">
                  <layout class="QVBoxLayout" name="verticalLayout_4">
                   <property name="spacing">
                    <number>0</number>
@@ -318,7 +327,7 @@
                   </item>
                  </layout>
                 </widget>
-                <widget class="QWidget" name="tabNotes" native="true">
+                <widget class="QWidget" name="tabNotes">
                  <layout class="QVBoxLayout" name="verticalLayout_2">
                   <property name="spacing">
                    <number>0</number>
@@ -347,7 +356,7 @@
                   </item>
                  </layout>
                 </widget>
-                <widget class="QWidget" name="tabBoards" native="true">
+                <widget class="QWidget" name="tabBoards">
                  <layout class="QVBoxLayout" name="verticalLayout_3">
                   <property name="spacing">
                    <number>0</number>
@@ -417,6 +426,11 @@
    <extends>QWidget</extends>
    <header>gui/widgets/widgetcalendar.h</header>
    <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>PushButtonSelectable</class>
+   <extends>QPushButton</extends>
+   <header>gui/widgets/pushbuttonselectable.h</header>
   </customwidget>
  </customwidgets>
  <resources>
