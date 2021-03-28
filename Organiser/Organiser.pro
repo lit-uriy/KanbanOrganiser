@@ -40,6 +40,7 @@ SOURCES += \
     gui/dialogs/dialogcolumnedit.cpp \
     gui/dialogs/dialogreminder.cpp \
     gui/widgets/cellreminder.cpp \
+    gui/widgets/iconlabel.cpp \
     gui/widgets/notestablewidget.cpp \
     gui/widgets/pushbuttonselectable.cpp \
     gui/widgets/remindercalendar.cpp \
@@ -76,6 +77,7 @@ HEADERS += \
     gui/dialogs/dialogreminder.h \
     datastructures/calendar/calendarday.h \
     gui/widgets/cellreminder.h \
+    gui/widgets/iconlabel.h \
     gui/widgets/notestablewidget.h \
     gui/widgets/pushbuttonselectable.h \
     gui/widgets/remindercalendar.h \

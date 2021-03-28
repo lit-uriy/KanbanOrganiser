@@ -33,6 +33,17 @@ QWidget[transparent=true]
 	background-color: $transparent;
 }
 
+IconLabel
+{
+	qproperty-iconColor: $textPrimary;
+}
+
+PushButtonSelectable
+{
+	qproperty-normalColor: $textPrimary;
+	qproperty-selectedColor: $textPrimaryReversed;
+}
+
 CellNotes
 {
 	background-color: $backgroundSecondary;
@@ -109,7 +120,6 @@ QPushButton::checked
 	background-color: $accentSecondary;
 	color: $textPrimaryReversed;
 }
-
 
 QSpinBox,
 QLineEdit,

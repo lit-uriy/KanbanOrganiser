@@ -233,6 +233,9 @@
                 <property name="checkable">
                  <bool>true</bool>
                 </property>
+                <property name="selectable" stdset="0">
+                 <bool>true</bool>
+                </property>
                </widget>
               </item>
               <item>
@@ -253,6 +256,9 @@
                 <property name="checkable">
                  <bool>true</bool>
                 </property>
+                <property name="selectable" stdset="0">
+                 <bool>true</bool>
+                </property>
                </widget>
               </item>
               <item>
@@ -265,6 +271,9 @@
                   <normaloff>:/icons/resources/icons/board.png</normaloff>:/icons/resources/icons/board.png</iconset>
                 </property>
                 <property name="checkable">
+                 <bool>true</bool>
+                </property>
+                <property name="selectable" stdset="0">
                  <bool>true</bool>
                 </property>
                </widget>

@@ -95,7 +95,7 @@
           </spacer>
          </item>
          <item>
-          <widget class="QLabel" name="imgPriority">
+          <widget class="IconLabel" name="imgPriority">
            <property name="minimumSize">
             <size>
              <width>0</width>
@@ -205,7 +205,7 @@
              <number>0</number>
             </property>
             <item>
-             <widget class="QLabel" name="imgStart">
+             <widget class="IconLabel" name="imgStart">
               <property name="maximumSize">
                <size>
                 <width>12</width>
@@ -255,7 +255,7 @@
              <number>0</number>
             </property>
             <item>
-             <widget class="QLabel" name="imgFinished">
+             <widget class="IconLabel" name="imgFinished">
               <property name="maximumSize">
                <size>
                 <width>12</width>
@@ -291,6 +291,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>IconLabel</class>
+   <extends>QLabel</extends>
+   <header>gui/widgets/iconlabel.h</header>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="../../resources.qrc"/>
  </resources>

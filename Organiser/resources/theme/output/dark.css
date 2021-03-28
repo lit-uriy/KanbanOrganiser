@@ -6,6 +6,15 @@ QWidget[transparent=true] {
   background-color: #00000000;
 }
 
+IconLabel {
+  qproperty-iconColor: #EEEEEE;
+}
+
+PushButtonSelectable {
+  qproperty-normalColor: #EEEEEE;
+  qproperty-selectedColor: #212121;
+}
+
 CellNotes {
   background-color: #424242;
   border-radius: 2px;

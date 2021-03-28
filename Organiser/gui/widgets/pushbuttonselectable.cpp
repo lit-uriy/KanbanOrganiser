@@ -8,6 +8,24 @@ PushButtonSelectable::PushButtonSelectable(QWidget* parent) : QPushButton(parent
 	updateIconColor();
 }
 
+QColor PushButtonSelectable::GetNormalColor()
+{
+	return normalColor;
+}
+void PushButtonSelectable::SetNormalColor(QColor color)
+{
+	normalColor = color;
+}
+
+QColor PushButtonSelectable::GetSelectedColor()
+{
+	return selectedColor;
+}
+void PushButtonSelectable::SetSelectedColor(QColor color)
+{
+	selectedColor = color;
+}
+
 void PushButtonSelectable::SetSelected(bool selected)
 {
 	setChecked(selected);

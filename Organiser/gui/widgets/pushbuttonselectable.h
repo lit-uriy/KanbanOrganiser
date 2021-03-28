@@ -5,11 +5,20 @@
 
 class PushButtonSelectable : public QPushButton
 {
+		Q_OBJECT
+		Q_PROPERTY(QColor normalColor READ GetNormalColor WRITE SetNormalColor)
+		Q_PROPERTY(QColor selectedColor READ GetSelectedColor WRITE SetSelectedColor)
+
 	public:
 		PushButtonSelectable(QWidget* parent=nullptr);
 
 		void SetSelected(bool selected);
 
+		QColor GetNormalColor();
+		void SetNormalColor(QColor color);
+
+		QColor GetSelectedColor();
+		void SetSelectedColor(QColor color);
 	protected:
 		void mousePressEvent(QMouseEvent *e) override;
 		void mouseReleaseEvent(QMouseEvent *e) override;

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>236</width>
-    <height>62</height>
+    <height>56</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,16 +18,16 @@
     <number>0</number>
    </property>
    <property name="leftMargin">
-    <number>0</number>
+    <number>4</number>
    </property>
    <property name="topMargin">
-    <number>0</number>
+    <number>4</number>
    </property>
    <property name="rightMargin">
-    <number>0</number>
+    <number>4</number>
    </property>
    <property name="bottomMargin">
-    <number>0</number>
+    <number>4</number>
    </property>
    <item>
     <widget class="QWidget" name="widget" native="true">
@@ -72,7 +72,7 @@
           <number>2</number>
          </property>
          <item>
-          <widget class="QLabel" name="imgType">
+          <widget class="IconLabel" name="imgType">
            <property name="minimumSize">
             <size>
              <width>0</width>
@@ -117,7 +117,7 @@
           </spacer>
          </item>
          <item>
-          <widget class="QLabel" name="imgPriority">
+          <widget class="IconLabel" name="imgPriority">
            <property name="minimumSize">
             <size>
              <width>0</width>
@@ -227,7 +227,7 @@
              <number>0</number>
             </property>
             <item>
-             <widget class="QLabel" name="imgStart">
+             <widget class="IconLabel" name="imgStart">
               <property name="maximumSize">
                <size>
                 <width>12</width>
@@ -263,6 +263,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>IconLabel</class>
+   <extends>QLabel</extends>
+   <header>gui/widgets/iconlabel.h</header>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="../../resources.qrc"/>
  </resources>
