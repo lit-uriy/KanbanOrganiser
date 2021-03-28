@@ -15,9 +15,9 @@ class calendar : public QObject
 		~calendar();
 
 		AppData appData;
-		Card card;
-		Card card2;
-		Card card3;
+		Card* card = nullptr;
+		Card* card2 = nullptr;
+		Card* card3 = nullptr;
 	private slots:
 		void getDayCards();
 		void getWeekCards();

@@ -9,41 +9,41 @@ RemindersWritterXml::RemindersWritterXml()
 
 QDomElement RemindersWritterXml::Save(Reminders reminders, QDomDocument document)
 {
-	QDomElement root = document.createElement(GetRootElementName());
+    QDomElement root = document.createElement(GetRootElementName());
 
-	ReminderCardWritterXml cardWriter;
+    ReminderCardWritterXml cardWriter;
 
-	for(int i=0; i < reminders.GetCardsCount();i++)
-	{
-		ReminderCard card = reminders.GetCardAt(i);
-		QDomElement elementCard = cardWriter.Save(card,document);
-		root.appendChild(elementCard);
-	}
+    for(int i=0; i < reminders.GetCardsCount();i++)
+    {
+        ReminderCard* card = reminders.GetCardAt(i);
+        QDomElement elementCard = cardWriter.Save(card,document);
+        root.appendChild(elementCard);
+    }
 
-	document.appendChild(root);
+    document.appendChild(root);
 
-	return root;
+    return root;
 }
 
 QString RemindersWritterXml::GetRootElementName()
 {
-	return "Reminder";
+    return "Reminder";
 }
 
 Reminders RemindersWritterXml::Load(QDomElement root)
 {
-	Reminders reminders;
+    Reminders reminders;
 
-	ReminderCardWritterXml cardWriter;
-	for(QDomElement elementCard = root.firstChildElement(cardWriter.GetRootElementName());!elementCard.isNull();elementCard = elementCard.nextSiblingElement("ReminderCard"))
-	{
-		ReminderCard card = cardWriter.Load(elementCard);
+    ReminderCardWritterXml cardWriter;
+    for(QDomElement elementCard = root.firstChildElement(cardWriter.GetRootElementName());!elementCard.isNull();elementCard = elementCard.nextSiblingElement("ReminderCard"))
+    {
+        ReminderCard* card = cardWriter.Load(elementCard);
 
-		if(!card.IsNull())
-		{
-			reminders.AddCard(card);
-		}
-	}
+        if(!card->IsNull())
+        {
+            reminders.AddCard(card);
+        }
+    }
 
-	return reminders;
+    return reminders;
 }

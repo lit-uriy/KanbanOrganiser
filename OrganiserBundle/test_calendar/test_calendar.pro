@@ -13,6 +13,8 @@ DEPENDPATH += $$SRC_PATH
 SOURCES += tst_calendar.cpp \
      $$SRC_PATH/datastructures/calendar/calendar.cpp \
      $$SRC_PATH/datastructures/card/card.cpp \
+     $$SRC_PATH/datastructures/reminders/remindercard.cpp \
+     $$SRC_PATH/datastructures/reminders/reminders.cpp \
      $$SRC_PATH/datastructures/board/board.cpp \
      $$SRC_PATH/datastructures/board/boardcolumn.cpp  \
      $$SRC_PATH/datastructures/notes/notes.cpp \

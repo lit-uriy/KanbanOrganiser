@@ -12,4 +12,5 @@ DEPENDPATH += $$SRC_PATH
 
 SOURCES +=  tst_test_reminders.cpp \
      $$SRC_PATH/datastructures/card/card.cpp \
+     $$SRC_PATH/datastructures/reminders/remindercard.cpp \
      $$SRC_PATH/datastructures/reminders/reminders.cpp

@@ -10,8 +10,8 @@ class ReminderCardWritterXml
 
 		QString GetRootElementName();
 
-		QDomElement Save(class ReminderCard notes, QDomDocument document);
-		class ReminderCard Load(QDomElement root);
+		QDomElement Save(class ReminderCard* notes, QDomDocument document);
+		class ReminderCard* Load(QDomElement root);
 	private:
 		static const QString dateTimeFormat;
 };

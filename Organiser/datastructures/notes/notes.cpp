@@ -8,78 +8,83 @@ Notes::Notes()
 
 Notes Notes::CreateInvalid()
 {
-	Notes notes;
-	notes.valid = false;
-	return notes;
+    Notes notes;
+    notes.valid = false;
+    return notes;
 }
 
-void Notes::AddCard(Card card)
+void Notes::AddCard(Card* card)
 {
-	cards.append(card);
+    cards.append(card);
 }
 
-void Notes::AddCardAt(int index, Card card)
+void Notes::AddCardAt(int index, Card* card)
 {
-	if(index < 0 || index > cards.size())
-	{
-		throw GeneralException("Index out of range");
-		return;
-	}
+    if(index < 0 || index > cards.size())
+    {
+        throw GeneralException("Index out of range");
+        return;
+    }
 
-	cards.insert(index,card);
+    cards.insert(index,card);
 }
 
-int Notes::Find(Card card)
+int Notes::Find(Card* card)
 {
-	for(int i=0; i < cards.size();i++)
-	{
-		if(card == cards.at(i))
-		{
-			return i;
-		}
-	}
+    for(int i=0; i < cards.size();i++)
+    {
+        if(card == cards.at(i))
+        {
+            return i;
+        }
+    }
 
-	return -1;
+    return -1;
 }
 
 int Notes::GetCardsCount()
 {
-	return cards.size();
+    return cards.size();
 }
 
-QList<Card> Notes::GetCards()
+QList<Card*> Notes::GetCards()
 {
-	return cards;
+    return cards;
 }
 
-Card Notes::GetCardAt(int index) const throw(GeneralException)
+Card* Notes::GetCardAt(int index) const throw(GeneralException)
 {
-	if(index < 0 || index >= cards.size())
-	{
-		throw GeneralException("Index out of range");
-		return Card();
-	}
-	return cards.at(index);
+    if(index < 0 || index >= cards.size())
+    {
+        throw GeneralException("Index out of range");
+        return nullptr;
+    }
+    return cards[index];
 }
 
 void Notes::DeleteCard(int index) throw(GeneralException)
 {
-	if(index < 0 || index >= cards.size())
-	{
-		throw GeneralException("Index out of range");
-		return;
-	}
-	cards.removeAt(index);
+    if(index < 0 || index >= cards.size())
+    {
+        throw GeneralException("Index out of range");
+        return;
+    }
+
+    Card* oldCard = GetCardAt(index);
+    cards.removeAt(index);
+    delete oldCard;
 }
 
 
-void Notes::ReplaceCard(int index, Card card) throw(GeneralException)
+void Notes::ReplaceCard(int index, Card* card) throw(GeneralException)
 {
-	if(index < 0 || index >= cards.size())
-	{
-		throw GeneralException("Index out of range");
-		return;
-	}
+    if(index < 0 || index >= cards.size())
+    {
+        throw GeneralException("Index out of range");
+        return;
+    }
 
-	cards.replace(index,card);
+    DeleteCard(index);
+
+    cards.insert(index,card);
 }

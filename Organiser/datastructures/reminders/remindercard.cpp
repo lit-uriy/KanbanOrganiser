@@ -1,6 +1,11 @@
 #include "remindercard.h"
 
-ReminderCard::ReminderCard()
+ReminderCard::ReminderCard() : Card()
+{
+
+}
+
+ReminderCard::ReminderCard(QString title, QString description, QDateTime creationDate) : Card(title,description,creationDate)
 {
 
 }

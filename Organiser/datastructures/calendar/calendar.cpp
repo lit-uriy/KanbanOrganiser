@@ -5,9 +5,9 @@ Calendar::Calendar()
 
 }
 
-QList<Card> Calendar::GetCardsForDay(QDate date, AppData appData)
+QList<Card*> Calendar::GetCardsForDay(QDate date, AppData appData)
 {
-	QList<Card> cards;
+	QList<Card*> cards;
 
 	for(int i=0; i < appData.boards.size();i++)
 	{
@@ -19,9 +19,9 @@ QList<Card> Calendar::GetCardsForDay(QDate date, AppData appData)
 
 			for(int k=0; k < column.GetCardsCount();k++)
 			{
-				Card card = column.GetCardAt(k);
+				Card* card = column.GetCardAt(k);
 
-				if(card.startDate.date() <= date && date <= card.deadline.date())
+				if(card->startDate.date() <= date && date <= card->deadline.date())
 				{
 					cards.append(card);
 				}
@@ -31,8 +31,8 @@ QList<Card> Calendar::GetCardsForDay(QDate date, AppData appData)
 
 	for(int i=0; i < appData.reminders.GetCardsCount();i++)
 	{
-		ReminderCard card = appData.reminders.GetCardAt(i);
-		if(card.startDate.date() == date)
+		ReminderCard* card = appData.reminders.GetCardAt(i);
+		if(card->startDate.date() == date)
 		{
 			cards.append(card);
 		}
@@ -42,9 +42,9 @@ QList<Card> Calendar::GetCardsForDay(QDate date, AppData appData)
 }
 
 
-QList<Card> Calendar::GetCardsForWeek(QDate date, AppData appData)
+QList<Card*> Calendar::GetCardsForWeek(QDate date, AppData appData)
 {
-	QList<Card> cards;
+	QList<Card*> cards;
 
 	int dayNumber = date.dayOfWeek()-1;
 
@@ -61,10 +61,10 @@ QList<Card> Calendar::GetCardsForWeek(QDate date, AppData appData)
 
 			for(int k=0; k < column.GetCardsCount();k++)
 			{
-				Card card = column.GetCardAt(k);
+				Card* card = column.GetCardAt(k);
 
-				QDate cardStartDay = card.startDate.date();
-				QDate cardEndDay = card.deadline.date();
+				QDate cardStartDay = card->startDate.date();
+				QDate cardEndDay = card->deadline.date();
 
 				if(weekStartDay <= cardStartDay && cardStartDay <= weekEndDay)
 				{
@@ -84,9 +84,9 @@ QList<Card> Calendar::GetCardsForWeek(QDate date, AppData appData)
 
 	for(int i=0; i < appData.reminders.GetCardsCount();i++)
 	{
-		ReminderCard card = appData.reminders.GetCardAt(i);
-		QDate cardStartDay = card.startDate.date();
-		QDate cardEndDay = card.deadline.date();
+		ReminderCard* card = appData.reminders.GetCardAt(i);
+		QDate cardStartDay = card->startDate.date();
+		QDate cardEndDay = card->deadline.date();
 
 		if(weekStartDay <= cardStartDay && cardStartDay <= weekEndDay)
 		{

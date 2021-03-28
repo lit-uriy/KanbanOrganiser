@@ -9,8 +9,8 @@ class CardWriterXml
 		CardWriterXml();
 		QString GetRootElementName();
 
-		QDomElement Save(class Card notes, QDomDocument document);
-		class Card Load(QDomElement root);
+		QDomElement Save(class Card* notes, QDomDocument document);
+		class Card* Load(QDomElement root);
 	private:
 		static const QString dateTimeFormat;
 };

@@ -36,7 +36,7 @@ class WidgetReminders : public WidgetTab
 		Reminders reminders;
 		AppData appData;
 
-		void addCardToListView(Card card, int id);
+		void addCardToListView(Card* card, int id);
 
 		void addReminder();
 

@@ -1,7 +1,7 @@
 #include <QtTest>
 
 // add necessary includes here
-#include "datastructures/card/card.h"
+#include "datastructures/reminders/remindercard.h"
 #include "datastructures/reminders/reminders.h"
 #include "exceptions/generalexception.h"
 
@@ -38,14 +38,14 @@ test_reminders::~test_reminders()
 void test_reminders::addCardToNotes()
 {
 	Reminders reminders;
-	Card card("Title", "Desc", QDateTime());
+        ReminderCard* card = new ReminderCard("Title", "Desc", QDateTime());
 	reminders.AddCard(card);
 
-	Card card2("Title2", "Desc2", QDateTime());
+        ReminderCard* card2 = new ReminderCard("Title2", "Desc2", QDateTime());
 	reminders.AddCard(card);
 
-	Card card1Clone = reminders.GetCardAt(0);
-	Card card2CLone = reminders.GetCardAt(1);
+        ReminderCard* card1Clone = reminders.GetCardAt(0);
+        ReminderCard* card2CLone = reminders.GetCardAt(1);
 
 	QVERIFY(card == card1Clone);
 	QVERIFY(card == card2CLone);
@@ -54,9 +54,9 @@ void test_reminders::addCardToNotes()
 void test_reminders::addCardToNotesAtPosition()
 {
 	Reminders reminders;
-	Card cardFirst("Title", "Desc", QDateTime());
-	Card cardSecond("Title2", "Desc2", QDateTime());
-	Card cardFirstAgain("Title3", "Desc3", QDateTime());
+        ReminderCard* cardFirst= new ReminderCard("Title", "Desc", QDateTime());
+        ReminderCard* cardSecond= new ReminderCard("Title2", "Desc2", QDateTime());
+        ReminderCard* cardFirstAgain= new ReminderCard("Title3", "Desc3", QDateTime());
 
 	reminders.AddCard(cardFirst);
 	reminders.AddCard(cardSecond);
@@ -64,8 +64,8 @@ void test_reminders::addCardToNotesAtPosition()
 	reminders.AddCardAt(0,cardFirstAgain);
 
 
-	Card cardFirstAgainClone = reminders.GetCardAt(0);
-	Card cardFirstClone = reminders.GetCardAt(1);
+        ReminderCard* cardFirstAgainClone = reminders.GetCardAt(0);
+        ReminderCard* cardFirstClone = reminders.GetCardAt(1);
 
 	QVERIFY(cardFirstAgain == cardFirstAgainClone);
 	QVERIFY(cardFirst == cardFirstClone);
@@ -75,7 +75,7 @@ void test_reminders::getCardOutOfRangeException()
 {
 	Reminders notes;
 
-	Card card("Title", "Desc", QDateTime());
+        ReminderCard* card = new ReminderCard("Title", "Desc", QDateTime());
 	notes.AddCard(card);
 
 	try
@@ -95,15 +95,15 @@ void test_reminders::deleteCardFromNotes()
 	Reminders reminders;
 
 
-	Card card("Title", "Desc", QDateTime(QDate(2020,1,1),QTime(10,10)));
+        ReminderCard* card = new ReminderCard("Title", "Desc", QDateTime(QDate(2020,1,1),QTime(10,10)));
 	reminders.AddCard(card);
 
-	Card card2("Title2", "Desc2", QDateTime(QDate(2019,2,4),QTime(4,8)));
+        ReminderCard* card2 = new ReminderCard("Title2", "Desc2", QDateTime(QDate(2019,2,4),QTime(4,8)));
 	reminders.AddCard(card2);
 
 	reminders.DeleteCard(0);
 
-	Card card2FromNotes = reminders.GetCards().at(0);
+        ReminderCard* card2FromNotes = reminders.GetCards().at(0);
 
 	QVERIFY(reminders.GetCards().size() == 1);
 
@@ -126,13 +126,13 @@ void test_reminders::editCardInNotes()
 {
 	Reminders reminders;
 
-	Card card("Title","Desc", QDateTime(QDate(2020,1,1),QTime(10,10)));
+        ReminderCard* card = new ReminderCard("Title","Desc", QDateTime(QDate(2020,1,1),QTime(10,10)));
 	reminders.AddCard(card);
 
-	Card card2("Title2","Desc2", QDateTime(QDate(2019,2,4),QTime(4,8)));
+        ReminderCard* card2 = new ReminderCard("Title2","Desc2", QDateTime(QDate(2019,2,4),QTime(4,8)));
 	reminders.ReplaceCard(0,card2);
 
-	Card cardFromNotes = reminders.GetCards().at(0);
+        ReminderCard* cardFromNotes = reminders.GetCards().at(0);
 
 	QVERIFY(card != cardFromNotes);
 	QVERIFY(card2 == cardFromNotes);
@@ -154,16 +154,16 @@ void test_reminders::findCard()
 {
 	Reminders reminders;
 
-	Card card("Title","Desc", QDateTime(QDate(2020,1,1),QTime(10,10)));
+        ReminderCard* card = new ReminderCard("Title","Desc", QDateTime(QDate(2020,1,1),QTime(10,10)));
 	reminders.AddCard(card);
 
-	Card card2("Title2","Desc2", QDateTime(QDate(2019,2,4),QTime(4,8)));
+        ReminderCard*  card2 = new ReminderCard("Title2","Desc2", QDateTime(QDate(2019,2,4),QTime(4,8)));
 	reminders.AddCard(card2);
 
-	Card card3("Title3","Desc3", QDateTime(QDate(2019,2,4),QTime(4,8)));
+        ReminderCard*  card3 = new ReminderCard("Title3","Desc3", QDateTime(QDate(2019,2,4),QTime(4,8)));
 
-	int index2 = reminders.Find(card2);
-	Card card2Copy = reminders.GetCardAt(index2);
+        int index2 = reminders.Find(card2);
+        ReminderCard*  card2Copy = reminders.GetCardAt(index2);
 
 	int index3 = reminders.Find(card3);
 

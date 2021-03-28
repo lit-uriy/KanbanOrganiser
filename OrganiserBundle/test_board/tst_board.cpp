@@ -97,12 +97,12 @@ void test_board::addCardToColumnInBoard()
 	BoardColumn column("Title");
 	board.AddColumn(column);
 
-	Card card("Title","Desc", QDateTime(QDate(2020,1,1),QTime(10,10)));
+	Card* card = new Card("Title","Desc", QDateTime(QDate(2020,1,1),QTime(10,10)));
 	board.AddCardToColumn(0,card);
 
 	BoardColumn column2FromNotes = board.GetColumnAt(0);
 
-	Card cardFromColumn = column2FromNotes.GetCardAt(0);
+	Card* cardFromColumn = column2FromNotes.GetCardAt(0);
 
 	QVERIFY(card == cardFromColumn);
 }
@@ -113,15 +113,15 @@ void test_board::replaceCardInColumnInBoard()
 	BoardColumn column("Title");
 	board.AddColumn(column);
 
-	Card card("Title","Desc", QDateTime(QDate(2020,1,1),QTime(10,10)));
+	Card* card = new Card("Title","Desc", QDateTime(QDate(2020,1,1),QTime(10,10)));
 	board.AddCardToColumn(0,card);
 
-	Card cardOther("TitleOther","DescOther", QDateTime(QDate(2020,1,1),QTime(10,10)));
+	Card* cardOther = new Card("TitleOther","DescOther", QDateTime(QDate(2020,1,1),QTime(10,10)));
 	board.ReplaceCardInColumn(0,0,cardOther);
 
 	BoardColumn column2FromNotes = board.GetColumnAt(0);
 
-	Card cardFromColumn = column2FromNotes.GetCardAt(0);
+	Card* cardFromColumn = column2FromNotes.GetCardAt(0);
 
 	QVERIFY(card != cardFromColumn);
 	QVERIFY(cardOther == cardFromColumn);
@@ -133,7 +133,7 @@ void test_board::deleteCardFromColumnInBoard()
 	BoardColumn column("Title");
 	board.AddColumn(column);
 
-	Card card("Title","Desc", QDateTime(QDate(2020,1,1),QTime(10,10)));
+	Card* card = new Card("Title","Desc", QDateTime(QDate(2020,1,1),QTime(10,10)));
 	board.AddCardToColumn(0,card);
 
 	board.DeleteCardFromColumn(0,0);
@@ -152,13 +152,13 @@ void test_board::moveCardToOtherColumnInSameBoard()
 	board.AddColumn(column2);
 
 
-	Card card("Title","Desc", QDateTime(QDate(2020,1,1),QTime(10,10)));
+	Card* card = new Card("Title","Desc", QDateTime(QDate(2020,1,1),QTime(10,10)));
 	board.AddCardToColumn(0,card);
 
 
 	board.MoveCard(0,0,1);
 
-	Card cardFromColumn = board.GetColumnAt(1).GetCardAt(0);
+	Card* cardFromColumn = board.GetColumnAt(1).GetCardAt(0);
 
 	QVERIFY(board.GetColumnAt(0).GetCardsCount() == 0);
 	QVERIFY(board.GetColumnAt(1).GetCardsCount() == 1);

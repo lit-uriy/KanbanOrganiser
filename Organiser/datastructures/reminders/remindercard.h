@@ -14,8 +14,9 @@ enum class RemindInterval
 class ReminderCard : public Card
 {
 	public:
+		//TODO:Add Card Icon
 		ReminderCard();
-
+		ReminderCard(QString title, QString description, QDateTime creationDate);
 		RemindInterval remindInterval = RemindInterval::None;
 
 

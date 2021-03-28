@@ -14,17 +14,17 @@ class DialogReminder : public QDialog
 
 	public:
 		explicit DialogReminder(QWidget *parent = nullptr);
-		explicit DialogReminder(ReminderCard card, QWidget *parent = nullptr);
+		explicit DialogReminder(ReminderCard* card, QWidget *parent = nullptr);
 		~DialogReminder();
 
-		ReminderCard GetReminderCard();
+		ReminderCard* GetReminderCard();
 
 	private:
 		Ui::DialogReminder *ui;
-		ReminderCard card;
+		ReminderCard* card;
 
 		void changeAcceptButtonToApply();
-		void setWidgetData(ReminderCard card);
+		void setWidgetData(ReminderCard* card);
 
 	private slots:
 		void on_btnAccept_clicked();

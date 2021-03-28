@@ -13,10 +13,7 @@ SUBDIRS += \
     test_noteswriterxml \
     test_reminders
 
-HEADERS += \
-
-SOURCES += \
-
-CONFIG += qt
+CONFIG += qt \
+    qt
 
 QT += widgets

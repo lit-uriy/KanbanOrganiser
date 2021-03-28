@@ -5,6 +5,11 @@ Card::Card()
 	id = generateId();
 }
 
+Card::~Card()
+{
+
+}
+
 unsigned long long Card::generateId()
 {
 	return QDateTime::currentMSecsSinceEpoch();

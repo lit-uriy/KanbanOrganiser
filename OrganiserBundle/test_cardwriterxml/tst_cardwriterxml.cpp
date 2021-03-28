@@ -19,13 +19,13 @@ void test_cardwriterxml::writeCardToXml()
 	QString description  = "descriptionText";
 	QDateTime creationDate = QDateTime(QDate(2020,1,1),QTime(10,10));
 
-	Card card(title,description,creationDate);
+        Card* card = new Card(title,description,creationDate);
 
 	CardWriterXml writer;
 	QDomDocument document;
 	QDomElement elementCard = writer.Save(card,document);
 
-	Card cardLoaded = writer.Load(elementCard);
+        Card* cardLoaded = writer.Load(elementCard);
 
 	QVERIFY(card == cardLoaded);
 }

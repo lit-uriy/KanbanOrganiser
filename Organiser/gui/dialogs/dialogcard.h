@@ -19,7 +19,7 @@ class DialogCard : public QDialog
 		explicit DialogCard(Card card, QWidget *parent = nullptr);
 		~DialogCard();
 
-		Card GetCard();
+		Card* GetCard();
 
 	private slots:
 		void on_btnAccept_clicked();

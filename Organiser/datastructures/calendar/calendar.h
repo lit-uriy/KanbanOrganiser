@@ -11,9 +11,9 @@ class Calendar
 	public:
 		Calendar();
 
-		QList<Card> GetCardsForDay(QDate date, AppData appData);
+		QList<Card*> GetCardsForDay(QDate date, AppData appData);
 
-		QList<Card> GetCardsForWeek(QDate date, AppData appData);
+		QList<Card*> GetCardsForWeek(QDate date, AppData appData);
 
 		QList<CalendarDay> GetCalendarDaysForMonth(QDate date,AppData appData);
 

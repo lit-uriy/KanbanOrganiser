@@ -69,39 +69,40 @@ DialogCard::~DialogCard()
 	delete ui;
 }
 
-Card DialogCard::GetCard()
+Card* DialogCard::GetCard()
 {
-	card.title = ui->tedTitle->text();
-	card.description = ui->tedDescription->toPlainText();
+	Card* card = new Card();
+	card->title = ui->tedTitle->text();
+	card->description = ui->tedDescription->toPlainText();
 
-	if(!card.creationDate.isValid())
+	if(!card->creationDate.isValid())
 	{
-		card.creationDate = QDateTime::currentDateTime();
+		card->creationDate = QDateTime::currentDateTime();
 	}
 
-	card.priority = (Card::Priority) ui->cbxPriority->currentIndex();
+	card->priority = (Card::Priority) ui->cbxPriority->currentIndex();
 
 	Card::Status status = (Card::Status)ui->cbxStatus->currentIndex();
-	card.status = status;
+	card->status = status;
 
 	if(status == Card::Status::Started)
 	{
-		card.finishedDate = QDateTime();
+		card->finishedDate = QDateTime();
 	}
 	else
 	{
-		card.finishedDate = QDateTime::currentDateTime();
+		card->finishedDate = QDateTime::currentDateTime();
 	}
 
 	if(ui->cbxHasDeadline->isChecked())
 	{
-		card.startDate = ui->dteStartTime->dateTime();
-		card.deadline = ui->dteDeadline->dateTime();
+		card->startDate = ui->dteStartTime->dateTime();
+		card->deadline = ui->dteDeadline->dateTime();
 	}
 	else
 	{
-		card.startDate = QDateTime();
-		card.deadline = QDateTime();
+		card->startDate = QDateTime();
+		card->deadline = QDateTime();
 	}
 
 	return card;

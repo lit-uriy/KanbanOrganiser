@@ -7,7 +7,9 @@
 class Card
 {
 	public:
+
 		Card();
+		virtual ~Card();
 		Card(Card* copy);
 		Card(QByteArray data);
 		Card(QString title, QString description, QDateTime creationDate);
