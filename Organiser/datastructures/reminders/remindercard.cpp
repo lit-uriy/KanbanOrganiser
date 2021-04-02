@@ -5,6 +5,15 @@ ReminderCard::ReminderCard() : Card()
 
 }
 
+ReminderCard::ReminderCard(Card* copy) : Card(copy)
+{
+	ReminderCard* reminderCard = dynamic_cast<ReminderCard*>(copy);
+	if(reminderCard != nullptr)
+	{
+		this->remindInterval = reminderCard->remindInterval;
+	}
+}
+
 ReminderCard::ReminderCard(QString title, QString description, QDateTime creationDate) : Card(title,description,creationDate)
 {
 

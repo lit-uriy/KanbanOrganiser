@@ -43,9 +43,9 @@ class WidgetNotes : public WidgetTab
 		QString title;
 
 		void updateListView();
-		void addCardToListView(class Card card,int id);
+		void addCardToListView(class Card* card,int id);
 
-		void replaceSelectedCard(Card card);
+		void replaceSelectedCard(Card* card);
 
 		int getSelectedCardID();
 		class CellNotes* getSelectedCell();

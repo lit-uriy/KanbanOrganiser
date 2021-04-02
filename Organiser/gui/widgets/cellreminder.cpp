@@ -1,13 +1,13 @@
 #include "cellreminder.h"
 #include "ui_cellreminder.h"
 
-CellReminder::CellReminder(Card* card, int id, QWidget *parent)  :
+CellReminder::CellReminder(Card* card, int id,QDate date, QWidget *parent)  :
 	QWidget(parent),
 	ui(new Ui::CellReminder)
 {
 	ui->setupUi(this);
 
-	this->id = id;
+	this->date = date;
 	UpdateCard(card);
 }
 
@@ -18,28 +18,23 @@ CellReminder::~CellReminder()
 
 void CellReminder::UpdateCard(Card* card)
 {
-	this->card = card;
 	setWidgetData(card);
 }
 
-int CellReminder::GetId()
+unsigned long long CellReminder::GetId()
 {
 	return id;
 }
 
-Card CellReminder::GetCard()
-{
-	return card;
-}
-
 void CellReminder::setWidgetData(Card* card)
 {
+	this->id = card->id;
 	ui->lblTitle->setText(card->title);
 
 	ui->lblDescription->setText(card->description);
 
-	setStartStatusIconAndLabel(card->startDate);
-
+	setStatusIconAndLabel(card->deadline);
+	setTimeleft(card->deadline);
 	setPriorityIcon(card->priority);
 
 	bool isReminder = dynamic_cast<ReminderCard*>(card) != nullptr;
@@ -47,18 +42,40 @@ void CellReminder::setWidgetData(Card* card)
 	setTypeIcon(isReminder);
 }
 
-void CellReminder::setStartStatusIconAndLabel(QDateTime startDate)
+void CellReminder::setStatusIconAndLabel(QDateTime datetime)
 {
-	if(startDate.isValid())
+	if(datetime.isValid())
 	{
-		ui->wdtStartedTime->setVisible(true);
-		QString date = startDate.toString("yyyy-MM-dd hh:mm");//TODO:
-		ui->lblStartTime->setText(date);
-		ui->lblStartTime->setToolTip(date);
+		ui->wdtDeadline->setVisible(true);
+		QString date = datetime.toString("yyyy-MM-dd hh:mm");//TODO:
+		ui->lblDeadlineTime->setText(date);
+		ui->lblDeadlineTime->setToolTip(date);
 	}
 	else
 	{
-		ui->wdtStartedTime->setVisible(false);
+		ui->wdtDeadline->setVisible(false);
+	}
+}
+
+void CellReminder::setTimeleft(QDateTime datetime)
+{
+	if(datetime.isValid())
+	{
+		int days = QDate::currentDate().daysTo(datetime.date());
+
+		if(days >= 0)
+		{
+			ui->lblTimeleft->setText(QString::number(days) +" "+ tr("day(s)"));
+			ui->wdtTimeleft->setVisible(true);
+		}
+		else
+		{
+			ui->wdtTimeleft->setVisible(false);
+		}
+	}
+	else
+	{
+		ui->wdtTimeleft->setVisible(false);
 	}
 }
 
@@ -76,7 +93,7 @@ void CellReminder::setTypeIcon(bool isReminder)
 		path = ":/icons/resources/icons/board.png";
 	}
 
-	ui->imgType->setPixmap(QPixmap(path));
+	ui->imgType->SetPixmap(QPixmap(path));
 }
 
 void CellReminder::setPriorityIcon(Card::Priority priority)
@@ -96,5 +113,6 @@ void CellReminder::setPriorityIcon(Card::Priority priority)
 			break;
 	}
 
-	ui->imgPriority->setPixmap(QPixmap(path));
+	ui->imgPriority->SetPixmap(QPixmap(path));
 }
+

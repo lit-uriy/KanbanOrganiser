@@ -30,6 +30,9 @@ Card::Card(Card* copy) : Card()
 
 	this->creationDate = copy->creationDate;
 	this->finishedDate = copy->finishedDate;
+
+	this->startDate = copy->startDate;
+	this->deadline = copy->deadline;
 }
 
 Card::Card(QString title, QString description, QDateTime creationDate, QDateTime startDate,QDateTime deadline) : Card(title,description,creationDate)

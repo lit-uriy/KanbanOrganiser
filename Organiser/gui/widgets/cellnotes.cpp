@@ -11,7 +11,7 @@
 #include <QStyleOption>
 #include <QPainter>
 
-CellNotes::CellNotes(Card card, int id, QWidget *parent) :
+CellNotes::CellNotes(Card* card, int id, QWidget *parent) :
 	QWidget(parent),
 	ui(new Ui::CellNotes)
 {
@@ -26,7 +26,7 @@ CellNotes::~CellNotes()
 	delete ui;
 }
 
-void CellNotes::UpdateCard(Card card)
+void CellNotes::UpdateCard(Card* card)
 {
 	this->card = card;
 	setWidgetData(card);
@@ -95,16 +95,11 @@ void CellNotes::mouseMoveEvent(QMouseEvent *event)
 	QDrag *drag = new QDrag(this);
 	QMimeData *mimeData = new QMimeData;
 
-	QByteArray dat = card.Encode();
+	QByteArray dat = card->Encode();
 	mimeData->setData("organiser/card", dat);
 	drag->setMimeData(mimeData);
 
-	//emit CardDelete(this);
-
-	//emit CardMoved(this);
-
 	Qt::DropAction dropAction = drag->exec(Qt::MoveAction);
-
 
 	setProperty("pressed", false);
 	this->style()->polish(this);
@@ -120,16 +115,16 @@ void CellNotes::mouseMoveEvent(QMouseEvent *event)
 
 }
 
-void CellNotes::setWidgetData(Card card)
+void CellNotes::setWidgetData(Card* card)
 {
-	ui->lblTitle->setText(card.title);
+	ui->lblTitle->setText(card->title);
 
-	ui->lblDescription->setText(card.description);
+	ui->lblDescription->setText(card->description);
 
-	setStartStatusIconAndLabel(card.startDate);
-	setFinishedStatusIconAndLabel(card.status,card.GetFinishingDate());
+	setStartStatusIconAndLabel(card->startDate);
+	setFinishedStatusIconAndLabel(card->status,card->GetFinishingDate());
 
-	setPriorityIcon(card.priority);
+	setPriorityIcon(card->priority);
 }
 
 void CellNotes::setStartStatusIconAndLabel(QDateTime startDate)
@@ -180,7 +175,7 @@ void CellNotes::setStatusIcon(Card::Status status)
 			break;
 	}
 
-	ui->imgFinished->setPixmap(QPixmap(path));
+	ui->imgFinished->SetPixmap(QPixmap(path));
 }
 
 void CellNotes::setPriorityIcon(Card::Priority priority)
@@ -200,5 +195,5 @@ void CellNotes::setPriorityIcon(Card::Priority priority)
 			break;
 	}
 
-	ui->imgPriority->setPixmap(QPixmap(path));
+	ui->imgPriority->SetPixmap(QPixmap(path));
 }

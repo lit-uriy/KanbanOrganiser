@@ -32,7 +32,7 @@ QList<Card*> Calendar::GetCardsForDay(QDate date, AppData appData)
 	for(int i=0; i < appData.reminders.GetCardsCount();i++)
 	{
 		ReminderCard* card = appData.reminders.GetCardAt(i);
-		if(card->startDate.date() == date)
+		if(card->deadline.date() == date)
 		{
 			cards.append(card);
 		}
@@ -104,18 +104,21 @@ QList<Card*> Calendar::GetCardsForWeek(QDate date, AppData appData)
 	return cards;
 }
 
-
+#include <QDebug>
 QList<CalendarDay> Calendar::GetCalendarDaysForMonth(QDate date,AppData appData)
 {
 	QList<CalendarDay> list;
 
 	const int daysInMonth = date.daysInMonth();
 
-	for(int i=0; i < daysInMonth;i++)
+	for(int i=1; i < daysInMonth+1;i++)
 	{
 		QDate day(date.year(),date.month(),i);
+
+
 		int count = GetCardsForDay(day,appData).size();
 
+		qDebug() << day << ":" << count;
 		if(count > 0)
 		{
 			list.append(CalendarDay(day,count));

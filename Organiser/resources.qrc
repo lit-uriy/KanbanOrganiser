@@ -13,6 +13,7 @@
         <file>resources/icons/board.png</file>
         <file>resources/icons/calendar.png</file>
         <file>resources/icons/notes.png</file>
+        <file>resources/icons/timeleft.png</file>
     </qresource>
     <qresource prefix="/themes">
         <file>resources/theme/output/dark.css</file>

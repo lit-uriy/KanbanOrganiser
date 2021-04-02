@@ -81,12 +81,12 @@ void PushButtonSelectable::updateIconColor()
 
 	if((isChecked() && !pressed) || (pressed && dragWithinBound))
 	{
-		qDebug() << "selectedCol";
+		//qDebug() << "selectedCol";
 		setIconColor(selectedColor);
 	}
 	else
 	{
-		qDebug() << "normalColor";
+		//qDebug() << "normalColor";
 		setIconColor(normalColor);
 	}
 }

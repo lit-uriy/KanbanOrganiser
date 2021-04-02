@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>236</width>
+    <width>349</width>
     <height>56</height>
    </rect>
   </property>
@@ -206,7 +206,57 @@
           <number>0</number>
          </property>
          <item>
-          <widget class="QWidget" name="wdtStartedTime" native="true">
+          <widget class="QWidget" name="wdtDeadline" native="true">
+           <property name="transparent" stdset="0">
+            <bool>true</bool>
+           </property>
+           <layout class="QHBoxLayout" name="horizontalLayout_5">
+            <property name="spacing">
+             <number>2</number>
+            </property>
+            <property name="leftMargin">
+             <number>0</number>
+            </property>
+            <property name="topMargin">
+             <number>0</number>
+            </property>
+            <property name="rightMargin">
+             <number>0</number>
+            </property>
+            <property name="bottomMargin">
+             <number>0</number>
+            </property>
+            <item>
+             <widget class="IconLabel" name="imgDeadline">
+              <property name="maximumSize">
+               <size>
+                <width>12</width>
+                <height>12</height>
+               </size>
+              </property>
+              <property name="text">
+               <string notr="true"/>
+              </property>
+              <property name="pixmap">
+               <pixmap resource="../../resources.qrc">:/icons/resources/icons/calendar_start.png</pixmap>
+              </property>
+              <property name="scaledContents">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="lblDeadlineTime">
+              <property name="text">
+               <string notr="true">01-01-2021 00:00:00</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <widget class="QWidget" name="wdtTimeleft" native="true">
            <property name="transparent" stdset="0">
             <bool>true</bool>
            </property>
@@ -227,7 +277,7 @@
              <number>0</number>
             </property>
             <item>
-             <widget class="IconLabel" name="imgStart">
+             <widget class="IconLabel" name="imgTimeleft">
               <property name="maximumSize">
                <size>
                 <width>12</width>
@@ -238,7 +288,7 @@
                <string notr="true"/>
               </property>
               <property name="pixmap">
-               <pixmap resource="../../resources.qrc">:/icons/resources/icons/calendar_start.png</pixmap>
+               <pixmap resource="../../resources.qrc">:/icons/resources/icons/timeleft.png</pixmap>
               </property>
               <property name="scaledContents">
                <bool>true</bool>
@@ -246,9 +296,9 @@
              </widget>
             </item>
             <item>
-             <widget class="QLabel" name="lblStartTime">
+             <widget class="QLabel" name="lblTimeleft">
               <property name="text">
-               <string notr="true">01-01-2021 00:00:00</string>
+               <string notr="true">1 day</string>
               </property>
              </widget>
             </item>

@@ -1,19 +1,19 @@
 #include "dialogreminder.h"
 #include "ui_dialogreminder.h"
 
-DialogReminder::DialogReminder(QWidget *parent) :
+DialogReminder::DialogReminder(QDate date, QWidget *parent) :
 	QDialog(parent),
 	ui(new Ui::DialogReminder)
 {
 	ui->setupUi(this);
 	card = new ReminderCard();
-	card->startDate = QDateTime::currentDateTime().addSecs(60*60);
+	card->deadline = QDateTime(date,QTime::currentTime().addSecs(60*60));
 	setWidgetData(card);
 	delete card;
 }
 
 DialogReminder::DialogReminder(ReminderCard* card,  QWidget *parent)  :
-	DialogReminder(parent)
+	DialogReminder(QDate(),parent)
 {
 	this->card = card;
 	setWidgetData(card);
@@ -43,7 +43,7 @@ void DialogReminder::on_btnCancel_clicked()
 void DialogReminder::setWidgetData(ReminderCard* card)
 {
 	ui->tedTitle->setText(card->title);
-	ui->dteStartTime->setDateTime(card->startDate);
+	ui->dteStartTime->setDateTime(card->deadline);
 
 	ui->cbxRepeat->setCurrentIndex((int)card->remindInterval);
 }
@@ -52,7 +52,7 @@ ReminderCard* DialogReminder::GetReminderCard()
 {
 	ReminderCard* card = new ReminderCard();
 	card->title = ui->tedTitle->text();
-	card->startDate = ui->dteStartTime->dateTime();
+	card->deadline = ui->dteStartTime->dateTime();
 	card->remindInterval = (RemindInterval)ui->cbxRepeat->currentIndex();
 
 	return card;

@@ -6,10 +6,13 @@ CONFIG += c++11
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = Organiser
+TARGET = KanbanOrganiser
 TEMPLATE = app
 
-VERSION = 0.1.0.0
+
+RC_ICONS = resources/KanbanOrganiser.ico
+
+VERSION = 0.8.0.0
 # The following define makes your compiler emit warnings if you use
 # any Qt feature that has been marked deprecated (the exact warnings
 # depend on your compiler). Please consult the documentation of the

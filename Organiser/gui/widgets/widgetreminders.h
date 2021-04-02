@@ -27,18 +27,30 @@ class WidgetReminders : public WidgetTab
 	private slots:
 		void on_pushButton_clicked();
 
+		void on_twdReminders_customContextMenuRequested(const QPoint &pos);
+
+		void on_actionEditReminder_triggered();
+
+		void on_actionDeleteReminder_triggered();
+
 	private:
 		Ui::WidgetReminders *ui;
 		constexpr static QSize size = QSize(300,600);
 
-
+		QDate date;
 		Calendar calendar;
 		Reminders reminders;
 		AppData appData;
 
-		void addCardToListView(Card* card, int id);
+		void addCardToListView(Card* card, int id,QDate date);
 
 		void addReminder();
+
+		unsigned long long getSelectedCardID();
+		class CellReminder* getSelectedCell();
+		int getSelectedCellIndex();
+		void replaceSelectedCard(Card* card);
+		void deleteCard(unsigned long long id);
 
 	signals:
 		void reminderAdded();

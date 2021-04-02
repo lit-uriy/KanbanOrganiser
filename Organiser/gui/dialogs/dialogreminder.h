@@ -13,7 +13,7 @@ class DialogReminder : public QDialog
 		Q_OBJECT
 
 	public:
-		explicit DialogReminder(QWidget *parent = nullptr);
+		explicit DialogReminder(QDate date, QWidget *parent = nullptr);
 		explicit DialogReminder(ReminderCard* card, QWidget *parent = nullptr);
 		~DialogReminder();
 
@@ -21,6 +21,7 @@ class DialogReminder : public QDialog
 
 	private:
 		Ui::DialogReminder *ui;
+		QDate date;
 		ReminderCard* card;
 
 		void changeAcceptButtonToApply();

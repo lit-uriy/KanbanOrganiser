@@ -14,22 +14,22 @@ class CellReminder : public QWidget
 		Q_OBJECT
 
 	public:
-		explicit CellReminder(Card* card, int id, QWidget *parent = nullptr);
+		explicit CellReminder(Card* card, int id,QDate date,  QWidget *parent = nullptr);
 		~CellReminder();
 
 		void UpdateCard(Card* card);
-		int GetId();
+		unsigned long long GetId();
 
-		Card GetCard();
 	private:
 		Ui::CellReminder *ui;
 
-		int id = -1;
-		Card card;
+		QDate date;
+		unsigned long long id = -1;
 
 		void setWidgetData(Card* card);
 
-		void setStartStatusIconAndLabel(QDateTime startDate);
+		void setStatusIconAndLabel(QDateTime datetime);
+		void setTimeleft(QDateTime datetime);
 		void setTypeIcon(bool isReminder);
 
 		void setPriorityIcon(Card::Priority priority);

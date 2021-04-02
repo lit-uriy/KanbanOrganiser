@@ -13,32 +13,31 @@ DialogCard::DialogCard(QWidget *parent) :
 	setDeadlineEnabled(false);
 }
 
-DialogCard::DialogCard(Card card, QWidget *parent) :
+DialogCard::DialogCard(Card* card, QWidget *parent) :
 	QDialog(parent),
 	ui(new Ui::DialogCard)
 {
 	ui->setupUi(this);
 
-	this->card = card;
 	setWidgetData(card);
 	changeAcceptButtonToApply();
 }
 
-void DialogCard::setWidgetData(Card card)
+void DialogCard::setWidgetData(Card* card)
 {
-	ui->tedTitle->setText(card.title);
-	ui->tedDescription->setPlainText(card.description);
+	ui->tedTitle->setText(card->title);
+	ui->tedDescription->setPlainText(card->description);
 
-	ui->cbxPriority->setCurrentIndex((int)card.priority);
-	ui->cbxStatus->setCurrentIndex((int)card.status);
+	ui->cbxPriority->setCurrentIndex((int)card->priority);
+	ui->cbxStatus->setCurrentIndex((int)card->status);
 
-	if(card.startDate.isValid())
+	if(card->startDate.isValid())
 	{
 		setDeadlineEnabled(true);
 		ui->cbxHasDeadline->setChecked(true);
-		ui->dteStartTime->setDateTime(card.startDate);
+		ui->dteStartTime->setDateTime(card->startDate);
 
-		ui->dteDeadline->setDateTime(card.deadline);
+		ui->dteDeadline->setDateTime(card->deadline);
 		ui->dteDeadline->setMinimumDateTime(ui->dteStartTime->dateTime());
 	}
 	else

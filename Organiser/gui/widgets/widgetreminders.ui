@@ -121,6 +121,9 @@
          </property>
          <item>
           <widget class="QTableWidget" name="twdReminders">
+           <property name="contextMenuPolicy">
+            <enum>Qt::CustomContextMenu</enum>
+           </property>
            <property name="frameShape">
             <enum>QFrame::NoFrame</enum>
            </property>
@@ -158,6 +161,16 @@
     </widget>
    </item>
   </layout>
+  <action name="actionEditReminder">
+   <property name="text">
+    <string>Edit reminder</string>
+   </property>
+  </action>
+  <action name="actionDeleteReminder">
+   <property name="text">
+    <string>Delete reminder</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>

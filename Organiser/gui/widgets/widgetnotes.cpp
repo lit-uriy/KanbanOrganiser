@@ -102,7 +102,7 @@ void WidgetNotes::updateListView()
 }
 
 
-void WidgetNotes::addCardToListView(Card card, int id)
+void WidgetNotes::addCardToListView(Card* card, int id)
 {
     ui->twdNotes->insertRow(0);
 
@@ -216,7 +216,7 @@ void WidgetNotes::on_actionEditCard_triggered()
     }
 }
 
-void WidgetNotes::replaceSelectedCard(Card card)
+void WidgetNotes::replaceSelectedCard(Card* card)
 {
     CellNotes* cell = getSelectedCell();
     cell->UpdateCard(card);

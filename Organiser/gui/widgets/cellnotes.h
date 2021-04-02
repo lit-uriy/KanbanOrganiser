@@ -14,10 +14,10 @@ class CellNotes : public QWidget
 		Q_OBJECT
 
 	public:
-		explicit CellNotes(Card card, int id, QWidget *parent = nullptr);
+		explicit CellNotes(Card* card, int id, QWidget *parent = nullptr);
 		~CellNotes();
 
-		void UpdateCard(Card card);
+		void UpdateCard(Card* card);
 		int GetId();
 
 		Card GetCard();
@@ -36,9 +36,9 @@ class CellNotes : public QWidget
 		Ui::CellNotes *ui;
 
 		int id = -1;
-		Card card;
+		Card* card = nullptr;
 
-		void setWidgetData(Card card);
+		void setWidgetData(Card* card);
 
 		void setStartStatusIconAndLabel(QDateTime startDate);
 		void setFinishedStatusIconAndLabel(Card::Status status, QDateTime finishedDate);

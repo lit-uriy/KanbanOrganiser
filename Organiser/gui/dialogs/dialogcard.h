@@ -16,7 +16,7 @@ class DialogCard : public QDialog
 
 	public:
 		explicit DialogCard(QWidget *parent = nullptr);
-		explicit DialogCard(Card card, QWidget *parent = nullptr);
+		explicit DialogCard(Card* card, QWidget *parent = nullptr);
 		~DialogCard();
 
 		Card* GetCard();
@@ -33,9 +33,8 @@ class DialogCard : public QDialog
 	private:
 		Ui::DialogCard *ui;
 
-		Card card;
 
-		void setWidgetData(Card card);
+		void setWidgetData(Card* card);
 		void changeAcceptButtonToApply();
 
 		void setDefaultDeadline();

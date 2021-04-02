@@ -13,6 +13,7 @@
 #include <QEasingCurve>
 
 #include <QButtonGroup>
+#include <QDialog>
 
 WindowMain::WindowMain(QWidget *parent)
     : QMainWindow(parent)
@@ -20,9 +21,6 @@ WindowMain::WindowMain(QWidget *parent)
 {
     ui->setupUi(this);
     setWindowFlags(Qt::FramelessWindowHint);
-
-
-
 
     startSplashScreen();
 
@@ -36,13 +34,15 @@ WindowMain::WindowMain(QWidget *parent)
 
     connect(&minimizeTimer,&QTimer::timeout,this,[this](){
         minimizeToTray();
+		onSelectableButtonClicked(ui->btnCalendar);
     });
 
 
     QObject::connect(qApp, &QGuiApplication::applicationStateChanged, this, [=](Qt::ApplicationState state){
 		//qDebug() << state;
+		QList<QDialog*> dialogs = findChildren<QDialog*>();
 
-        if(state == Qt::ApplicationState::ApplicationInactive)
+		if(state == Qt::ApplicationState::ApplicationInactive && dialogs.size() == 0)
         {
             minimizeTimer.start(100);
             //minimizeToTray();
@@ -53,8 +53,6 @@ WindowMain::WindowMain(QWidget *parent)
         }
     });
 
-
-
 	connect(ui->btnCalendar,&QPushButton::clicked,this, [this](){
 		onSelectableButtonClicked(ui->btnCalendar);
 	});
@@ -64,6 +62,7 @@ WindowMain::WindowMain(QWidget *parent)
 	connect(ui->btnBoard,&QPushButton::clicked,this, [this](){
 		onSelectableButtonClicked(ui->btnBoard);
 	});
+
 }
 
 void WindowMain::onSelectableButtonClicked(PushButtonSelectable* button)
@@ -351,17 +350,17 @@ void WindowMain::setScreenGeometry(QSize size)
 
 void WindowMain::on_btnNotes_clicked()
 {
-    ui->tabWidget->setCurrentWidget(ui->tabNotes);
+	ui->tabWidget->setCurrentWidget(ui->tabNotes);
 }
 
 void WindowMain::on_btnBoard_clicked()
 {
-    ui->tabWidget->setCurrentWidget(ui->tabBoards);
+	ui->tabWidget->setCurrentWidget(ui->tabBoards);
 }
 
 void WindowMain::on_btnCalendar_clicked()
 {
-    ui->tabWidget->setCurrentWidget(ui->tabCalendar);
-	ui->btnCalendar->SetSelected(true);
+	tempLoad();
+	ui->tabWidget->setCurrentWidget(ui->tabCalendar);
 }
 

@@ -11,6 +11,11 @@ QColor IconLabel::GetIconColor()
 	return color;
 }
 
+void IconLabel::SetPixmap(const QPixmap &pixmap)
+{
+	setPixmap(pixmap);
+	updateIconColor();
+}
 void IconLabel::SetIconColor(QColor color)
 {
 	this->color = color;
@@ -38,6 +43,4 @@ void IconLabel::setIconColor(QColor color)
 	pixmapNew.setMask(bitmap);
 
 	setPixmap(pixmapNew);
-
-
 }

@@ -51,34 +51,61 @@ QList<ReminderCard*> Reminders::GetCards()
     return cards;
 }
 
+ReminderCard* Reminders::GetCard(unsigned long long id) const throw(GeneralException)
+{
+	int index = findCardIndex(id);
+	if(index < 0 || index >= cards.size())
+	{
+		throw GeneralException("Index out of range");
+		return nullptr;
+	}
+
+	return cards[index];
+}
+
 ReminderCard* Reminders::GetCardAt(int index) const throw(GeneralException)
 {
-    if(index < 0 || index >= cards.size())
-    {
-        throw GeneralException("Index out of range");
-        return nullptr;
-    }
+	if(index < 0 || index >= cards.size())
+	{
+		throw GeneralException("Index out of range");
+		return nullptr;
+	}
     return cards[index];
 }
 
-void Reminders::DeleteCard(int index) throw(GeneralException)
+void Reminders::DeleteCard(unsigned long long id) throw(GeneralException)
 {
-    if(index < 0 || index >= cards.size())
+	int index = findCardIndex(id);
+	if(index < 0 || index >= cards.size())
     {
         throw GeneralException("Index out of range");
         return;
-    }
-    cards.removeAt(index);
+	}
+
+	cards.removeAt(index);
 }
 
-
-void Reminders::ReplaceCard(int index, ReminderCard* card) throw(GeneralException)
+int Reminders::findCardIndex(unsigned long long id) const
 {
-    if(index < 0 || index >= cards.size())
-    {
-        throw GeneralException("Index out of range");
-        return;
-    }
+	for(int i=0; i < cards.size();i++)
+	{
+		if(id == cards.at(i)->id)
+		{
+			return i;
+		}
+	}
+
+	return -1;
+}
+
+void Reminders::ReplaceCard(unsigned long long id, ReminderCard* card) throw(GeneralException)
+{
+	int index = findCardIndex(id);
+	if(index < 0 || index >= cards.size())
+	{
+		throw GeneralException("Index out of range");
+		return;
+	}
 
     cards.replace(index,card);
 }

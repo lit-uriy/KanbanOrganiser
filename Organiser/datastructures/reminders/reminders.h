@@ -21,16 +21,18 @@ class Reminders
 
 		QList<ReminderCard*> GetCards();
 
+		ReminderCard* GetCard(unsigned long long id) const throw(GeneralException);
 		ReminderCard* GetCardAt(int index) const throw(GeneralException);
 
-		void DeleteCard(int index) throw(GeneralException);
+		void DeleteCard(unsigned long long id) throw(GeneralException);
 
-		void ReplaceCard(int index, ReminderCard* card) throw(GeneralException);
+		void ReplaceCard(unsigned long long id, ReminderCard* card) throw(GeneralException);
 
 		bool IsValid(){return valid;}
 	protected:
 		QList<ReminderCard*> cards;
 
+		int findCardIndex(unsigned long long id) const;
 		bool valid = true;
 };
 

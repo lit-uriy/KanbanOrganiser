@@ -16,6 +16,7 @@ class ReminderCard : public Card
 	public:
 		//TODO:Add Card Icon
 		ReminderCard();
+		ReminderCard(Card* copy);
 		ReminderCard(QString title, QString description, QDateTime creationDate);
 		RemindInterval remindInterval = RemindInterval::None;
 
