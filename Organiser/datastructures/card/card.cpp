@@ -22,6 +22,7 @@ Card::Card(QByteArray data) : Card()
 
 Card::Card(Card* copy) : Card()
 {
+	this->id = copy->id;
 	this->title = copy->title;
 	this->description = copy->description;
 
@@ -46,16 +47,6 @@ Card::Card(QString title, QString description, QDateTime creationDate) : Card()
 	this->title = title;
 	this->description = description;
 	this->creationDate = creationDate;
-}
-
-bool Card::operator==(const Card &other)
-{
-	return isEqual(other);
-}
-
-bool Card::operator!=(const Card &other)
-{
-	return !isEqual(other);
 }
 
 bool Card::IsNull()
@@ -155,6 +146,7 @@ void Card::SetDataFromArray(QByteArray data)
 	currentIndex += 1;
 	deadline = QDateTime::fromString(QString(data.mid(currentIndex,length)),"yyyy-MM-dd hh:mm:ss");
 	currentIndex += length;
+
 }
 
 QDateTime Card::GetFinishingDate()
@@ -169,16 +161,16 @@ QDateTime Card::GetFinishingDate()
 	}
 }
 
-bool Card::isEqual(const Card &other)
+bool Card::IsEqual(const Card* other)
 {
-	if(this->title.compare(other.title) == 0 &&
-			this->description.compare(other.description) == 0 &&
-			this->creationDate == other.creationDate &&
-			this->priority == other.priority &&
-			this->status == other.status &&
-			this->finishedDate == other.finishedDate &&
-			this->startDate == other.startDate &&
-			this->deadline == other.deadline)
+	if(this->title.compare(other->title) == 0 &&
+			this->description.compare(other->description) == 0 &&
+			this->creationDate == other->creationDate &&
+			this->priority == other->priority &&
+			this->status == other->status &&
+			this->finishedDate == other->finishedDate &&
+			this->startDate == other->startDate &&
+			this->deadline == other->deadline)
 	{
 		return true;
 	}

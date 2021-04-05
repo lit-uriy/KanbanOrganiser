@@ -22,6 +22,7 @@ class calendar : public QObject
 		void getDayCards();
 		void getWeekCards();
 
+		void getCardsForDeadline();
 };
 
 #endif // TST_CALENDAR_H

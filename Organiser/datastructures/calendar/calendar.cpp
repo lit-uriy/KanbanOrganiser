@@ -104,7 +104,6 @@ QList<Card*> Calendar::GetCardsForWeek(QDate date, AppData appData)
 	return cards;
 }
 
-#include <QDebug>
 QList<CalendarDay> Calendar::GetCalendarDaysForMonth(QDate date,AppData appData)
 {
 	QList<CalendarDay> list;
@@ -118,7 +117,6 @@ QList<CalendarDay> Calendar::GetCalendarDaysForMonth(QDate date,AppData appData)
 
 		int count = GetCardsForDay(day,appData).size();
 
-		qDebug() << day << ":" << count;
 		if(count > 0)
 		{
 			list.append(CalendarDay(day,count));
@@ -126,4 +124,63 @@ QList<CalendarDay> Calendar::GetCalendarDaysForMonth(QDate date,AppData appData)
 	}
 
 	return list;
+}
+
+QList<Card*> Calendar::GetCardsForDeadline(QDateTime datetime, AppData appData, int addedMinutes)
+{
+	QList<Card*> cards;
+
+	//TODO:Add Iterator thourgh all cards in all subobjects
+	for(int i=0; i < appData.boards.size();i++)
+	{
+		Board board = appData.boards.at(i);
+
+		for(int j=0; j < board.GetColumnCount();j++)
+		{
+			BoardColumn column = board.GetColumnAt(j);
+
+			for(int k=0; k < column.GetCardsCount();k++)
+			{
+				Card* card = column.GetCardAt(k);
+
+				if(shouldShowCard(card,datetime,addedMinutes))
+				{
+					cards.push_back(card);
+				}
+			}
+		}
+	}
+
+	for(int i=0; i < appData.reminders.GetCardsCount();i++)
+	{
+		ReminderCard* card = appData.reminders.GetCardAt(i);
+
+		if(shouldShowCard(card,datetime,addedMinutes))
+		{
+			cards.push_back(card);
+		}
+	}
+
+	return cards;
+}
+
+
+bool Calendar::shouldShowCard(Card* card,QDateTime datetime,int addedMinutes)
+{
+	if(card->postponedDeadline.isValid())
+	{
+		if(card->postponedDeadline <= datetime && card->status == Card::Status::Started)
+		{
+			return true;
+		}
+	}
+	else
+	{
+		if(card->deadline <= datetime.addSecs(60*addedMinutes) && card->status == Card::Status::Started)
+		{
+			return true;
+		}
+	}
+
+	return false;
 }

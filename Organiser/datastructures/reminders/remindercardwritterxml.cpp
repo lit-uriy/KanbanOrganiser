@@ -30,6 +30,8 @@ QDomElement ReminderCardWritterXml::Save(ReminderCard* card, QDomDocument docume
 
 	root.setAttribute("remindInterval", (int)card->remindInterval);
 
+	root.setAttribute("postponedDeadline", card->postponedDeadline.toString(dateTimeFormat));
+
 	document.appendChild(root);
 
 	return root;
@@ -57,6 +59,8 @@ ReminderCard* ReminderCardWritterXml::Load(QDomElement root)
 	card->status = (Card::Status)root.attribute("status").toInt();
 
 	card->remindInterval = (RemindInterval)root.attribute("remindInterval").toInt();
+
+	card->postponedDeadline = QDateTime::fromString(root.attribute("postponedDeadline"),dateTimeFormat);
 
 	return card;
 }

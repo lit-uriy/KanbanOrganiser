@@ -91,7 +91,7 @@ void Board::MoveCard(int columnFrom,int cardIndex,int columnTo) throw(GeneralExc
     }
 
 
-    Card* card = columns.at(columnFrom).GetCardAt(cardIndex);
+	Card* card = new Card(columns.at(columnFrom).GetCardAt(cardIndex));
 
     columns[columnFrom].DeleteCard(cardIndex);
 

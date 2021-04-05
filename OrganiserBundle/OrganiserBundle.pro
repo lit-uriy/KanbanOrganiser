@@ -17,3 +17,7 @@ CONFIG += qt \
     qt
 
 QT += widgets
+
+HEADERS += \
+
+SOURCES += \

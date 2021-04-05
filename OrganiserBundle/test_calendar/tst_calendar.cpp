@@ -23,9 +23,10 @@ calendar::calendar()
 	board.title = boardTitle;
 	BoardColumn column("Column1");
 
-        card = new Card(title,description,creationDate,startDay,deadline);
-        card2 = new Card(title,description,creationDate,startDay2,deadline2);
-        card3 = new Card(title,description,creationDate,startDay3,deadline3);
+	card = new Card(title,description,creationDate,startDay,deadline);
+	card2 = new Card(title,description,creationDate,startDay2,deadline2);
+	card3 = new Card(title,description,creationDate,startDay3,deadline3);
+	card3->status = Card::Status::Finished;
 
 	column.AddCard(card);
 	column.AddCard(card2);
@@ -46,24 +47,24 @@ void calendar::getDayCards()
 {
 
 	Calendar calendar;
-        QList<Card*> cards = calendar.GetCardsForDay(QDate(2020,01,9),appData);
+	QList<Card*> cards = calendar.GetCardsForDay(QDate(2020,01,9),appData);
 
 	QCOMPARE(cards.size(), 2);
 
 	if(cards.size() == 2)
 	{
-                Card* cardSame = cards.at(0);
+		Card* cardSame = cards.at(0);
 
-		QVERIFY(card == cardSame);
+		QVERIFY(card->IsEqual(cardSame));
 	}
 
 
-        QList<Card*> cards2 = calendar.GetCardsForDay(QDate(2020,01,11),appData);
+	QList<Card*> cards2 = calendar.GetCardsForDay(QDate(2020,01,11),appData);
 	if(cards.size() == 1)
 	{
-                Card* cardSame = cards.at(0);
+		Card* cardSame = cards.at(0);
 
-		QVERIFY(card2 == cardSame);
+		QVERIFY(card2->IsEqual(cardSame));
 	}
 }
 
@@ -71,25 +72,37 @@ void calendar::getWeekCards()
 {
 
 	Calendar calendar;
-        QList<Card*> cards = calendar.GetCardsForWeek(QDate(2020,01,9),appData);
+	QList<Card*> cards = calendar.GetCardsForWeek(QDate(2020,01,9),appData);
 
 	QCOMPARE(cards.size(), 2);
 
 	if(cards.size() == 2)
 	{
-                Card* cardSame = cards.at(0);
+		Card* cardSame = cards.at(0);
 
-		QVERIFY(card == cardSame);
+		QVERIFY(card->IsEqual(cardSame));
 	}
 
 
-        QList<Card*> cards2 = calendar.GetCardsForWeek(QDate(2020,01,11),appData);
+	QList<Card*> cards2 = calendar.GetCardsForWeek(QDate(2020,01,11),appData);
 	if(cards2.size() == 1)
 	{
-                Card* cardSame = cards.at(0);
+		Card* cardSame = cards.at(0);
 
-		QVERIFY(card2 == cardSame);
+		QVERIFY(card2->IsEqual(cardSame));
 	}
+}
+
+
+void calendar::getCardsForDeadline()
+{
+	Calendar calendar;
+
+	QList<Card*> cards = calendar.GetCardsForDeadline(QDateTime(QDate(2020,1,9),QTime(10,10)),appData,10);
+
+	QCOMPARE(cards.size(), 1);
+	QVERIFY(card->IsEqual(cards[0]));
+
 }
 
 QTEST_APPLESS_MAIN(calendar)

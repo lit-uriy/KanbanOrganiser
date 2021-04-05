@@ -49,10 +49,10 @@ void TestCard::test_compare()
 	Card carDiffDesc(title,description2,creationDate);
 	Card carDiffCreateDate(title,description,creationDate2);
 
-	QVERIFY(card == cardSame);
-	QVERIFY(card != cardDiffTitle);
-	QVERIFY(card != carDiffDesc);
-	QVERIFY(card != carDiffCreateDate);
+	QVERIFY(card.IsEqual(&cardSame));
+	QVERIFY(!card.IsEqual(&cardDiffTitle));
+	QVERIFY(!card.IsEqual(&carDiffDesc));
+	QVERIFY(!card.IsEqual(&carDiffCreateDate));
 }
 
 void TestCard::test_EncodeDecode()
@@ -68,7 +68,7 @@ void TestCard::test_EncodeDecode()
 	Card cardDecoded(card.Encode());
 
 
-	QVERIFY(card == cardDecoded);
+	QVERIFY(card.IsEqual(&cardDecoded));
 }
 
 QTEST_APPLESS_MAIN(TestCard)

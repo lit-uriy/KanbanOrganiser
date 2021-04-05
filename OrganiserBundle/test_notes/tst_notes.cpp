@@ -21,25 +21,25 @@ test_notes::~test_notes()
 void test_notes::addCardToNotes()
 {
 	Notes notes;
-        Card* card = new Card("Title", "Desc", QDateTime());
+	Card* card = new Card("Title", "Desc", QDateTime());
 	notes.AddCard(card);
 
-        Card* card2 = new Card("Title2", "Desc2", QDateTime());
+	Card* card2 = new Card("Title2", "Desc2", QDateTime());
 	notes.AddCard(card);
 
-        Card* card1Clone = notes.GetCardAt(0);
-        Card* card2CLone = notes.GetCardAt(1);
+	Card* card1Clone = notes.GetCardAt(0);
+	Card* card2CLone = notes.GetCardAt(1);
 
-	QVERIFY(card == card1Clone);
-	QVERIFY(card == card2CLone);
+	QVERIFY(card->IsEqual(card1Clone));
+	QVERIFY(card->IsEqual(card2CLone));
 }
 
 void test_notes::addCardToNotesAtPosition()
 {
 	Notes notes;
-        Card* cardFirst = new Card("Title", "Desc", QDateTime());
-        Card* cardSecond = new Card("Title2", "Desc2", QDateTime());
-        Card* cardFirstAgain = new Card("Title3", "Desc3", QDateTime());
+	Card* cardFirst = new Card("Title", "Desc", QDateTime());
+	Card* cardSecond = new Card("Title2", "Desc2", QDateTime());
+	Card* cardFirstAgain = new Card("Title3", "Desc3", QDateTime());
 
 	notes.AddCard(cardFirst);
 	notes.AddCard(cardSecond);
@@ -47,18 +47,18 @@ void test_notes::addCardToNotesAtPosition()
 	notes.AddCardAt(0,cardFirstAgain);
 
 
-        Card* cardFirstAgainClone = notes.GetCardAt(0);
-        Card* cardFirstClone = notes.GetCardAt(1);
+	Card* cardFirstAgainClone = notes.GetCardAt(0);
+	Card* cardFirstClone = notes.GetCardAt(1);
 
-	QVERIFY(cardFirstAgain == cardFirstAgainClone);
-	QVERIFY(cardFirst == cardFirstClone);
+	QVERIFY(cardFirstAgain->IsEqual(cardFirstAgainClone));
+	QVERIFY(cardFirst->IsEqual(cardFirstClone));
 }
 
 void test_notes::getCardOutOfRangeException()
 {
 	Notes notes;
 
-        Card* card = new Card("Title", "Desc", QDateTime());
+	Card* card = new Card("Title", "Desc", QDateTime());
 	notes.AddCard(card);
 
 	try
@@ -78,20 +78,20 @@ void test_notes::deleteCardFromNotes()
 	Notes notes;
 
 
-        Card* card = new Card("Title", "Desc", QDateTime(QDate(2020,1,1),QTime(10,10)));
-	notes.AddCard(card);
+	Card* card = new Card("Title", "Desc", QDateTime(QDate(2020,1,1),QTime(10,10)));
+	notes.AddCard(new Card(card));
 
-        Card* card2 = new Card("Title2", "Desc2", QDateTime(QDate(2019,2,4),QTime(4,8)));
+	Card* card2 = new Card("Title2", "Desc2", QDateTime(QDate(2019,2,4),QTime(4,8)));
 	notes.AddCard(card2);
 
 	notes.DeleteCard(0);
 
-        Card* card2FromNotes = notes.GetCards().at(0);
+	Card* card2FromNotes = notes.GetCards().at(0);
 
 	QVERIFY(notes.GetCards().size() == 1);
 
-	QVERIFY(card != card2FromNotes);
-	QVERIFY(card2 == card2FromNotes);
+	QVERIFY(!card->IsEqual(card2FromNotes));
+	QVERIFY(card2->IsEqual(card2FromNotes));
 
 	try
 	{
@@ -103,22 +103,23 @@ void test_notes::deleteCardFromNotes()
 	{
 
 	}
+
 }
 
 void test_notes::editCardInNotes()
 {
 	Notes notes;
 
-        Card* card = new Card("Title","Desc", QDateTime(QDate(2020,1,1),QTime(10,10)));
-	notes.AddCard(card);
+	Card* card = new Card("Title","Desc", QDateTime(QDate(2020,1,1),QTime(10,10)));
+	notes.AddCard(new Card(card));
 
-        Card* card2 = new Card("Title2","Desc2", QDateTime(QDate(2019,2,4),QTime(4,8)));
+	Card* card2 = new Card("Title2","Desc2", QDateTime(QDate(2019,2,4),QTime(4,8)));
 	notes.ReplaceCard(0,card2);
 
-        Card* cardFromNotes = notes.GetCards().at(0);
+	Card* cardFromNotes = notes.GetCards().at(0);
 
-	QVERIFY(card != cardFromNotes);
-	QVERIFY(card2 == cardFromNotes);
+	QVERIFY(!card->IsEqual(cardFromNotes));
+	QVERIFY(card2->IsEqual(cardFromNotes));
 
 	try
 	{
@@ -137,22 +138,22 @@ void test_notes::findCard()
 {
 	Notes notes;
 
-        Card* card = new Card("Title","Desc", QDateTime(QDate(2020,1,1),QTime(10,10)));
+	Card* card = new Card("Title","Desc", QDateTime(QDate(2020,1,1),QTime(10,10)));
 	notes.AddCard(card);
 
-        Card* card2 = new Card("Title2","Desc2", QDateTime(QDate(2019,2,4),QTime(4,8)));
+	Card* card2 = new Card("Title2","Desc2", QDateTime(QDate(2019,2,4),QTime(4,8)));
 	notes.AddCard(card2);
 
-        Card* card3 = new Card("Title3","Desc3", QDateTime(QDate(2019,2,4),QTime(4,8)));
+	Card* card3 = new Card("Title3","Desc3", QDateTime(QDate(2019,2,4),QTime(4,8)));
 
 	int index2 = notes.Find(card2);
-        Card* card2Copy = notes.GetCardAt(index2);
+	Card* card2Copy = notes.GetCardAt(index2);
 
 	int index3 = notes.Find(card3);
 
 
-	QVERIFY(card2 == card2Copy);
-	QVERIFY(card != card2Copy);
+	QVERIFY(card2->IsEqual(card2Copy));
+	QVERIFY(!card->IsEqual(card2Copy));
 
 	try
 	{

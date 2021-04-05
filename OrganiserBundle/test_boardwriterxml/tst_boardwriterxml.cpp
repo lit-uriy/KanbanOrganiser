@@ -21,7 +21,7 @@ void test_BoardWriterXml::writeBoardToXml()
 	board.title = boardTitle;
 	BoardColumn column("Column1");
 
-        Card* card = new Card(title,description,creationDate);
+	Card* card = new Card(title,description,creationDate);
 	column.AddCard(card);
 
 	board.AddColumn(column);

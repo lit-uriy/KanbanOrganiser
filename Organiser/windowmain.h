@@ -11,6 +11,7 @@ QT_END_NAMESPACE
 #include <QMenu>
 #include <QTimer>
 #include "gui/widgets/pushbuttonselectable.h"
+#include "gui/popup/popupmanager.h"
 
 class WindowMain : public QMainWindow
 {
@@ -26,6 +27,7 @@ class WindowMain : public QMainWindow
 		void closeEvent(QCloseEvent *event) override;
 	private:
 		Ui::WindowMain *ui;
+		PopupManager popupManager;
 
 		const int splashDuration = 1000;
 		void startSplashScreen();
@@ -50,12 +52,15 @@ class WindowMain : public QMainWindow
 		void exitApp();
 
 		void saveAppDataToFile();
+		void updatePopupManager();
 		void loadAppDataFromFile();
 
 		void setBootAtStartup(bool enabled);
 
 		void setScreenGeometry(QSize size);
 	private slots:
+		void onCardStatusSetToFinished(unsigned long long id);
+		void onPostponeCard(unsigned long long id,int minutes);
 		void onSelectableButtonClicked(PushButtonSelectable* button);
 
 		void saveAppData();

@@ -16,8 +16,7 @@ class Card
 
 		Card(QString title, QString description, QDateTime creationDate, QDateTime startDate,QDateTime deadline);
 
-		bool operator==(const Card &other);
-		bool operator!=(const Card &other);
+		virtual bool IsEqual(const Card* other);
 
 		unsigned long long id = 0;
 
@@ -36,6 +35,7 @@ class Card
 		QDateTime startDate;//Remind date for reminderCard
 		QDateTime deadline;
 
+		QDateTime postponedDeadline;
 		virtual bool IsNull();
 
 		QByteArray Encode();
@@ -45,7 +45,6 @@ class Card
 	private:
 		unsigned long long generateId();
 
-		bool isEqual(const Card &other);
 };
 
 #endif // CARD_H

@@ -25,7 +25,7 @@ void test_noteswriterxml::writeNotesToXml()
 
 	Notes notes;
 	Card card(title,description,creationDate);
-        notes.AddCard(&card);
+	notes.AddCard(&card);
 
 	NotesWriterXml writer;
 	QDomDocument document;
@@ -33,9 +33,9 @@ void test_noteswriterxml::writeNotesToXml()
 
 	notes = writer.Load(elementNotes);
 
-        Card* cardLoaded = notes.GetCardAt(0);
+	Card* cardLoaded = notes.GetCardAt(0);
 
-	QVERIFY(card == cardLoaded);
+	QVERIFY(card.IsEqual(cardLoaded));
 }
 
 QTEST_APPLESS_MAIN(test_noteswriterxml)

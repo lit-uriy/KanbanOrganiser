@@ -47,8 +47,8 @@ void test_reminders::addCardToNotes()
 	ReminderCard* card1Clone = reminders.GetCardAt(0);
 	ReminderCard* card2CLone = reminders.GetCardAt(1);
 
-	QVERIFY(card == card1Clone);
-	QVERIFY(card == card2CLone);
+	QVERIFY(card->IsEqual(card1Clone));
+	QVERIFY(card->IsEqual(card2CLone));
 }
 
 void test_reminders::addCardToNotesAtPosition()
@@ -67,8 +67,8 @@ void test_reminders::addCardToNotesAtPosition()
 	ReminderCard* cardFirstAgainClone = reminders.GetCardAt(0);
 	ReminderCard* cardFirstClone = reminders.GetCardAt(1);
 
-	QVERIFY(cardFirstAgain == cardFirstAgainClone);
-	QVERIFY(cardFirst == cardFirstClone);
+	QVERIFY(cardFirstAgain->IsEqual(cardFirstAgainClone));
+	QVERIFY(cardFirst->IsEqual(cardFirstClone));
 }
 
 void test_reminders::getCardOutOfRangeException()
@@ -107,8 +107,8 @@ void test_reminders::deleteCardFromNotes()
 
 	QVERIFY(reminders.GetCards().size() == 1);
 
-	QVERIFY(card != card2FromNotes);
-	QVERIFY(card2 == card2FromNotes);
+	QVERIFY(!card->IsEqual(card2FromNotes));
+	QVERIFY(card2->IsEqual(card2FromNotes));
 
 	try
 	{
@@ -134,8 +134,8 @@ void test_reminders::editCardInNotes()
 
 	ReminderCard* cardFromNotes = reminders.GetCards().at(0);
 
-	QVERIFY(card != cardFromNotes);
-	QVERIFY(card2 == cardFromNotes);
+	QVERIFY(!card->IsEqual(cardFromNotes));
+	QVERIFY(card2->IsEqual(cardFromNotes));
 
 	try
 	{

@@ -1,6 +1,6 @@
 
 
-QT += core gui network xml
+QT += core gui network xml multimedia
 
 CONFIG += c++11
 
@@ -33,6 +33,7 @@ SOURCES += \
     datastructures/board/boardcolumnwriterxml.cpp \
     datastructures/board/boardwriterxml.cpp \
     datastructures/calendar/calendar.cpp \
+    datastructures/calendar/postponedcard.cpp \
     datastructures/card/card.cpp \
     datastructures/card/cardwriterxml.cpp \
     datastructures/reminders/remindercard.cpp \
@@ -41,6 +42,7 @@ SOURCES += \
     datastructures/reminders/reminderswritterxml.cpp \
     gui/dialogs/dialogcard.cpp \
     gui/dialogs/dialogcolumnedit.cpp \
+    gui/dialogs/dialogpopup.cpp \
     gui/dialogs/dialogreminder.cpp \
     gui/widgets/cellreminder.cpp \
     gui/widgets/iconlabel.cpp \
@@ -56,7 +58,8 @@ SOURCES += \
     datastructures/notes/noteswriterxml.cpp \
     gui/widgets/cellnotes.cpp \
     gui/widgets/widgetnotes.cpp \
-    windowmain.cpp
+    windowmain.cpp\
+    gui/popup/popupmanager.cpp
 
 HEADERS += \
     datastructures/appData/appdata.h \
@@ -67,6 +70,7 @@ HEADERS += \
     datastructures/board/boardcolumnwriterxml.h \
     datastructures/board/boardwriterxml.h \
     datastructures/calendar/calendar.h \
+    datastructures/calendar/postponedcard.h \
     datastructures/card/cardwriterxml.h \
     datastructures/reminders/remindercard.h \
     datastructures/reminders/remindercardwritterxml.h \
@@ -77,6 +81,7 @@ HEADERS += \
     datastructures/card/card.h \
     gui/dialogs/dialogcard.h \
     gui/dialogs/dialogcolumnedit.h \
+    gui/dialogs/dialogpopup.h \
     gui/dialogs/dialogreminder.h \
     datastructures/calendar/calendarday.h \
     gui/widgets/cellreminder.h \
@@ -92,11 +97,13 @@ HEADERS += \
     gui/widgets/widgetnotes.h \
     gui/widgets/widgetreminders.h \
     gui/widgets/widgettab.h \
-    windowmain.h
+    windowmain.h \
+    gui/popup/popupmanager.h
 
 FORMS += \
     gui/dialogs/dialogcard.ui \
     gui/dialogs/dialogcolumnedit.ui \
+    gui/dialogs/dialogpopup.ui \
     gui/dialogs/dialogreminder.ui \
     gui/widgets/cellnotes.ui \
     gui/widgets/cellreminder.ui \

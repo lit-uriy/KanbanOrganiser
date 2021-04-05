@@ -1,12 +1,16 @@
 #include "cellreminder.h"
 #include "ui_cellreminder.h"
 
-CellReminder::CellReminder(Card* card, int id,QDate date, QWidget *parent)  :
+CellReminder::CellReminder(QWidget* parent) :
 	QWidget(parent),
 	ui(new Ui::CellReminder)
 {
 	ui->setupUi(this);
+}
 
+CellReminder::CellReminder(Card* card, int id,QDate date, QWidget *parent)  :
+	CellReminder(parent)
+{
 	this->date = date;
 	UpdateCard(card);
 }
@@ -28,8 +32,10 @@ unsigned long long CellReminder::GetId()
 
 void CellReminder::setWidgetData(Card* card)
 {
+
 	this->id = card->id;
 	ui->lblTitle->setText(card->title);
+
 
 	ui->lblDescription->setText(card->description);
 
@@ -40,6 +46,7 @@ void CellReminder::setWidgetData(Card* card)
 	bool isReminder = dynamic_cast<ReminderCard*>(card) != nullptr;
 
 	setTypeIcon(isReminder);
+
 }
 
 void CellReminder::setStatusIconAndLabel(QDateTime datetime)

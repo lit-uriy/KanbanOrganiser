@@ -20,10 +20,11 @@ class ReminderCard : public Card
 		ReminderCard(QString title, QString description, QDateTime creationDate);
 		RemindInterval remindInterval = RemindInterval::None;
 
+		virtual bool IsEqual(const Card* other) override;
 
 		bool IsNull() override;
-		bool operator==(const ReminderCard &other);
-		bool operator!=(const ReminderCard &other);
+		bool operator==(const ReminderCard* other);
+		bool operator!=(const ReminderCard* other);
 };
 
 #endif // REMINDERCARD_H

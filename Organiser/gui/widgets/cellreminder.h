@@ -14,6 +14,7 @@ class CellReminder : public QWidget
 		Q_OBJECT
 
 	public:
+		explicit CellReminder(QWidget *parent = nullptr);
 		explicit CellReminder(Card* card, int id,QDate date,  QWidget *parent = nullptr);
 		~CellReminder();
 

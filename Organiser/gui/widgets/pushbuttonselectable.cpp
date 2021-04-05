@@ -74,19 +74,15 @@ void PushButtonSelectable::mouseMoveEvent(QMouseEvent *event)
 	QPushButton::mouseMoveEvent(event);
 }
 
-#include <QDebug>
-
 void PushButtonSelectable::updateIconColor()
 {
 
 	if((isChecked() && !pressed) || (pressed && dragWithinBound))
 	{
-		//qDebug() << "selectedCol";
 		setIconColor(selectedColor);
 	}
 	else
 	{
-		//qDebug() << "normalColor";
 		setIconColor(normalColor);
 	}
 }

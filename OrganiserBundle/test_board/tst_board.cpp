@@ -104,7 +104,7 @@ void test_board::addCardToColumnInBoard()
 
 	Card* cardFromColumn = column2FromNotes.GetCardAt(0);
 
-	QVERIFY(card == cardFromColumn);
+	QVERIFY(card->IsEqual(cardFromColumn));
 }
 
 void test_board::replaceCardInColumnInBoard()
@@ -114,7 +114,7 @@ void test_board::replaceCardInColumnInBoard()
 	board.AddColumn(column);
 
 	Card* card = new Card("Title","Desc", QDateTime(QDate(2020,1,1),QTime(10,10)));
-	board.AddCardToColumn(0,card);
+	board.AddCardToColumn(0,new Card(card));
 
 	Card* cardOther = new Card("TitleOther","DescOther", QDateTime(QDate(2020,1,1),QTime(10,10)));
 	board.ReplaceCardInColumn(0,0,cardOther);
@@ -123,8 +123,8 @@ void test_board::replaceCardInColumnInBoard()
 
 	Card* cardFromColumn = column2FromNotes.GetCardAt(0);
 
-	QVERIFY(card != cardFromColumn);
-	QVERIFY(cardOther == cardFromColumn);
+	QVERIFY(!card->IsEqual(cardFromColumn));
+	QVERIFY(cardOther->IsEqual(cardFromColumn));
 }
 
 void test_board::deleteCardFromColumnInBoard()
@@ -153,16 +153,20 @@ void test_board::moveCardToOtherColumnInSameBoard()
 
 
 	Card* card = new Card("Title","Desc", QDateTime(QDate(2020,1,1),QTime(10,10)));
-	board.AddCardToColumn(0,card);
+	board.AddCardToColumn(0,new Card(card));
 
 
 	board.MoveCard(0,0,1);
 
 	Card* cardFromColumn = board.GetColumnAt(1).GetCardAt(0);
 
+
 	QVERIFY(board.GetColumnAt(0).GetCardsCount() == 0);
 	QVERIFY(board.GetColumnAt(1).GetCardsCount() == 1);
-	QVERIFY(card == cardFromColumn);
+
+	QVERIFY(cardFromColumn != nullptr);
+	QVERIFY(card->IsEqual(cardFromColumn));
+
 }
 
 QTEST_APPLESS_MAIN(test_board)

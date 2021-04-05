@@ -32,4 +32,8 @@
         <file>resources/theme/output/dark/arrow-up-hover.png</file>
         <file>resources/theme/output/dark/arrow-up-pressed.png</file>
     </qresource>
+    <qresource prefix="/sounds">
+        <file>resources/sounds/popup.wav</file>
+        <file>resources/sounds/popup2.wav</file>
+    </qresource>
 </RCC>

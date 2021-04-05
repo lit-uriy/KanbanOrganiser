@@ -5,6 +5,7 @@
 #include "datastructures/card/card.h"
 #include "datastructures/appData/appdata.h"
 #include "calendarday.h"
+#include "postponedcard.h"
 
 class Calendar
 {
@@ -17,6 +18,10 @@ class Calendar
 
 		QList<CalendarDay> GetCalendarDaysForMonth(QDate date,AppData appData);
 
+		QList<Card*> GetCardsForDeadline(QDateTime datetime, AppData appData, int addedMinutes=60);
+
+	private:
+		bool shouldShowCard(Card* card,QDateTime datetime,int addedMinutes);
 };
 
 #endif // CALENDAR_H

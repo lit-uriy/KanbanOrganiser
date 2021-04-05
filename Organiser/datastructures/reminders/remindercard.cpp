@@ -19,11 +19,18 @@ ReminderCard::ReminderCard(QString title, QString description, QDateTime creatio
 
 }
 
-bool ReminderCard::operator==(const ReminderCard &other)
+bool ReminderCard::IsEqual(const Card* other)
 {
-	bool result = Card::operator==(other);
+	const ReminderCard* remidnerCard = dynamic_cast<const ReminderCard*>(other);
 
-	if(result && remindInterval == other.remindInterval)
+	if(remidnerCard == nullptr)
+	{
+		return false;
+	}
+
+	bool result = Card::IsEqual(other);
+
+	if(result && remindInterval == remidnerCard->remindInterval)
 	{
 		return true;
 	}
@@ -31,17 +38,6 @@ bool ReminderCard::operator==(const ReminderCard &other)
 	return false;
 }
 
-bool ReminderCard::operator!=(const ReminderCard &other)
-{
-	bool result = Card::operator!=(other);
-
-	if(result && remindInterval != other.remindInterval)
-	{
-		return true;
-	}
-
-	return false;
-}
 
 bool ReminderCard::IsNull()
 {

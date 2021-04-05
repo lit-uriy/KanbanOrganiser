@@ -121,6 +121,28 @@ QPushButton::checked
 	color: $textPrimaryReversed;
 }
 
+QPushButton[popup=true]
+{
+	background-color: $transparent;
+	border-color: $buttonColor;
+	color: $accentPrimary;
+	border-radius: 0px;
+	padding: 5px;
+	font-weight: bold;
+	border: 0px solid $buttonColor;
+}
+
+QPushButton::hover[popup=true]
+{
+	border-color: $accentSecondary;
+
+}
+
+QPushButton::pressed[popup=true]
+{
+	color: $accentDark;
+}
+
 QSpinBox,
 QLineEdit,
 QTextEdit,
