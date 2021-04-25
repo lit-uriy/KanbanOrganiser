@@ -21,6 +21,7 @@ class Notes
 
 		QList<Card*> GetCards();
 
+        Card* GetCardWithID(unsigned long long id) const throw(GeneralException);
 		Card* GetCardAt(int index) const throw(GeneralException);
 
 		void DeleteCard(int index) throw(GeneralException);

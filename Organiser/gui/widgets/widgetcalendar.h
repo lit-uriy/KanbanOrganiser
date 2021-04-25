@@ -19,15 +19,15 @@ class WidgetCalendar : public WidgetTab
 	public:
 		explicit WidgetCalendar(QWidget *parent = nullptr);
 		~WidgetCalendar();
-		void SetAppData(AppData appData);
+        void SetAppData(AppData* appData);
 
-		Reminders GetReminders();
+        Reminders* GetReminders();
 	private:
 		Ui::WidgetCalendar *ui;
 		constexpr static QSize size = QSize(300,600);
 
 		Calendar calendar;
-		AppData appData;
+        AppData* appData = nullptr;
 
 		void updateReminders();
 

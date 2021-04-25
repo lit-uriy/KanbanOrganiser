@@ -7,16 +7,16 @@ BoardColumnWriterXml::BoardColumnWriterXml()
 
 }
 
-QDomElement BoardColumnWriterXml::Save(BoardColumn column, QDomDocument document)
+QDomElement BoardColumnWriterXml::Save(BoardColumn* column, QDomDocument document)
 {
     QDomElement root = document.createElement(GetRootElementName());
 
-    root.setAttribute("title", column.title);
+    root.setAttribute("title", column->title);
 
     CardWriterXml cardWriter;
-    for(int i=0; i < column.GetCardsCount();i++)
+    for(int i=0; i < column->GetCardsCount();i++)
     {
-        Card* card = column.GetCardAt(i);
+        Card* card = column->GetCardAt(i);
         QDomElement elementCard = cardWriter.Save(card,document);
         root.appendChild(elementCard);
     }
@@ -31,11 +31,11 @@ QString BoardColumnWriterXml::GetRootElementName()
     return "BoardColumn";
 }
 
-BoardColumn BoardColumnWriterXml::Load(QDomElement root)
+BoardColumn* BoardColumnWriterXml::Load(QDomElement root)
 {
-    BoardColumn column;
+    BoardColumn* column = new BoardColumn();
 
-    column.title = root.attribute("title");
+    column->title = root.attribute("title");
 
     CardWriterXml cardWriter;
     for(QDomElement elementCard = root.firstChildElement(cardWriter.GetRootElementName());!elementCard.isNull();elementCard = elementCard.nextSiblingElement("Card"))
@@ -44,7 +44,7 @@ BoardColumn BoardColumnWriterXml::Load(QDomElement root)
 
         if(!card->IsNull())
         {
-            column.AddCard(card);
+            column->AddCard(card);
         }
     }
 

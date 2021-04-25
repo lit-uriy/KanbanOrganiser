@@ -12,7 +12,7 @@ TEMPLATE = app
 
 RC_ICONS = resources/KanbanOrganiser.ico
 
-VERSION = 0.8.0.0
+VERSION = 0.9.0.0
 # The following define makes your compiler emit warnings if you use
 # any Qt feature that has been marked deprecated (the exact warnings
 # depend on your compiler). Please consult the documentation of the
@@ -31,6 +31,7 @@ SOURCES += \
     datastructures/board/board.cpp \
     datastructures/board/boardcolumn.cpp \
     datastructures/board/boardcolumnwriterxml.cpp \
+    datastructures/board/boards.cpp \
     datastructures/board/boardwriterxml.cpp \
     datastructures/calendar/calendar.cpp \
     datastructures/calendar/postponedcard.cpp \
@@ -68,6 +69,7 @@ HEADERS += \
     datastructures/board/board.h \
     datastructures/board/boardcolumn.h \
     datastructures/board/boardcolumnwriterxml.h \
+    datastructures/board/boards.h \
     datastructures/board/boardwriterxml.h \
     datastructures/calendar/calendar.h \
     datastructures/calendar/postponedcard.h \

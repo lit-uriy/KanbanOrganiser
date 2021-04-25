@@ -27,13 +27,12 @@ class WindowMain : public QMainWindow
 		void closeEvent(QCloseEvent *event) override;
 	private:
 		Ui::WindowMain *ui;
-		PopupManager popupManager;
+        PopupManager* popupManager = nullptr;
+        AppData appData;
 
 		const int splashDuration = 1000;
 		void startSplashScreen();
 		void closeSplashScreen();
-
-		void tempLoad();//TODO:Delete later
 
 		QTimer minimizeTimer;
 
@@ -51,9 +50,9 @@ class WindowMain : public QMainWindow
 		void maximizeFromTray();
 		void exitApp();
 
-		void saveAppDataToFile();
-		void updatePopupManager();
+        void saveAppDataToFile();
 		void loadAppDataFromFile();
+        void injectAppData();
 
 		void setBootAtStartup(bool enabled);
 

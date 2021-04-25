@@ -11,6 +11,14 @@ DialogPopup::DialogPopup(ReminderCard* card,QWidget *parent) :
 	setWindowFlags(Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
 
 	ui->wdtCard->UpdateCard(card);
+    updateButtonVisibility(card);
+}
+
+void DialogPopup::updateButtonVisibility(ReminderCard* card)
+{
+    bool isReminder = dynamic_cast<ReminderCard*>(card) != nullptr;
+
+    ui->btnMarkAsFinished->setVisible(isReminder);
 }
 
 DialogPopup::~DialogPopup()

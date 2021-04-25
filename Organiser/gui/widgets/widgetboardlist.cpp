@@ -1,6 +1,8 @@
 #include "widgetboardlist.h"
 #include "ui_widgetboardlist.h"
 
+#include "gui/dialogs/dialogcolumnedit.h"
+
 WidgetBoardList::WidgetBoardList(QWidget *parent) :
 	WidgetTab(size,parent),
 	ui(new Ui::WidgetBoardList)
@@ -13,20 +15,15 @@ WidgetBoardList::~WidgetBoardList()
 	delete ui;
 }
 
-void WidgetBoardList::SetBoardList(QList<Board> boards)
+void WidgetBoardList::SetBoardList(Boards* boards)
 {
 	this->boards = boards;
 	refreshCombobox();
 }
 
-QList<Board> WidgetBoardList::GetBoardList()
+Boards* WidgetBoardList::GetBoardList()
 {
-	if(ui->cbxBoards->currentIndex() > -1)
-	{
-		boards.replace(ui->cbxBoards->currentIndex(),ui->wdtBoard->GetBoard());
-	}
-
-	return boards;
+    return boards;
 }
 
 void WidgetBoardList::refreshCombobox()
@@ -36,9 +33,9 @@ void WidgetBoardList::refreshCombobox()
 
 	ui->cbxBoards->clear();
 
-	for(int i=0; i < boards.size();i++)
+    for(int i=0; i < boards->GetSize();i++)
 	{
-		QString title = boards.at(i).title;
+        QString title = boards->GetBoard(i)->title;
 
 		if(title.isNull() || title.isEmpty())
 		{
@@ -50,9 +47,9 @@ void WidgetBoardList::refreshCombobox()
 
 	ui->cbxBoards->blockSignals(false);
 
-	if(boards.size() > 0)
+    if(boards->GetSize() > 0)
 	{
-		ui->wdtBoard->SetBoard(boards.at(0));
+        ui->wdtBoard->SetBoard(boards->GetBoard(0));
 		ui->wdtBoard->setVisible(true);
 	}
 	else
@@ -69,28 +66,61 @@ void WidgetBoardList::on_btnAddBoard_clicked()
 void WidgetBoardList::addBoard()
 {
 	Board board;
-	board.title = "Test";//TODO:
 
-	boards.append(board);
+    DialogColumnEdit dialogColumnEdit(tr("Create board"),tr("New board"));
 
-	if(oldIndex > -1)
-	{
-		boards.replace(oldIndex,ui->wdtBoard->GetBoard());
-	}
+    if(dialogColumnEdit.exec() == QDialog::Accepted)
+    {
+        board.title = dialogColumnEdit.GetTitle();
+        boards->AddBoard(board);
+        if(oldIndex > -1)
+        {
+            boards->boards.replace(oldIndex,ui->wdtBoard->GetBoard());
+        }
 
-	refreshCombobox();
+        refreshCombobox();
+        oldIndex = -1;
+        ui->cbxBoards->setCurrentIndex(boards->GetSize()-1);
+    }
 
-	ui->cbxBoards->setCurrentIndex(boards.size()-1);
+
 }
 
 void WidgetBoardList::on_cbxBoards_currentIndexChanged(int index)
 {
 	if(oldIndex > -1)
 	{
-		boards.replace(oldIndex,ui->wdtBoard->GetBoard());
+        boards->boards.replace(oldIndex,ui->wdtBoard->GetBoard());
 	}
 
-	ui->wdtBoard->SetBoard(boards.at(index));
+    ui->wdtBoard->SetBoard(boards->GetBoard(index));
 
 	oldIndex = index;
+}
+
+void WidgetBoardList::on_btnEditBoard_clicked()
+{
+    int index = ui->cbxBoards->currentIndex();
+    QString title = boards->boards[index].title;
+
+    DialogColumnEdit dialogColumnEdit(tr("Rename board"),title);
+
+    if(dialogColumnEdit.exec() == QDialog::Accepted)
+    {
+        boards->boards[index].title = dialogColumnEdit.GetTitle();
+        refreshCombobox();
+        oldIndex = -1;
+        ui->cbxBoards->setCurrentIndex(index);
+    }
+
+}
+
+void WidgetBoardList::on_btnDeleteBoard_clicked()
+{
+    int index = ui->cbxBoards->currentIndex();
+    if(boards->DeleteBoard(index))
+    {
+        refreshCombobox();
+        ui->cbxBoards->setCurrentIndex(0);
+    }
 }

@@ -20,10 +20,10 @@ class WidgetReminders : public WidgetTab
 		explicit WidgetReminders(QWidget *parent = nullptr);
 		~WidgetReminders();
 
-		void SetAppData(AppData appData);
+        void SetAppData(AppData* appData);
 		void UpdateData(QDate date);
 
-		Reminders GetReminders();
+        Reminders* GetReminders();
 	private slots:
 		void on_pushButton_clicked();
 
@@ -39,8 +39,8 @@ class WidgetReminders : public WidgetTab
 
 		QDate date;
 		Calendar calendar;
-		Reminders reminders;
-		AppData appData;
+        Reminders* reminders = nullptr;
+        AppData* appData = nullptr;
 
 		void addCardToListView(Card* card, int id,QDate date);
 

@@ -29,6 +29,8 @@ class Card
 		enum class Status {Started,Finished,Canceled};
 		Status status = Status::Started;
 
+        bool markedAsShown = false;
+
 		QDateTime creationDate;
 		QDateTime finishedDate;
 

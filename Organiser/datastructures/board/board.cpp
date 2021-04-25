@@ -5,7 +5,7 @@ Board::Board()
 
 }
 
-void Board::AddColumn(BoardColumn column)
+void Board::AddColumn(BoardColumn* column)
 {
     columns.append(column);
 }
@@ -18,15 +18,15 @@ void Board::EditColumnName(int index, QString title) throw(GeneralException)
         return;
     }
 
-    columns[index].title = title;
+    columns[index]->title = title;
 }
 
-BoardColumn Board::GetColumnAt(int index) throw(GeneralException)
+BoardColumn* Board::GetColumnAt(int index) throw(GeneralException)
 {
     if(index < 0 || index >= columns.size())
     {
         throw GeneralException("Index out of range");
-        return BoardColumn();
+        return nullptr;
     }
 
     return columns.at(index);
@@ -56,7 +56,7 @@ void Board::AddCardToColumn(int columnIndex, Card* card) throw(GeneralException)
         return;
     }
 
-    columns[columnIndex].AddCard(card);
+    columns[columnIndex]->AddCard(card);
 }
 
 void Board::ReplaceCardInColumn(int columnIndex, int cardIndex, Card* card) throw(GeneralException)
@@ -67,7 +67,7 @@ void Board::ReplaceCardInColumn(int columnIndex, int cardIndex, Card* card) thro
         return;
     }
 
-    columns[columnIndex].ReplaceCard(cardIndex,card);
+    columns[columnIndex]->ReplaceCard(cardIndex,card);
 }
 
 void Board::DeleteCardFromColumn(int columnIndex, int cardIndex) throw(GeneralException)
@@ -78,7 +78,7 @@ void Board::DeleteCardFromColumn(int columnIndex, int cardIndex) throw(GeneralEx
         return;
     }
 
-    columns[columnIndex].DeleteCard(cardIndex);
+    columns[columnIndex]->DeleteCard(cardIndex);
 }
 
 void Board::MoveCard(int columnFrom,int cardIndex,int columnTo) throw(GeneralException)
@@ -91,10 +91,10 @@ void Board::MoveCard(int columnFrom,int cardIndex,int columnTo) throw(GeneralExc
     }
 
 
-	Card* card = new Card(columns.at(columnFrom).GetCardAt(cardIndex));
+    Card* card = new Card(columns.at(columnFrom)->GetCardAt(cardIndex));
 
-    columns[columnFrom].DeleteCard(cardIndex);
+    columns[columnFrom]->DeleteCard(cardIndex);
 
-    columns[columnTo].AddCard(card);
+    columns[columnTo]->AddCard(card);
 
 }

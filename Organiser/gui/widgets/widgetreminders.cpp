@@ -16,22 +16,23 @@ WidgetReminders::~WidgetReminders()
     delete ui;
 }
 
-Reminders WidgetReminders::GetReminders()
+Reminders* WidgetReminders::GetReminders()
 {
     return reminders;
 }
 
-void WidgetReminders::SetAppData(AppData appData)
+void WidgetReminders::SetAppData(AppData* appData)
 {
     this->appData = appData;
-    this->reminders = appData.reminders;
+    calendar.SetAppData(appData);
+    this->reminders = &appData->reminders;
 }
 
 void WidgetReminders::UpdateData(QDate date)
 {
 	this->date = date;
 
-    QList<Card*> cards = calendar.GetCardsForDay(date,appData);
+    QList<Card*> cards = calendar.GetCardsForDay(date);
 
     ui->twdReminders->setRowCount(0);
     for(int i=0; i < cards.size();i++)
@@ -59,7 +60,7 @@ void WidgetReminders::on_pushButton_clicked()
     {
         ReminderCard* card = dialogCard.GetReminderCard();
 
-        reminders.AddCard(card);
+        reminders->AddCard(card);
 
         emit reminderAdded();
     }
@@ -83,7 +84,7 @@ void WidgetReminders::on_twdReminders_customContextMenuRequested(const QPoint &p
 		return;
 	}
 
-	if(reminders.GetCard(id) == nullptr)
+    if(reminders->GetCard(id) == nullptr)
 	{
 		return;
 	}
@@ -105,13 +106,13 @@ void WidgetReminders::on_actionEditReminder_triggered()
 		return;
 	}
 
-	DialogReminder dialogCard(reminders.GetCard(id),this);
+    DialogReminder dialogCard(reminders->GetCard(id),this);
 
 
 	if(dialogCard.exec() == QDialog::Accepted)
 	{
 		ReminderCard* card = dialogCard.GetReminderCard();
-		reminders.ReplaceCard(id,card);
+        reminders->ReplaceCard(id,card);
 		replaceSelectedCard(card);
 
 		emit reminderAdded();
@@ -175,7 +176,7 @@ void WidgetReminders::deleteCard(unsigned long long id)
 		return;
 	}
 
-	reminders.DeleteCard(id);
+    reminders->DeleteCard(id);
 	UpdateData(date);
 
 	emit reminderAdded();

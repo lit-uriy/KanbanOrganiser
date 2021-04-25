@@ -8,9 +8,11 @@ DialogCard::DialogCard(QWidget *parent) :
 	ui(new Ui::DialogCard)
 {
 	ui->setupUi(this);
+    setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
 	setDefaultDeadline();
 	ui->cbxHasDeadline->setChecked(false);
 	setDeadlineEnabled(false);
+    setWindowTitle(tr("Add card"));
 }
 
 DialogCard::DialogCard(Card* card, QWidget *parent) :
@@ -21,6 +23,7 @@ DialogCard::DialogCard(Card* card, QWidget *parent) :
 
 	setWidgetData(card);
 	changeAcceptButtonToApply();
+    setWindowTitle(tr("Edit card"));
 }
 
 void DialogCard::setWidgetData(Card* card)

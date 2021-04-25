@@ -49,15 +49,65 @@
       </property>
       <item>
        <widget class="QComboBox" name="cbxBoards">
+        <property name="minimumSize">
+         <size>
+          <width>150</width>
+          <height>0</height>
+         </size>
+        </property>
         <property name="sizeAdjustPolicy">
          <enum>QComboBox::AdjustToContents</enum>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="btnAddBoard">
+       <widget class="PushButtonSelectable" name="btnAddBoard">
+        <property name="maximumSize">
+         <size>
+          <width>22</width>
+          <height>22</height>
+         </size>
+        </property>
         <property name="text">
-         <string>Add board</string>
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="../../resources.qrc">
+          <normaloff>:/icons/resources/icons/add.png</normaloff>:/icons/resources/icons/add.png</iconset>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="PushButtonSelectable" name="btnEditBoard">
+        <property name="maximumSize">
+         <size>
+          <width>22</width>
+          <height>22</height>
+         </size>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="../../resources.qrc">
+          <normaloff>:/icons/resources/icons/edit.png</normaloff>:/icons/resources/icons/edit.png</iconset>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="PushButtonSelectable" name="btnDeleteBoard">
+        <property name="maximumSize">
+         <size>
+          <width>22</width>
+          <height>22</height>
+         </size>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="../../resources.qrc">
+          <normaloff>:/icons/resources/icons/close.png</normaloff>:/icons/resources/icons/close.png</iconset>
         </property>
        </widget>
       </item>
@@ -87,6 +137,19 @@
      </property>
     </widget>
    </item>
+   <item>
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>0</width>
+       <height>0</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
   </layout>
  </widget>
  <customwidgets>
@@ -96,7 +159,14 @@
    <header>gui/widgets/widgetboard.h</header>
    <container>1</container>
   </customwidget>
+  <customwidget>
+   <class>PushButtonSelectable</class>
+   <extends>QPushButton</extends>
+   <header>gui/widgets/pushbuttonselectable.h</header>
+  </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="../../resources.qrc"/>
+ </resources>
  <connections/>
 </ui>

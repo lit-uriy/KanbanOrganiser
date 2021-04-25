@@ -1,12 +1,14 @@
 #include "dialogcolumnedit.h"
 #include "ui_dialogcolumnedit.h"
 
-DialogColumnEdit::DialogColumnEdit(QString title, QWidget *parent) :
+DialogColumnEdit::DialogColumnEdit(QString title, QString text, QWidget *parent) :
 	QDialog(parent),
 	ui(new Ui::DialogColumnEdit)
 {
 	ui->setupUi(this);
-	ui->tedTitle->setText(title);
+    setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
+    ui->tedTitle->setText(text);
+    setWindowTitle(title);
 }
 
 DialogColumnEdit::~DialogColumnEdit()

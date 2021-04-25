@@ -3,7 +3,7 @@
 
 
 #include "datastructures/notes/notes.h"
-#include "datastructures/board/board.h"
+#include "datastructures/board/boards.h"
 #include "datastructures/reminders/reminders.h"
 
 class AppData
@@ -14,12 +14,12 @@ class AppData
 		bool IsValid();
 
 		Notes notes;
-		QList<Board> boards;
+        Boards boards;
 		Reminders reminders;
 
 		const Card* FindCard(unsigned long long id);
 
-		void SetCardStatusToFinished(unsigned long long id);
+        void MarkCardAsShown(unsigned long long id);
 		void PostponeCard(unsigned long long id,int timeInMinutes);
 	private:
 		Card* findCard(unsigned long long id);

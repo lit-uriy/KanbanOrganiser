@@ -25,7 +25,8 @@ QDomElement CardWriterXml::Save(Card* card, QDomDocument document)
 	root.setAttribute("deadline", card->deadline.toString(dateTimeFormat));
 
 	root.setAttribute("priority", (int)card->priority);
-	root.setAttribute("status", (int)card->status);
+    root.setAttribute("status", (int)card->status);
+    root.setAttribute("markedAsShown", (int)card->markedAsShown);
 
 	root.setAttribute("postponedDeadline", card->postponedDeadline.toString(dateTimeFormat));
 
@@ -54,6 +55,7 @@ Card* CardWriterXml::Load(QDomElement root)
 
 	card->priority = (Card::Priority)root.attribute("priority").toInt();
 	card->status = (Card::Status)root.attribute("status").toInt();
+    card->markedAsShown = root.attribute("markedAsShown").toInt();
 
 	card->postponedDeadline = QDateTime::fromString(root.attribute("postponedDeadline"),dateTimeFormat);
 

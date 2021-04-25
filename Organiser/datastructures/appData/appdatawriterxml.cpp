@@ -22,9 +22,9 @@ QDomElement AppDataWriterXml::Save(AppData appData, QDomDocument document)
 
 	BoardWriterXml boardWriterXml;
 	QDomElement boardList = document.createElement("BoardList");
-	for(int i=0; i < appData.boards.size();i++)
+    for(int i=0; i < appData.boards.GetSize();i++)
 	{
-		boardList.appendChild(boardWriterXml.Save(appData.boards.at(i),document));
+        boardList.appendChild(boardWriterXml.Save(appData.boards.GetBoard(i),document));
 	}
 	root.appendChild(boardList);
 
@@ -59,7 +59,7 @@ AppData AppDataWriterXml::Load(QDomElement root)
 	for(QDomElement elementBoard = elementBoardList.firstChildElement(boardWriterXml.GetRootElementName());!elementBoard.isNull();elementBoard = elementBoard.nextSiblingElement(boardWriterXml.GetRootElementName()))
 	{
 		Board board = boardWriterXml.Load(elementBoard);
-		appData.boards.append(board);
+        appData.boards.AddBoard(board);
 	}
 
 	RemindersWritterXml remindersWriterXml;

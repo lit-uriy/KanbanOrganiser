@@ -11,23 +11,26 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Reminder</string>
+  </property>
+  <property name="main" stdset="0">
+   <bool>true</bool>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="spacing">
-    <number>2</number>
+    <number>1</number>
    </property>
    <property name="leftMargin">
-    <number>2</number>
+    <number>1</number>
    </property>
    <property name="topMargin">
-    <number>2</number>
+    <number>1</number>
    </property>
    <property name="rightMargin">
-    <number>2</number>
+    <number>1</number>
    </property>
    <property name="bottomMargin">
-    <number>2</number>
+    <number>1</number>
    </property>
    <item>
     <widget class="CellReminder" name="wdtCard" native="true">
@@ -60,7 +63,7 @@
       <item>
        <widget class="QPushButton" name="btnMarkAsFinished">
         <property name="text">
-         <string>Mark as finished</string>
+         <string>Don't show again</string>
         </property>
         <property name="popup" stdset="0">
          <bool>true</bool>

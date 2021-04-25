@@ -9,7 +9,7 @@ class BoardWriterXml
 	public:
 		BoardWriterXml();
 
-		QDomElement Save(Board board, QDomDocument document);
+        QDomElement Save(Board* board, QDomDocument document);
 		QString GetRootElementName();
 
 		Board Load(QDomElement root);

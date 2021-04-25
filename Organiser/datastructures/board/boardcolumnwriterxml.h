@@ -10,8 +10,8 @@ class BoardColumnWriterXml
 		BoardColumnWriterXml();
 		QString GetRootElementName();
 
-		QDomElement Save(BoardColumn column, QDomDocument document);
-		BoardColumn Load(QDomElement root);
+        QDomElement Save(BoardColumn* column, QDomDocument document);
+        BoardColumn* Load(QDomElement root);
 	private:
 };
 

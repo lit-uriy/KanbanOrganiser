@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>819</width>
-    <height>343</height>
+    <width>645</width>
+    <height>325</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -20,21 +20,24 @@
    <string>Kanban organiser</string>
   </property>
   <widget class="QWidget" name="centralwidget">
+   <property name="main" stdset="0">
+    <bool>true</bool>
+   </property>
    <layout class="QVBoxLayout" name="verticalLayout_7">
     <property name="spacing">
      <number>0</number>
     </property>
     <property name="leftMargin">
-     <number>0</number>
+     <number>1</number>
     </property>
     <property name="topMargin">
-     <number>0</number>
+     <number>1</number>
     </property>
     <property name="rightMargin">
-     <number>0</number>
+     <number>1</number>
     </property>
     <property name="bottomMargin">
-     <number>0</number>
+     <number>1</number>
     </property>
     <item>
      <widget class="QWidget" name="wdtMain" native="true">
@@ -57,7 +60,7 @@
        <item>
         <widget class="QStackedWidget" name="stackedWidget">
          <property name="currentIndex">
-          <number>0</number>
+          <number>1</number>
          </property>
          <widget class="QWidget" name="pageLoading">
           <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -301,6 +304,9 @@
               </property>
               <item>
                <widget class="QStackedWidget" name="tabWidget">
+                <property name="currentIndex">
+                 <number>1</number>
+                </property>
                 <widget class="QWidget" name="tabCalendar">
                  <layout class="QVBoxLayout" name="verticalLayout_4">
                   <property name="spacing">
@@ -419,6 +425,11 @@
  </widget>
  <customwidgets>
   <customwidget>
+   <class>PushButtonSelectable</class>
+   <extends>QPushButton</extends>
+   <header>gui/widgets/pushbuttonselectable.h</header>
+  </customwidget>
+  <customwidget>
    <class>WidgetNotes</class>
    <extends>QWidget</extends>
    <header>gui/widgets/widgetnotes.h</header>
@@ -435,11 +446,6 @@
    <extends>QWidget</extends>
    <header>gui/widgets/widgetcalendar.h</header>
    <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>PushButtonSelectable</class>
-   <extends>QPushButton</extends>
-   <header>gui/widgets/pushbuttonselectable.h</header>
   </customwidget>
  </customwidgets>
  <resources>

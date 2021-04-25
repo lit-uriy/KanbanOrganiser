@@ -19,11 +19,11 @@ WidgetBoard::~WidgetBoard()
 
 Board WidgetBoard::GetBoard()
 {
-	Board board;
+    Board board;//TODO:
 
 	for(int i=0; i < columns.size();i++)
 	{
-		BoardColumn column = columns[i]->GetColumn();
+        BoardColumn* column = columns[i]->GetColumn();
 		board.AddColumn(column);
 	}
 
@@ -31,20 +31,20 @@ Board WidgetBoard::GetBoard()
 	return board;
 }
 
-void WidgetBoard::SetBoard(Board board)
+void WidgetBoard::SetBoard(Board* board)
 {
 	updateListView(board);
 }
 
-void WidgetBoard::updateListView(Board board)
+void WidgetBoard::updateListView(Board* board)
 {
 	clearColumns();
-	for(int i=0; i < board.GetColumnCount();i++)
+    for(int i=0; i < board->GetColumnCount();i++)
 	{
-		BoardColumn column = board.GetColumnAt(i);
+        BoardColumn* column = board->GetColumnAt(i);
 		addColumnToListView(column,i);
 	}
-	title = board.title;
+    title = board->title;
 }
 
 void WidgetBoard::clearColumns()
@@ -58,7 +58,7 @@ void WidgetBoard::clearColumns()
 	columns.clear();
 }
 
-void WidgetBoard::addColumnToListView(BoardColumn column,int id)
+void WidgetBoard::addColumnToListView(BoardColumn* column,int id)
 {
 	WidgetNotes* columnWidget = new WidgetNotes(column,id,this);
 
@@ -91,12 +91,12 @@ void WidgetBoard::updateColumnIds()
 
 void WidgetBoard::on_btnAddColumn_clicked()
 {
-	DialogColumnEdit dialogColumnEdit(tr("New column"));
+    DialogColumnEdit dialogColumnEdit(tr("Create column"),tr("New column"));
 
 	if(dialogColumnEdit.exec() == QDialog::Accepted)
 	{
-		BoardColumn column;
-		column.title = dialogColumnEdit.GetTitle();
+        BoardColumn* column = new BoardColumn();
+        column->title = dialogColumnEdit.GetTitle();
 		addColumnToListView(column,columns.size());
 	}
 }

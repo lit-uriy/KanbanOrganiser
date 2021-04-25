@@ -22,16 +22,17 @@ WidgetCalendar::~WidgetCalendar()
 }
 
 
-Reminders WidgetCalendar::GetReminders()
+Reminders* WidgetCalendar::GetReminders()
 {
 	return ui->wdtReminders->GetReminders();
 }
 
-void WidgetCalendar::SetAppData(AppData appData)
+void WidgetCalendar::SetAppData(AppData* appData)
 {
 	this->appData = appData;
 	ui->wdtReminders->SetAppData(appData);
-	updateReminders();
+    calendar.SetAppData(appData);
+    updateReminders();
 
 	QDate date = ui->calendarWidget->selectedDate();
 	on_calendarWidget_currentPageChanged(date.year(),date.month());
@@ -39,14 +40,14 @@ void WidgetCalendar::SetAppData(AppData appData)
 
 void WidgetCalendar::updateReminders()
 {
-	appData.reminders = ui->wdtReminders->GetReminders();
+    //appData->reminders = ui->wdtReminders->GetReminders();
 	ui->wdtReminders->SetAppData(appData);
 	ui->wdtReminders->UpdateData(ui->calendarWidget->selectedDate());
 }
 
 void WidgetCalendar::on_calendarWidget_currentPageChanged(int year, int month)
 {
-	QList<CalendarDay> calendarDays = calendar.GetCalendarDaysForMonth(QDate(year,month,1),appData);
+    QList<CalendarDay> calendarDays = calendar.GetCalendarDaysForMonth(QDate(year,month,1));
 	ui->calendarWidget->SetCalendarDays(calendarDays);
 }
 

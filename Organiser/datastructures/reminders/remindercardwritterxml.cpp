@@ -27,6 +27,7 @@ QDomElement ReminderCardWritterXml::Save(ReminderCard* card, QDomDocument docume
 
 	root.setAttribute("priority", (int)card->priority);
 	root.setAttribute("status", (int)card->status);
+    root.setAttribute("markedAsShown", (int)card->markedAsShown);
 
 	root.setAttribute("remindInterval", (int)card->remindInterval);
 
@@ -57,6 +58,8 @@ ReminderCard* ReminderCardWritterXml::Load(QDomElement root)
 
 	card->priority = (Card::Priority)root.attribute("priority").toInt();
 	card->status = (Card::Status)root.attribute("status").toInt();
+    card->markedAsShown = root.attribute("markedAsShown").toInt();
+
 
 	card->remindInterval = (RemindInterval)root.attribute("remindInterval").toInt();
 

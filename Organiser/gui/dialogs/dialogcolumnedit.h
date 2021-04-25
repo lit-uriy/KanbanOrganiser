@@ -12,7 +12,7 @@ class DialogColumnEdit : public QDialog
 		Q_OBJECT
 
 	public:
-		explicit DialogColumnEdit(QString title, QWidget *parent = nullptr);
+        explicit DialogColumnEdit(QString title, QString text, QWidget *parent = nullptr);
 		~DialogColumnEdit();
 
 		QString GetTitle();

@@ -26,6 +26,7 @@ class DialogPopup : public QDialog
 	private:
 		Ui::DialogPopup *ui;
 
+        void updateButtonVisibility(class ReminderCard* card);
 	signals:
 		void closed(DialogPopup* popup);
 		void markAsFinished(DialogPopup* popup);

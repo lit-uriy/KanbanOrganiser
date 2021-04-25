@@ -28,6 +28,7 @@ Card::Card(Card* copy) : Card()
 
 	this->priority = copy->priority;
 	this->status = copy->status;
+    this->markedAsShown = copy->markedAsShown;
 
 	this->creationDate = copy->creationDate;
 	this->finishedDate = copy->finishedDate;
@@ -79,6 +80,9 @@ QByteArray Card::Encode()
 	data.append((int)1);
 	data.append((int)status);
 
+    data.append((int)1);
+    data.append((int)markedAsShown);
+
 	temp = creationDate.toString("yyyy-MM-dd hh:mm:ss");
 	data.append((int)temp.length());
 	data.append(temp);
@@ -127,6 +131,11 @@ void Card::SetDataFromArray(QByteArray data)
 	status = (Status)data.mid(currentIndex,length).toInt();
 	currentIndex += length;
 
+    length = data.mid(currentIndex,1)[0];
+    currentIndex += 1;
+    markedAsShown = data.mid(currentIndex,length).toInt();
+    currentIndex += length;
+
 	length = data.mid(currentIndex,1)[0];
 	currentIndex += 1;
 	creationDate = QDateTime::fromString(QString(data.mid(currentIndex,length)),"yyyy-MM-dd hh:mm:ss");
@@ -168,6 +177,7 @@ bool Card::IsEqual(const Card* other)
 			this->creationDate == other->creationDate &&
 			this->priority == other->priority &&
 			this->status == other->status &&
+            this->markedAsShown == other->markedAsShown &&
 			this->finishedDate == other->finishedDate &&
 			this->startDate == other->startDate &&
 			this->deadline == other->deadline)

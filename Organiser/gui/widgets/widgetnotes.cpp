@@ -21,13 +21,13 @@ WidgetNotes::WidgetNotes(QWidget *parent) :
     connect(ui->twdNotes,&NotesTableWidget::CardDropped,this,&WidgetNotes::OnCardDropped);
 }
 
-WidgetNotes::WidgetNotes(BoardColumn column, int id,QWidget *parent) :
+WidgetNotes::WidgetNotes(BoardColumn* column, int id,QWidget *parent) :
     WidgetTab(QSize(100,100),parent),
     ui(new Ui::WidgetNotes)
 {
     ui->setupUi(this);
     SetNotes(column);
-    this->title = column.title;
+    this->title = column->title;
     this->id = id;
 
     ui->lblTitle->setText(title);
@@ -52,12 +52,17 @@ void WidgetNotes::SetTitle(QString title)
     this->title = title;
 }
 
-Notes WidgetNotes::GetNotes()
+Notes* WidgetNotes::GetNotes()
 {
     return notes;
 }
 
-void WidgetNotes::SetNotes(Notes notes)
+void WidgetNotes::SetColumnEditable(bool editable)
+{
+    ui->btnColumnOptions->setVisible(editable);
+}
+
+void WidgetNotes::SetNotes(Notes* notes)
 {
     this->notes = notes;
     updateListView();
@@ -68,16 +73,16 @@ int WidgetNotes::GetId()
     return id;
 }
 
-BoardColumn WidgetNotes::GetColumn()
+BoardColumn* WidgetNotes::GetColumn()
 {
-    BoardColumn column;
+    BoardColumn* column = new BoardColumn();
 
-    column.title = title;
+    column->title = title;
 
-    for(int i=0; i < notes.GetCardsCount();i++)
+    for(int i=0; i < notes->GetCardsCount();i++)
     {
-        Card* card = notes.GetCardAt(i);
-        column.AddCard(card);
+        Card* card = notes->GetCardAt(i);
+        column->AddCard(card);
     }
 
     return column;
@@ -90,13 +95,13 @@ void WidgetNotes::SetId(int id)
 
 void WidgetNotes::updateListView()
 {
-    const int count = notes.GetCardsCount();
+    const int count = notes->GetCardsCount();
 
     ui->twdNotes->setRowCount(0);
 
     for(int i=0; i < count;i++)
     {
-        Card* card = notes.GetCardAt(i);
+        Card* card = notes->GetCardAt(i);
         addCardToListView(card,i);
     }
 }
@@ -123,7 +128,7 @@ void WidgetNotes::OnCardMovedSuccess(CellNotes* cell,bool success)
 
 void WidgetNotes::OnCardDropped(Card* card, int position)
 {
-    const int cardIndex = notes.Find(card);
+    const int cardIndex = notes->Find(card);
 
     internalDrag = cardIndex > -1;
 
@@ -144,7 +149,7 @@ void WidgetNotes::OnCardDropped(Card* card, int position)
         }
 
         deleteCard(cardIndex);
-        notes.AddCardAt(position,cardNew);
+        notes->AddCardAt(position,cardNew);
         updateListView();
     }
     else
@@ -152,7 +157,7 @@ void WidgetNotes::OnCardDropped(Card* card, int position)
         Card* cardNew = new Card(card);
         delete card;
 
-        notes.AddCardAt(position,cardNew);
+        notes->AddCardAt(position,cardNew);
         updateListView();
     }
 }
@@ -164,7 +169,7 @@ void WidgetNotes::on_btnAddNote_clicked()
     if(dialogCard.exec() == QDialog::Accepted)
     {
         Card* card = dialogCard.GetCard();
-        notes.AddCard(card);
+        notes->AddCard(card);
         updateListView();
 
         emit SaveRequest();
@@ -203,13 +208,13 @@ void WidgetNotes::on_actionEditCard_triggered()
         return;
     }
 
-    DialogCard dialogCard(notes.GetCardAt(id),this);
+    DialogCard dialogCard(notes->GetCardAt(id),this);
 
 
     if(dialogCard.exec() == QDialog::Accepted)
     {
         Card* card = dialogCard.GetCard();
-        notes.ReplaceCard(id,card);
+        notes->ReplaceCard(id,card);
         replaceSelectedCard(card);
 
         emit SaveRequest();
@@ -271,7 +276,7 @@ void WidgetNotes::deleteCard(int id)
         return;
     }
 
-    notes.DeleteCard(id);
+    notes->DeleteCard(id);
     updateListView();
 
     emit SaveRequest();
@@ -291,7 +296,7 @@ void WidgetNotes::on_btnColumnOptions_clicked()
 
 void WidgetNotes::on_actionRenameColumn_triggered()
 {
-    DialogColumnEdit dialogColumnEdit(title);
+    DialogColumnEdit dialogColumnEdit(tr("Rename column"),title);
 
     if(dialogColumnEdit.exec() == QDialog::Accepted)
     {

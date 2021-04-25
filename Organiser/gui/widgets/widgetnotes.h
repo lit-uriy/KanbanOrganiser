@@ -17,18 +17,19 @@ class WidgetNotes : public WidgetTab
 
 	public:
 		explicit WidgetNotes(QWidget *parent = nullptr);
-		explicit WidgetNotes(BoardColumn column, int id,QWidget *parent = nullptr);
+        explicit WidgetNotes(BoardColumn* column, int id,QWidget *parent = nullptr);
 		~WidgetNotes();
 
-		Notes GetNotes();
-		void SetNotes(Notes notes);
+        void SetColumnEditable(bool editable);
+        Notes* GetNotes();
+        void SetNotes(Notes* notes);
 
 		QString GetTitle();
 		void SetTitle(QString title);
 
 		int GetId();
 
-		BoardColumn GetColumn();
+        BoardColumn* GetColumn();
 
 		void SetId(int id);
 
@@ -39,7 +40,7 @@ class WidgetNotes : public WidgetTab
 		bool internalDrag = false;
 
 		int id = -1;
-		Notes notes;
+        Notes* notes = nullptr;
 		QString title;
 
 		void updateListView();

@@ -17,7 +17,7 @@ class WidgetBoard : public QWidget
 		~WidgetBoard();
 
 		class Board GetBoard();
-		void SetBoard(class Board board);
+        void SetBoard(class Board* board);
 
 	private:
 		Ui::WidgetBoard *ui;
@@ -25,10 +25,10 @@ class WidgetBoard : public QWidget
 		QString title;
 
 		QList<class WidgetNotes*> columns;
-		void updateListView(Board board);
+        void updateListView(Board* board);
 
 		void clearColumns();
-		void addColumnToListView(class BoardColumn column,int id);
+        void addColumnToListView(class BoardColumn* column,int id);
 		void updateColumnIds();
 	private slots:
 		void DeleteColumn(int id);

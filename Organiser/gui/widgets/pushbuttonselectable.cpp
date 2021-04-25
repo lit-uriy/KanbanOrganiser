@@ -12,6 +12,7 @@ QColor PushButtonSelectable::GetNormalColor()
 {
 	return normalColor;
 }
+
 void PushButtonSelectable::SetNormalColor(QColor color)
 {
 	normalColor = color;
@@ -46,7 +47,6 @@ void PushButtonSelectable::mouseReleaseEvent(QMouseEvent *e)
 	updateIconColor();
 }
 
-
 void PushButtonSelectable::mouseMoveEvent(QMouseEvent *event)
 {
 	if(pressed)
@@ -76,7 +76,6 @@ void PushButtonSelectable::mouseMoveEvent(QMouseEvent *event)
 
 void PushButtonSelectable::updateIconColor()
 {
-
 	if((isChecked() && !pressed) || (pressed && dragWithinBound))
 	{
 		setIconColor(selectedColor);

@@ -52,8 +52,23 @@ QList<Card*> Notes::GetCards()
 	return cards;
 }
 
+Card* Notes::GetCardWithID(unsigned long long id) const throw(GeneralException)
+{
+    for(int i=0; i < cards.size();i++)
+    {
+        if(cards[i]->id == id)
+        {
+            return cards[i];
+        }
+    }
+
+    throw GeneralException("Can't find card with requested ID");
+    return nullptr;
+}
+
 Card* Notes::GetCardAt(int index) const throw(GeneralException)
 {
+
 	if(index < 0 || index >= cards.size())
 	{
 		throw GeneralException("Index out of range");

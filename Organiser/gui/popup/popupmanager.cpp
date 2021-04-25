@@ -3,11 +3,10 @@
 
 #include <QApplication>
 #include <QDesktopWidget>
-#include <QDebug>
-#include <QSound>
 
 PopupManager::PopupManager(QObject *parent) : QObject(parent)
 {
+	initSound();
 	initTimer();
 }
 
@@ -17,6 +16,12 @@ void PopupManager::initTimer()
 	setTimerInterval();
 	timer.start();
 }
+void PopupManager::initSound()
+{
+	effect.setSource(QUrl::fromLocalFile(":/sounds/resources/sounds/popup2.wav"));
+	effect.setLoopCount(1);
+	effect.setVolume(soundVolume);
+}
 
 void PopupManager::setTimerInterval()
 {
@@ -25,14 +30,23 @@ void PopupManager::setTimerInterval()
 	timer.setInterval(secondsLeft*1000);
 }
 
-void PopupManager::UpdateAppData(AppData appData)
+void PopupManager::UpdateAppData(AppData* appData)
 {
 	this->appData = appData;
+    calendar.SetAppData(appData);
 }
 
 void PopupManager::ForcePopups()
 {
 	checkForReminders();
+}
+
+void PopupManager::CloseAllPopups()
+{
+    for(int i=0; i < dialogs.size();i++)
+    {
+        dialogs[i]->close();
+    }
 }
 
 void PopupManager::OnTimer()
@@ -43,7 +57,7 @@ void PopupManager::OnTimer()
 
 void PopupManager::checkForReminders()
 {
-	QList<Card*> cards = calendar.GetCardsForDeadline(QDateTime::currentDateTime(),appData);
+    QList<Card*> cards = calendar.GetCardsForDeadline(QDateTime::currentDateTime());
 
 	bool newCardShown = false;
 	for(int i=0; i < cards.size();i++)
@@ -65,7 +79,7 @@ void PopupManager::checkForReminders()
 
 void PopupManager::playSound()
 {
-	QSound::play(":/sounds/resources/sounds/popup2.wav");
+	effect.play();
 }
 
 bool PopupManager::isCardVisible(ReminderCard* card)
@@ -83,14 +97,14 @@ bool PopupManager::isCardVisible(ReminderCard* card)
 
 void PopupManager::showPopup(ReminderCard* card)
 {
-	qDebug() << "showPopup";
-	DialogPopup* popup = new DialogPopup(card,dynamic_cast<QWidget*>(parent()));
+    DialogPopup* popup = new DialogPopup(card,nullptr);//TODO: dynamic_cast<QWidget*>(parent()) it shows on parent then, with relative position to it
 	connect(popup,&DialogPopup::closed,this,&PopupManager::OnClose);
 	connect(popup,&DialogPopup::markAsFinished,this,&PopupManager::OnMarkAsFinished);
 	connect(popup,&DialogPopup::postpone,this,&PopupManager::OnPostpone);
 	dialogs.append(popup);
 
-	popup->show();
+    popup->show();
+
 	moveVisiblePopups();
 }
 
@@ -105,7 +119,7 @@ void PopupManager::moveVisiblePopups()
 	for(int i=0; i < dialogs.size();i++)
 	{
 		DialogPopup* popup = dialogs[i];
-		QPoint position = calculatePopupPosition(popup,dialogs.size()-(i));
+        QPoint position = calculatePopupPosition(popup,dialogs.size()-(i));
 		popup->move(position);
 	}
 }

@@ -63,11 +63,11 @@
       <item>
        <widget class="QPushButton" name="btnAddColumn">
         <property name="text">
-         <string>Add column</string>
+         <string/>
         </property>
         <property name="icon">
          <iconset resource="../../resources.qrc">
-          <normaloff>:/icons/resources/icons/add.png</normaloff>:/icons/resources/icons/add.png</iconset>
+          <normaloff>:/icons/resources/icons/add_column.png</normaloff>:/icons/resources/icons/add_column.png</iconset>
         </property>
        </widget>
       </item>

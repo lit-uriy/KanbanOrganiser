@@ -12,12 +12,12 @@ class Board
 
 		QString title;
 
-		void AddColumn(BoardColumn column);
+        void AddColumn(BoardColumn* column);
 		void EditColumnName(int index, QString title) throw(GeneralException);
 		void DeleteColumn(int index) throw(GeneralException);
 
 		int GetColumnCount();
-		BoardColumn GetColumnAt(int index) throw(GeneralException);
+        BoardColumn* GetColumnAt(int index) throw(GeneralException);
 
 		void AddCardToColumn(int columnIndex, Card* card) throw(GeneralException);
 		void ReplaceCardInColumn(int columnIndex, int cardIndex, Card* card) throw(GeneralException);
@@ -27,7 +27,7 @@ class Board
 
 		bool IsValid(){return true;}//TODO:
 	private:
-		QList<BoardColumn> columns;
+        QList<BoardColumn*> columns;
 };
 
 #endif // BOARD_H

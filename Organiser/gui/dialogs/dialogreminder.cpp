@@ -6,9 +6,11 @@ DialogReminder::DialogReminder(QDate date, QWidget *parent) :
 	ui(new Ui::DialogReminder)
 {
 	ui->setupUi(this);
+    setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
 	card = new ReminderCard();
 	card->deadline = QDateTime(date,QTime::currentTime().addSecs(60*60));
 	setWidgetData(card);
+    setWindowTitle(tr("Add reminder"));
 	delete card;
 }
 
@@ -18,6 +20,7 @@ DialogReminder::DialogReminder(ReminderCard* card,  QWidget *parent)  :
 	this->card = card;
 	setWidgetData(card);
 	changeAcceptButtonToApply();
+    setWindowTitle(tr("Edit reminder"));
 }
 
 void DialogReminder::changeAcceptButtonToApply()

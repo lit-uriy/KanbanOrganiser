@@ -7,13 +7,14 @@ QT += core network widgets xml
 
 TEMPLATE = app
 
-SRC_PATH = H:/Programowanie/QT/organiser/Organiser
+SRC_PATH = ../../Organiser
 INCLUDEPATH += $$SRC_PATH
 DEPENDPATH += $$SRC_PATH
 
 SOURCES +=  tst_appdatawriterxml.cpp \
      $$SRC_PATH/datastructures/card/card.cpp \
      $$SRC_PATH/datastructures/board/board.cpp \
+     $$SRC_PATH/datastructures/board/boards.cpp \
      $$SRC_PATH/datastructures/board/boardcolumn.cpp \
      $$SRC_PATH/datastructures/board/boardwriterxml.cpp \
      $$SRC_PATH/datastructures/board/boardcolumnwriterxml.cpp \

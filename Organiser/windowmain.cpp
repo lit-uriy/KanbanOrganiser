@@ -24,6 +24,7 @@ WindowMain::WindowMain(QWidget *parent)
 {
 	ui->setupUi(this);
 	setWindowFlags(Qt::FramelessWindowHint);
+    popupManager = new PopupManager(this);
 
 	QGuiApplication::setQuitOnLastWindowClosed(false);
 	startSplashScreen();
@@ -34,7 +35,7 @@ WindowMain::WindowMain(QWidget *parent)
 	connect(ui->wdtNotes,&WidgetNotes::SaveRequest,this,&WindowMain::saveAppData);
 	connect(ui->wdtCalendar,&WidgetCalendar::reminderAdded,this,&WindowMain::saveAppData);
 
-	tempLoad();
+    ui->wdtNotes->SetColumnEditable(false);
 
 	connect(&minimizeTimer,&QTimer::timeout,this,[this](){
 		minimizeToTray();
@@ -66,28 +67,19 @@ WindowMain::WindowMain(QWidget *parent)
 		onSelectableButtonClicked(ui->btnBoard);
 	});
 
-	connect(&popupManager,&PopupManager::CardStatusSetToFinished,this,&WindowMain::onCardStatusSetToFinished);
-	connect(&popupManager,&PopupManager::PostponeCard,this,&WindowMain::onPostponeCard);
+    connect(popupManager,&PopupManager::CardStatusSetToFinished,this,&WindowMain::onCardStatusSetToFinished);
+    connect(popupManager,&PopupManager::PostponeCard,this,&WindowMain::onPostponeCard);
+
 }
 
 void WindowMain::onCardStatusSetToFinished(unsigned long long id)
 {
-	AppData appData;
-	appData.notes = ui->wdtNotes->GetNotes();
-	appData.boards = ui->wdtBoard->GetBoardList();
-	appData.reminders = ui->wdtCalendar->GetReminders();
-
-	appData.SetCardStatusToFinished(id);
+    appData.MarkCardAsShown(id);
 	saveAppData();
 }
 
 void WindowMain::onPostponeCard(unsigned long long id,int minutes)
 {
-	AppData appData;
-	appData.notes = ui->wdtNotes->GetNotes();
-	appData.boards = ui->wdtBoard->GetBoardList();
-	appData.reminders = ui->wdtCalendar->GetReminders();
-
 	appData.PostponeCard(id,minutes);
 	saveAppData();
 }
@@ -141,33 +133,27 @@ void WindowMain::closeSplashScreen()
 {
 	minimizeToTray();
 	ui->stackedWidget->setCurrentIndex(1);
+    ui->tabWidget->setCurrentWidget(ui->tabCalendar);
 	on_tabWidget_currentChanged(ui->tabWidget->currentIndex());
-	popupManager.ForcePopups();
-}
-
-void WindowMain::tempLoad()
-{
-	AppData appData;
-	appData.notes = ui->wdtNotes->GetNotes();
-	appData.boards = ui->wdtBoard->GetBoardList();
-	appData.reminders = ui->wdtCalendar->GetReminders();
-
-	ui->wdtCalendar->SetAppData(appData);
-
+    popupManager->ForcePopups();
 }
 
 void WindowMain::loadAppDataFromFile()
 {
 	AppDataWriterXml writer;
 	QString exePath = QCoreApplication::applicationDirPath();
-	AppData appData = writer.ReadFromFile(exePath + "/calendar.xml");
+    appData = writer.ReadFromFile(exePath + "/calendar.xml");
 
-	ui->wdtNotes->SetNotes(appData.notes);
+    injectAppData();
+    //updatePopupManager();
+}
 
-	ui->wdtBoard->SetBoardList(appData.boards);
-	ui->wdtCalendar->SetAppData(appData);
-
-	updatePopupManager();
+void WindowMain::injectAppData()
+{
+    ui->wdtNotes->SetNotes(&appData.notes);
+    ui->wdtBoard->SetBoardList(&appData.boards);
+    ui->wdtCalendar->SetAppData(&appData);
+    popupManager->UpdateAppData(&appData);
 }
 
 WindowMain::~WindowMain()
@@ -183,30 +169,14 @@ void WindowMain::showEvent(QShowEvent *event)
 
 void WindowMain::saveAppData()
 {
-	updatePopupManager();
-	saveAppDataToFile();
-}
-
-void WindowMain::updatePopupManager()
-{
-	AppData appData;
-	appData.notes = ui->wdtNotes->GetNotes();
-	appData.boards = ui->wdtBoard->GetBoardList();
-	appData.reminders = ui->wdtCalendar->GetReminders();
-
-	popupManager.UpdateAppData(appData);
+    saveAppDataToFile();
 }
 
 void WindowMain::saveAppDataToFile()
 {
-	AppData appData;
-	appData.notes = ui->wdtNotes->GetNotes();
-	appData.boards = ui->wdtBoard->GetBoardList();
-	appData.reminders = ui->wdtCalendar->GetReminders();
-
-	AppDataWriterXml writer;
-	QString exePath = QCoreApplication::applicationDirPath();
-	writer.WriteToFile(appData,exePath + "/calendar.xml");
+    AppDataWriterXml writer;
+    QString exePath = QCoreApplication::applicationDirPath();
+    writer.WriteToFile(appData,exePath + "/calendar.xml");
 }
 
 void WindowMain::showTrayIcon()
@@ -275,6 +245,8 @@ void WindowMain::closeEvent(QCloseEvent* event)
 	else
 	{
 		QGuiApplication::setQuitOnLastWindowClosed(true);
+
+        popupManager->CloseAllPopups();
 		QMainWindow::closeEvent(event);
 	}
 }
@@ -398,7 +370,6 @@ void WindowMain::on_btnBoard_clicked()
 
 void WindowMain::on_btnCalendar_clicked()
 {
-	tempLoad();
 	ui->tabWidget->setCurrentWidget(ui->tabCalendar);
 }
 

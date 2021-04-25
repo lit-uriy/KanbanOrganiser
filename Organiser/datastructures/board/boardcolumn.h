@@ -11,14 +11,11 @@ class BoardColumn : public Notes
 		BoardColumn();
 		BoardColumn(QString title);
 
-		bool operator==(const BoardColumn &other);
-		bool operator!=(const BoardColumn &other);
-
 		QString title = "";
 
 		bool IsNull();
-	private:
-		bool isEqual(const BoardColumn &other);
+        bool isEqual(const BoardColumn* other);
+    private:
 };
 
 #endif // BOARDCOLUMN_H

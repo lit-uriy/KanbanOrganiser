@@ -12,15 +12,18 @@ class Calendar
 	public:
 		Calendar();
 
-		QList<Card*> GetCardsForDay(QDate date, AppData appData);
+        void SetAppData(AppData* appData);//TODO:const
 
-		QList<Card*> GetCardsForWeek(QDate date, AppData appData);
+        QList<Card*> GetCardsForDay(QDate date);
 
-		QList<CalendarDay> GetCalendarDaysForMonth(QDate date,AppData appData);
+        QList<Card*> GetCardsForWeek(QDate date);
 
-		QList<Card*> GetCardsForDeadline(QDateTime datetime, AppData appData, int addedMinutes=60);
+        QList<CalendarDay> GetCalendarDaysForMonth(QDate date);
+
+        QList<Card*> GetCardsForDeadline(QDateTime datetime, int addedMinutes=60);
 
 	private:
+        AppData* appData = nullptr;
 		bool shouldShowCard(Card* card,QDateTime datetime,int addedMinutes);
 };
 

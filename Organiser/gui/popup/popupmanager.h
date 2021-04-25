@@ -13,20 +13,24 @@ class PopupManager : public QObject
 {
 		Q_OBJECT
 	public:
-		explicit PopupManager(QObject *parent = nullptr);
+        explicit PopupManager(QObject *parent = nullptr);
 
-		void UpdateAppData(AppData appData);
+        void UpdateAppData(AppData* appData);
 
 		void ForcePopups();
-	private:
 
+        void CloseAllPopups();
+    private:
 		const int maxPopups = 5;
 
-		AppData appData;
+        AppData* appData = nullptr;
 		QTimer timer;
 
 		Calendar calendar;
 		QList<class DialogPopup*> dialogs;
+
+		QSoundEffect effect;
+		float soundVolume = 0.25f;
 
 		void initTimer();
 		void initSound();

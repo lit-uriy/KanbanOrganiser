@@ -4,7 +4,7 @@
 #include <QWidget>
 #include "widgettab.h"
 
-#include "datastructures/board/board.h"
+#include "datastructures/board/boards.h"
 
 namespace Ui {
 class WidgetBoardList;
@@ -18,14 +18,14 @@ class WidgetBoardList : public WidgetTab
 		explicit WidgetBoardList(QWidget *parent = nullptr);
 		~WidgetBoardList();
 
-		void SetBoardList(QList<Board> boards);
-		QList<Board> GetBoardList();
+        void SetBoardList(Boards* boards);
+        Boards* GetBoardList();
 	private:
 		Ui::WidgetBoardList *ui;
 		constexpr static QSize size = QSize(910,600);
 
 		int oldIndex = -1;
-		QList<Board> boards;
+        Boards* boards;
 
 		void addBoard();
 		void refreshCombobox();
@@ -34,6 +34,8 @@ class WidgetBoardList : public WidgetTab
 		void on_btnAddBoard_clicked();
 
 		void on_cbxBoards_currentIndexChanged(int index);
+        void on_btnEditBoard_clicked();
+        void on_btnDeleteBoard_clicked();
 };
 
 #endif // WIDGETBOARDLIST_H

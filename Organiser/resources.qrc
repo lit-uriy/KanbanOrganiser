@@ -14,6 +14,8 @@
         <file>resources/icons/calendar.png</file>
         <file>resources/icons/notes.png</file>
         <file>resources/icons/timeleft.png</file>
+        <file>resources/icons/add_column.png</file>
+        <file>resources/icons/more.png</file>
     </qresource>
     <qresource prefix="/themes">
         <file>resources/theme/output/dark.css</file>

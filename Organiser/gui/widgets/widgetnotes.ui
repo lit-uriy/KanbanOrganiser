@@ -52,13 +52,13 @@ QWidget#wdtTitlebar
        <number>0</number>
       </property>
       <property name="topMargin">
-       <number>4</number>
+       <number>2</number>
       </property>
       <property name="rightMargin">
        <number>0</number>
       </property>
       <property name="bottomMargin">
-       <number>4</number>
+       <number>2</number>
       </property>
       <item>
        <widget class="QWidget" name="wdtTitlebar" native="true">
@@ -83,6 +83,12 @@ QWidget#wdtTitlebar
          </property>
          <item>
           <widget class="QLabel" name="lblTitle">
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>16777215</height>
+            </size>
+           </property>
            <property name="font">
             <font>
              <family>Verdana</family>
@@ -104,20 +110,26 @@ QWidget#wdtTitlebar
            <property name="sizeHint" stdset="0">
             <size>
              <width>0</width>
-             <height>20</height>
+             <height>10</height>
             </size>
            </property>
           </spacer>
          </item>
          <item>
           <widget class="QPushButton" name="btnAddNote">
+           <property name="maximumSize">
+            <size>
+             <width>22</width>
+             <height>22</height>
+            </size>
+           </property>
            <property name="font">
             <font>
              <family>Verdana</family>
             </font>
            </property>
            <property name="text">
-            <string>Add card</string>
+            <string/>
            </property>
            <property name="icon">
             <iconset resource="../../resources.qrc">
@@ -127,8 +139,18 @@ QWidget#wdtTitlebar
          </item>
          <item>
           <widget class="QPushButton" name="btnColumnOptions">
+           <property name="maximumSize">
+            <size>
+             <width>22</width>
+             <height>22</height>
+            </size>
+           </property>
            <property name="text">
-            <string notr="true">More</string>
+            <string notr="true"/>
+           </property>
+           <property name="icon">
+            <iconset resource="../../resources.qrc">
+             <normaloff>:/icons/resources/icons/more.png</normaloff>:/icons/resources/icons/more.png</iconset>
            </property>
           </widget>
          </item>

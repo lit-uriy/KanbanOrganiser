@@ -30,17 +30,28 @@ Card* AppData::findCard(unsigned long long id)
 		return card;
 	}
 
-	//TODO: board and notes
+    card = notes.GetCardWithID(id);
+    if(card != nullptr)
+    {
+        return card;
+    }
+
+    card = boards.GetCardWithID(id);
+    if(card != nullptr)
+    {
+        return card;
+    }
+
 	return nullptr;
 }
 
-void AppData::SetCardStatusToFinished(unsigned long long id)
+void AppData::MarkCardAsShown(unsigned long long id)
 {
 	Card* card = findCard(id);
 
 	if(card != nullptr)
 	{
-		card->status = Card::Status::Finished;
+        card->markedAsShown = true;
 	}
 }
 

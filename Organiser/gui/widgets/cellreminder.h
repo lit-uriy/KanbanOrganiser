@@ -32,6 +32,7 @@ class CellReminder : public QWidget
 		void setStatusIconAndLabel(QDateTime datetime);
 		void setTimeleft(QDateTime datetime);
 		void setTypeIcon(bool isReminder);
+        void setButtons(bool isReminder);
 
 		void setPriorityIcon(Card::Priority priority);
 };

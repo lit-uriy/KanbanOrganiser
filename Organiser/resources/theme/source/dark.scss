@@ -1,6 +1,7 @@
 $backgroundPrimary: #323232;
 $backgroundSecondary: #424242;
 $backgroundDark: #212121;
+$windowBorder: #646464;
 
 $accentPrimary: #42A5F5;
 $accentSecondary: #64B5F6;
@@ -22,7 +23,12 @@ $scrollHandle: #424242;
 
 $menuBorder: #CDCDCD;
 
-
+QWidget[main=true]
+{
+	background-color: $backgroundDark;
+	padding: 1px;
+	border: 1px solid $windowBorder;
+}
 QWidget
 {
 	background-color: $backgroundDark;
