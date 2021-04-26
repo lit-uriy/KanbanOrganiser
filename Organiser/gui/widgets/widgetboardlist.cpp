@@ -8,6 +8,8 @@ WidgetBoardList::WidgetBoardList(QWidget *parent) :
 	ui(new Ui::WidgetBoardList)
 {
 	ui->setupUi(this);
+
+    connect(ui->wdtBoard,&WidgetBoard::SaveRequest,this,&WidgetBoardList::SaveRequest);
 }
 
 WidgetBoardList::~WidgetBoardList()
@@ -81,9 +83,8 @@ void WidgetBoardList::addBoard()
         refreshCombobox();
         oldIndex = -1;
         ui->cbxBoards->setCurrentIndex(boards->GetSize()-1);
+        emit SaveRequest();
     }
-
-
 }
 
 void WidgetBoardList::on_cbxBoards_currentIndexChanged(int index)
@@ -111,6 +112,7 @@ void WidgetBoardList::on_btnEditBoard_clicked()
         refreshCombobox();
         oldIndex = -1;
         ui->cbxBoards->setCurrentIndex(index);
+        emit SaveRequest();
     }
 
 }
@@ -122,5 +124,6 @@ void WidgetBoardList::on_btnDeleteBoard_clicked()
     {
         refreshCombobox();
         ui->cbxBoards->setCurrentIndex(0);
+        emit SaveRequest();
     }
 }

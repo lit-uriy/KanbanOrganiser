@@ -172,6 +172,11 @@ QList<Card*> Calendar::GetCardsForDeadline(QDateTime datetime, int addedMinutes)
 
 bool Calendar::shouldShowCard(Card* card,QDateTime datetime,int addedMinutes)
 {
+    if(!card->deadline.isValid())
+    {
+        return false;
+    }
+
 	if(card->postponedDeadline.isValid())
 	{
         if(card->postponedDeadline <= datetime && card->status == Card::Status::Started && !card->markedAsShown)

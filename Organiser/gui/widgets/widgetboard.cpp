@@ -66,7 +66,9 @@ void WidgetBoard::addColumnToListView(BoardColumn* column,int id)
 	ui->wdtColumnList->layout()->addWidget(columnWidget);
 
 	connect(columnWidget,&WidgetNotes::DeleteRequest,this,&WidgetBoard::DeleteColumn);
+    connect(columnWidget,&WidgetNotes::SaveRequest,this,&WidgetBoard::SaveRequest);
 	columns.append(columnWidget);
+    emit SaveRequest();
 }
 
 void WidgetBoard::DeleteColumn(int id)
@@ -78,6 +80,7 @@ void WidgetBoard::DeleteColumn(int id)
 		columns.removeAt(id);
 
 		updateColumnIds();
+        emit SaveRequest();
 	}
 }
 

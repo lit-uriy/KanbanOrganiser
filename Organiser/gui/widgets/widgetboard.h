@@ -35,6 +35,9 @@ class WidgetBoard : public QWidget
 
 		void on_btnAddColumn_clicked();
 
+    signals:
+        void SaveRequest();
+
 };
 
 #endif // WIDGETBOARD_H

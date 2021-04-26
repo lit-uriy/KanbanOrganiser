@@ -23,6 +23,7 @@ class DialogColumnEdit : public QDialog
 
 	private:
 		Ui::DialogColumnEdit *ui;
+
 };
 
 #endif // DIALOGCOLUMNEDIT_H

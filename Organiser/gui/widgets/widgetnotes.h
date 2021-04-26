@@ -74,8 +74,6 @@ class WidgetNotes : public WidgetTab
 
 		void on_actionDeleteColumn_triggered();
 
-
-
 	signals:
 		void SaveRequest();
 		void DeleteRequest(int id);

@@ -34,6 +34,7 @@ WindowMain::WindowMain(QWidget *parent)
 	showTrayIcon();
 	connect(ui->wdtNotes,&WidgetNotes::SaveRequest,this,&WindowMain::saveAppData);
 	connect(ui->wdtCalendar,&WidgetCalendar::reminderAdded,this,&WindowMain::saveAppData);
+    connect(ui->wdtBoard,&WidgetBoardList::SaveRequest,this,&WindowMain::saveAppData);
 
     ui->wdtNotes->SetColumnEditable(false);
 
