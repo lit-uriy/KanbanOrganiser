@@ -10,7 +10,8 @@
 
 
 WidgetNotes::WidgetNotes(QWidget *parent) :
-    WidgetTab(size,parent),
+    WidgetTab(QSize(300,600),parent),
+    size(QSize(300,600)),
     ui(new Ui::WidgetNotes)
 {
     ui->setupUi(this);

@@ -35,7 +35,7 @@ class WidgetReminders : public WidgetTab
 
 	private:
 		Ui::WidgetReminders *ui;
-		constexpr static QSize size = QSize(300,600);
+        QSize size;
 
 		QDate date;
 		Calendar calendar;

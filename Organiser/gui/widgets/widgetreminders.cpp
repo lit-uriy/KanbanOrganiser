@@ -5,7 +5,8 @@
 #include "gui/dialogs/dialogreminder.h"
 
 WidgetReminders::WidgetReminders(QWidget *parent) :
-    WidgetTab(size,parent),
+    WidgetTab(QSize(300,600),parent),
+    size(QSize(300,600)),
     ui(new Ui::WidgetReminders)
 {
     ui->setupUi(this);

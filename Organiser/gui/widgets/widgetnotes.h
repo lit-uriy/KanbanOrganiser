@@ -35,7 +35,7 @@ class WidgetNotes : public WidgetTab
 
 	private:
 		Ui::WidgetNotes *ui;
-		constexpr static QSize size = QSize(300,600);
+        QSize size = QSize(300,600);
 
 		bool internalDrag = false;
 

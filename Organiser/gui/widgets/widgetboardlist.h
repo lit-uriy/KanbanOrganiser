@@ -22,7 +22,7 @@ class WidgetBoardList : public WidgetTab
         Boards* GetBoardList();
     private:
         Ui::WidgetBoardList *ui;
-        constexpr static QSize size = QSize(910,600);
+        QSize size;
 
         int oldIndex = -1;
         Boards* boards;

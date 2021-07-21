@@ -4,7 +4,8 @@
 #include "gui/dialogs/dialogcolumnedit.h"
 
 WidgetBoardList::WidgetBoardList(QWidget *parent) :
-	WidgetTab(size,parent),
+    WidgetTab(QSize(910,600),parent),
+    size(QSize(910,600)),
 	ui(new Ui::WidgetBoardList)
 {
 	ui->setupUi(this);

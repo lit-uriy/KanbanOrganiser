@@ -23,8 +23,8 @@ class WidgetCalendar : public WidgetTab
 
         Reminders* GetReminders();
 	private:
-		Ui::WidgetCalendar *ui;
-		constexpr static QSize size = QSize(300,600);
+        Ui::WidgetCalendar *ui;
+        QSize size;
 
 		Calendar calendar;
         AppData* appData = nullptr;
