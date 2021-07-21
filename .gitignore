@@ -4,3 +4,4 @@ tests/debug/
 tests/release/
 Organiser/build/
 build/
+*.pro.user*
