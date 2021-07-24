@@ -104,9 +104,13 @@ void NotesTableWidget::dragMoveEvent(QDragMoveEvent *event)
 
 void NotesTableWidget::dropEvent(QDropEvent *event)
 {
-	if(event->mimeData()->hasFormat("organiser/card"))
+    const QMimeData *md = event->mimeData();
+
+    QByteArray ba = md->data("organiser/card");
+
+    if(md->hasFormat("organiser/card"))
 	{
-		Card* card = new Card(event->mimeData()->data("organiser/card"));
+        Card* card = new Card(ba);
 		event->acceptProposedAction();
 
 		emit CardDropped(card, rowCount()-getDropPosition(event));

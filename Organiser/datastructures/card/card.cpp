@@ -68,8 +68,10 @@ QByteArray Card::Encode()
 	data.append(temp.length());
 	data.append(temp);
 
-	data.append((int)title.length());
-	data.append(title);
+    QByteArray b = title.toUtf8();
+    int l = b.size();
+    data.append(l);
+    data.append(b);
 
 	data.append((int)description.length());
 	data.append(description);
@@ -105,20 +107,23 @@ QByteArray Card::Encode()
 void Card::SetDataFromArray(QByteArray data)
 {
 	int currentIndex = 0;
+    QByteArray ba;
 
 	int length = data.mid(0,1)[0];
 	currentIndex += 1;
-	id = data.mid(currentIndex,length).toULongLong();
+    ba = data.mid(currentIndex,length);
+    id = ba.toULongLong();
 	currentIndex += length;
 
 	length = data.mid(currentIndex,1)[0];
 	currentIndex += 1;
-	title = data.mid(currentIndex,length);
+    ba = data.mid(currentIndex,length);
+    title.fromUtf8(ba);
 	currentIndex += length;
 
 	length = data.mid(currentIndex,1)[0];
 	currentIndex += 1;
-	description = data.mid(currentIndex,length);
+    description.fromUtf8(data.mid(currentIndex,length));
 	currentIndex += length;
 
 	length = data.mid(currentIndex,1)[0];
